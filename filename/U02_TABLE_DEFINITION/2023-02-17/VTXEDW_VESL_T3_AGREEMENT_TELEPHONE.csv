@@ -1,0 +1,7 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Account_Num","varchar","100","0","0","","1","2023-02-16 20:28:30.368","montarat"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Account_Modifier_Num","varchar","20","0","0","","2","2023-02-16 20:28:30.368","montarat"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Agmt_Ctl_Id","char","10","0","0","","3","2023-02-16 20:28:30.368","montarat"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Home_Line_1_Num","string","0","0","0","","4","2023-02-16 20:28:30.368","montarat"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Office_Line_1_Num","string","0","0","0","","5","2023-02-16 20:28:30.368","montarat"
+"VTXEDW","VESL_T3_AGREEMENT_TELEPHONE","Mobile_Line_1_Num","string","0","0","0","","6","2023-02-16 20:28:30.368","montarat"

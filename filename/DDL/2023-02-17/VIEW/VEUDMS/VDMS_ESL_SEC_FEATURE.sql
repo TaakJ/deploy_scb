@@ -1,0 +1,241 @@
+CREATE OR REPLACE VIEW P1VEUDMS.VDMS_ESL_SEC_FEATURE (
+  Security_Num,
+  Product_Desc,
+  Prod_Issue_Dt,
+  Prod_Maturity_Dt,
+  Denomination_Currency_Code,
+  Custodian_Name,
+  Isin_Num,
+  Bond_Product_Group_Val,
+  Instrument_Type_Group_Val,
+  Coupon_Rate,
+  Market_Price_Amt,
+  Entity_Code,
+  PAR_VALUE,
+  BOT_TYPE)
+COMMENT ' ############################################################
+ DSF SYSTEM: (DMS)
+ Create By: Nattharut
+ Create DATE: 2010-10-05
+ Mapping:  EDW_DownStream_DMS_ESL_Treasury_MapXFormBusRule_Specification_V0-1
+ --------------------------------------------------------------------------------------------------------------------------------
+ DSF SYSTEM: (DMS)
+ Create By: RAVI SEKHAR REDDY M
+ Create DATE: 2013-11-21
+ Mapping:  EDW_DownStream_DMS_ESL_Treasury_MapXFormBusRule_Specification_V0-6
+                    DMS_ESL_Treasuty_V0-6.vsd
+ Description : Added column Par_Value
+   ------------------------------------------------------------------------
+  -- OT61070006 - DMS BOT
+  --Updated date:2018-10-11
+  --Updated by :Chokchai Th. 
+ ############################################################
+ 
+'
+AS SELECT Cast(Trim(PROD.Host_Prod_Id) AS VARCHAR(20)) AS Security_Num
+ --, Cast(PROD.Product_Desc AS VARCHAR(50)) AS Product_Desc
+ , Cast(LEFT(PROD.Product_Desc,50) AS VARCHAR(50)) AS Product_Desc --ADD LEFT ON 20230206
+ , Cast(TO_DATE(PROD.Product_Start_Dt ,'yyyy-MM-dd') AS CHAR(10)) AS Prod_Issue_Dt
+ , Cast(TO_DATE(PROD.Product_End_Dt ,'yyyy-MM-dd') AS CHAR(10)) AS Prod_Maturity_Dt
+ , Cast(REF_DESC_CRNCY.Short_Description AS CHAR(3)) AS Denomination_Currency_Code
+ , Cast(INV_PROD.Custodian_Name AS VARCHAR(25)) AS Custodian_Name
+ , Cast(INV_PROD.ISIN_Num AS VARCHAR(25)) AS Isin_Num
+ , Cast(PGA.Host_Product_Group_Val1 AS VARCHAR(4)) AS Bond_Product_Group_Val
+ , Cast(PGA.Host_Product_Group_Val2 AS VARCHAR(25)) AS Instrument_Type_Group_Val
+ --,CAST(TRIM(FEA.Other_Feature_Rate) AS CHAR(10)) AS Coupon_Rate
+/* ,CAST(TRIM(FEA.Other_Feature_Rate) AS CHAR(10)) AS Coupon_Rate 
+*/
+ , Cast(Cast(COALESCE(FEA.Other_Feature_Rate, 0) AS DECIMAL(8, 5) ) AS CHAR(9)) AS Coupon_Rate
+ --,CAST(TRIM(INV_PROD_VAL_HIST.Invest_Prod_Value_Amt) AS CHAR(22)) AS Market_Price_Amt
+/* ,CAST(TRIM(INV_PROD_VAL_HIST.Invest_Prod_Value_Amt) AS CHAR(22)) AS Market_Price_Amt 
+*/
+ , Cast(Cast(COALESCE(INV_PROD_VAL_HIST.Invest_Prod_Value_Amt, 0) AS DECIMAL(20, 2) ) AS CHAR(22)) AS Market_Price_Amt
+ , Cast(Trim(PROD_DEMO.Product_Demog_Num) AS VARCHAR(4)) AS Entity_Code  /* ----------------Added by 2013-11-18 */ ----------------Added by 2013-11-18
+ , Cast(AMT_FEA.PAR_VALUE AS DECIMAL(18, 4)) AS PAR_VALUE
+ , Cast(PGA.Host_Product_Group_Val3 AS VARCHAR(35)) AS BOT_TYPE
+FROM P1VTTEDW.PRODUCT AS PROD
+INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS BD
+ ON PROD.CTL_ID = '017'
+  AND BD.BUSINESSDATE BETWEEN PROD.START_DT
+   AND PROD.END_DT
+  AND PROD.RECORD_DELETED_FLAG = 0
+INNER JOIN (
+    SELECT PGA.PRODUCT_ID
+        , Max(CASE 
+                WHEN PG_BOND.Host_Product_Group_Val IS NOT NULL
+                    THEN PG_BOND.Host_Product_Group_Val
+                ELSE NULL
+                END) AS Host_Product_Group_Val1
+        , Max(CASE 
+                WHEN PG_INSTRU.Host_Product_Group_Val IS NOT NULL
+                    THEN PG_INSTRU.Host_Product_Group_Val
+                ELSE NULL
+                END) AS Host_Product_Group_Val2
+        , Max(CASE 
+                WHEN PG_BOT.Host_Product_Group_Val IS NOT NULL
+                    THEN PG_BOT.Host_Product_Group_Val
+                ELSE NULL
+                END) AS Host_Product_Group_Val3                
+    FROM P1VTTEDW.PROD_GROUP_ASSOCIATION AS PGA
+    INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS BD
+        ON PGA.CTL_ID = '017'
+            AND BD.BUSINESSDATE BETWEEN PGA.START_DT
+                AND PGA.END_DT
+            AND PGA.RECORD_DELETED_FLAG = 0
+    LEFT OUTER JOIN P1VTTEDW.PRODUCT_GROUP AS PG_BOND
+        ON PGA.Product_Group_Id = PG_BOND.Product_Group_Id
+            AND PG_BOND.CTL_ID = '017'
+            AND PG_BOND.Product_Group_Reason_Type_Cd = 6 /* [CS026600 : Bond Product Group] */ --[CS026600 : Bond Product Group]
+            AND BD.BUSINESSDATE BETWEEN PG_BOND.START_DT
+                AND PG_BOND.END_DT
+            AND PG_BOND.RECORD_DELETED_FLAG = 0
+    LEFT OUTER JOIN P1VTTEDW.PRODUCT_GROUP AS PG_INSTRU
+        ON PGA.Product_Group_Id = PG_INSTRU.Product_Group_Id
+            AND PG_INSTRU.CTL_ID = '017'
+            AND PG_INSTRU.Product_Group_Reason_Type_Cd = 3 /* [CS026600 : Instrument Type Group] */ --[CS026600 : Instrument Type Group]
+            AND BD.BUSINESSDATE BETWEEN PG_INSTRU.START_DT
+                AND PG_INSTRU.END_DT
+            AND PG_INSTRU.RECORD_DELETED_FLAG = 0
+
+
+/* START-ADDED FOR OT61070006 - DMS BOT
+ 
+*/
+    LEFT OUTER JOIN P1VTTEDW.PRODUCT_GROUP AS PG_BOT
+        ON PGA.Product_Group_Id = PG_BOT.Product_Group_Id
+            AND PG_BOT.CTL_ID = '017'
+            AND PG_BOT.Product_Group_Reason_Type_Cd = 19 /* [CS026600 : Bot Type Group] */ --[CS026600 : Bot Type Group]
+            AND BD.BUSINESSDATE BETWEEN PG_BOT.START_DT
+                AND PG_BOT.END_DT
+            AND PG_BOT.RECORD_DELETED_FLAG = 0
+
+/* END-ADDED FOR OT61070006 - DMS BOT
+ 
+*/
+    GROUP BY 1
+ ) AS PGA
+ ON PROD.PRODUCT_ID = PGA.PRODUCT_ID
+INNER JOIN P1VTTEDW.PRODUCT_FEATURE AS PROD_FEA
+ ON PROD.PRODUCT_ID = PROD_FEA.PRODUCT_ID
+  AND PROD_FEA.CTL_ID = '017'
+  AND BD.BUSINESSDATE BETWEEN PROD_FEA.START_DT
+   AND PROD_FEA.END_DT
+  AND PROD_FEA.RECORD_DELETED_FLAG = 0
+INNER JOIN (
+ SELECT FEA.Feature_Id
+  , OTH_RATE_FEA_COURATE.Other_Feature_Rate
+ FROM P1VTTEDW.FEATURE AS FEA
+ INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS BD
+  ON FEA.CTL_ID = '017'
+   AND FEA.Feature_Name = 'Original Coupon rate'
+   AND BD.BUSINESSDATE BETWEEN FEA.START_DT
+    AND FEA.END_DT
+   AND FEA.RECORD_DELETED_FLAG = 0
+ INNER JOIN P1VTTEDW.OTHER_RATE_FEATURE AS OTH_RATE_FEA_COURATE
+  ON FEA.Feature_Id = OTH_RATE_FEA_COURATE.Feature_Id
+   AND OTH_RATE_FEA_COURATE.CTL_ID = '017'
+   AND BD.BUSINESSDATE BETWEEN OTH_RATE_FEA_COURATE.START_DT
+    AND OTH_RATE_FEA_COURATE.END_DT
+   AND OTH_RATE_FEA_COURATE.RECORD_DELETED_FLAG = 0
+ ) AS FEA
+ ON PROD_FEA.Feature_Id = FEA.Feature_Id
+LEFT OUTER JOIN P1VTTEDW.INVESTMENT_PRODUCT AS INV_PROD
+ ON PROD.PRODUCT_ID = INV_PROD.Investment_Product_Id
+  AND INV_PROD.CTL_ID = '017'
+  AND BD.BUSINESSDATE BETWEEN INV_PROD.START_DT
+   AND INV_PROD.END_DT
+  AND INV_PROD.RECORD_DELETED_FLAG = 0
+LEFT OUTER JOIN (
+ SELECT *
+ FROM (
+    SELECT INVEST_PROD.*
+  
+    ,Rank() Over (
+      PARTITION BY INVEST_PROD.INVESTMENT_PRODUCT_ID ORDER BY INVEST_PROD.INVEST_PROD_VALUE_DT DESC
+      )  AS R 
+    FROM P1VTTEDW.INVEST_PROD_VALUE_HIST AS INVEST_PROD
+ INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS CB
+  ON CB.BUSINESSDATE BETWEEN INVEST_PROD.START_DT
+    AND INVEST_PROD.END_DT
+   AND INVEST_PROD.RECORD_DELETED_FLAG = 0
+   AND INVEST_PROD.CTL_ID = '017'
+   AND INVEST_PROD.INVEST_PROD_VALUE_DT BETWEEN Add_Months(CB.BUSINESSDATE + 1, - 1)
+    AND CB.BUSINESSDATE ) AS SRC
+    WHERE SRC.R = 1 
+    
+ ) AS INV_PROD_VAL_HIST
+ ON INV_PROD.Investment_Product_Id = INV_PROD_VAL_HIST.Investment_Product_Id
+ -- /*LEFT OUTER JOIN
+ 
+/*  LEFT OUTER JOIN
+ (
+ SELECT
+ PP.Product_Id
+ ,ACCT_PAR.ACCOUNT_NUM
+ FROM P1VTTEDW.PRODUCT_PARTY AS PP
+ 
+ INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS BD
+ ON PP.CTL_ID = '017'
+ AND BD.BUSINESSDATE BETWEEN PP.START_DT AND PP.END_DT
+ AND PP.RECORD_DELETED_FLAG = 0
+ 
+ INNER JOIN P1VTTEDW.PARTY AS PAR
+ ON PP.PARTY_ID = PAR.PARTY_ID
+ AND PAR.CTL_ID = '001'
+ AND BD.BUSINESSDATE BETWEEN PAR.START_DT AND PAR.END_DT
+ AND PAR.RECORD_DELETED_FLAG = 0
+ 
+ INNER JOIN P1VTTEDW.ACCOUNT_PARTY AS ACCT_PAR
+ ON PAR.PARTY_ID = ACCT_PAR.PARTY_ID
+ AND ACCT_PAR.CTL_ID = '001'
+ AND ACCT_PAR.Account_Modifier_Num = 'TR'
+ AND BD.BUSINESSDATE BETWEEN ACCT_PAR.START_DT AND ACCT_PAR.END_DT
+ AND ACCT_PAR.RECORD_DELETED_FLAG = 0
+ 
+ GROUP BY 1,2
+ ) AS PRODUCT_RM
+ ON PROD.Product_Id = PRODUCT_RM.Product_Id
+  
+*/
+ LEFT OUTER JOIN P1VTTEDW.PRODUCT_DEMOGRAPHIC AS PROD_DEMO
+ ON PROD.PRODUCT_ID = PROD_DEMO.PRODUCT_ID
+  AND PROD_DEMO.Ctl_Id = '017' /* -[TR] */ ---[TR]
+  AND PROD_DEMO.Demog_CD = 4165 /* [CS010800 : Issuer Entity Code] */ --[CS010800 : Issuer Entity Code]
+  AND PROD_DEMO.DATA_SOURCE_CD = 2000 /* [CS010300 : TR] */ --[CS010300 : TR]
+  AND BD.BUSINESSDATE BETWEEN PROD_DEMO.START_DT
+   AND PROD_DEMO.END_DT
+  AND PROD_DEMO.RECORD_DELETED_FLAG = 0
+LEFT OUTER JOIN P1VUTEDW.REFERENCE_DESCRIPTION AS REF_DESC_CRNCY
+ ON INV_PROD.Denomination_Currency_Cd = REF_DESC_CRNCY.EDW_CODE
+  AND REF_DESC_CRNCY.LANGUAGE_ID = 1
+  AND REF_DESC_CRNCY.CODE_SET_ID = 'CS009700'
+  AND REF_DESC_CRNCY.CODE_ID = 55
+/* --------------------------------------Added by 2013-11-18---------------------------------------------------------------------- 
+*/
+INNER JOIN P1VTTEDW.PRODUCT_FEATURE AS PROD_FEA2
+ ON PROD_FEA2.PRODUCT_ID = PROD.PRODUCT_ID
+  AND PROD_FEA2.CTL_ID = '017'
+  AND PROD_FEA2.PROD_FEAT_REL_TYPE_CD = '10' /* Par Value */ --Par Value
+  AND BD.BUSINESSDATE BETWEEN PROD_FEA2.START_DT
+   AND PROD_FEA2.END_DT
+  AND PROD_FEA2.RECORD_DELETED_FLAG = 0
+INNER JOIN (
+ SELECT FEA2.FEATURE_ID
+  , AMT_FEA.FROM_FEATURE_AMT AS PAR_VALUE
+ FROM P1VTTEDW.FEATURE AS FEA2
+ INNER JOIN P1VTPDMS.VDMS_BUSINESSDATE_D AS BD
+  ON FEA2.CTL_ID = '017'
+   AND FEA2.FEATURE_TYPE_CD = '2' /* Amount Feature   */ --Amount Feature  
+   AND FEA2.FEATURE_CLASSIFICATION_CD = '10' /* Investment */ --Investment
+   AND FEA2.FEATURE_NAME = 'Par Value'
+   AND BD.BUSINESSDATE BETWEEN FEA2.START_DT
+    AND FEA2.END_DT
+   AND FEA2.RECORD_DELETED_FLAG = 0
+ INNER JOIN P1VTTEDW.AMOUNT_FEATURE AS AMT_FEA
+  ON AMT_FEA.FEATURE_ID = FEA2.FEATURE_ID
+   AND AMT_FEA.CTL_ID = '017'
+   AND BD.BUSINESSDATE BETWEEN AMT_FEA.START_DT
+    AND AMT_FEA.END_DT
+   AND AMT_FEA.RECORD_DELETED_FLAG = 0
+ ) AS AMT_FEA
+ ON AMT_FEA.FEATURE_ID = PROD_FEA2.FEATURE_ID
