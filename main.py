@@ -26,6 +26,7 @@ class run_main:
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
+    print("Hello World")
 
 if __name__ == '__main__':
     run_main()
