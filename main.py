@@ -19,7 +19,7 @@ class run_main:
     run_process_split(date=date).run()
     
     ## start change
-    # check_files_for_deploy(date=date)
+    check_files_for_deploy(date=date)
     
     ## start merge 
     # run_process_merge(date=date, storage=storage, container=container)
