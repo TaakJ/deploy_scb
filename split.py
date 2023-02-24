@@ -38,38 +38,50 @@ class run_process_split():
         self.sheet = self.wb.create_sheet(sheet)
         self.sheet.title = sheet
         column = ['MVP1', 'MVP2', 'MVP3', 'MVP4', 'MVP6']
-        
         i = 0
-        for (col, val) in zip(column, write_list):
-            column = self.sheet.cell(row=i + 1, column=1)
-            column.value = col
-            value = self.sheet.cell(row=i + 2, column=1)
-            value.value = val
-            i += 3
+        for (col, li_val) in zip(column, write_list):
+            for val in li_val:
+                column = self.sheet.cell(row=i + 1, column=1)
+                column.value = col
+                value = self.sheet.cell(row=i + 2, column=1)
+                value.value = val
+                i += 3
             
         self.wb.save(self.file_name)
         
-    async def spilt_sheet_ddl(self, latest_file):
+    async def spilt_sheet_ddl(self, dataframe):
         
-        print("============== sheet_ddl ==============")
-        df = pandas.read_excel(latest_file, sheet_name='Sheet2')
-        dup = df.loc[df.duplicated('VIEW_TABLE'), :]
-        # check column duplicate
-        print(f"count dup sheet_ddl: {len(dup)}")
-        print(f"delete dup sheet_ddl: {dup['VIEW_TABLE'].values.tolist()}")
-        # drop dup and set to list
-        drop_dup = df[~df.duplicated('VIEW_TABLE')]
-        print(f"count after delete dup sheet_ddl: {len(drop_dup)}\n")
+        print("============== ddl ==============")
+        # check column duplicate GROUP_JOB_NAME
+        dataframe.loc[dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME']), :]
+        # drop duplicate GROUP_JOB_NAME and set to list
+        drop_dup = dataframe[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME'])]
         
-        sheet_ddl_to_list = str(list(drop_dup["VIEW_TABLE"])).replace(" ", "\n") # format output to list
-        sheet_ddl_to_str = ',\n'.join(map(str, list(drop_dup["VIEW_TABLE"]))) # format output to string
+        m_df = self.join_mvp(drop_dup=drop_dup)
         
-        # write output excel
-        column = self.sheet.cell(row=21, column=1)
-        column.value ="- LIST DDL"
-        value = self.sheet.cell(row=22, column=1)
-        value.value = sheet_ddl_to_list
-        self.wb.save(self.file_name)
+        # check column duplicate MVP
+        mvp_dup = m_df.loc[m_df.duplicated(subset=['VIEW_TABLE','MVP']), :]
+        print(f"count duplicated table_definitaion: {len(mvp_dup)}")
+        print(f"delete duplicated table_definitaion: {mvp_dup['VIEW_TABLE'].values.tolist()}")
+        ## drop duplicate MVP and set to list
+        mvp_drop_dup = m_df[~m_df.duplicated(subset=['VIEW_TABLE','MVP'])]
+        print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
+        
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+        
+        # format output to list
+        mvp1_to_list = str(list(mvp1["VIEW_TABLE"])).replace(" ", "\n")
+        mvp2_to_list = str(list(mvp2["VIEW_TABLE"])).replace(" ", "\n")
+        mvp3_to_list = str(list(mvp3["VIEW_TABLE"])).replace(" ", "\n")
+        mvp4_to_list = str(list(mvp4["VIEW_TABLE"])).replace(" ", "\n")
+        mvp6_to_list = str(list(mvp6["VIEW_TABLE"])).replace(" ", "\n")
+        
+        write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
+        self.write_to_gen_parameter(write_list=write_list, sheet="ddl")
         
         return 'sheet_ddl completed ..'
     
@@ -78,23 +90,86 @@ class run_process_split():
         print("============== table_def ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'TABLE']
         
-        # check column duplicate
-        dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME']), :]
-        print(f"count dup table_def: {len(dup)}")
-        print(f"delete dup table_def: {dup['LIST'].values.tolist()}")
+        # check column duplicate GROUP_JOB_NAME
+        df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME']), :]
+        # drop duplicate GROUP_JOB_NAME and set to list
+        drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME'])]
         
-        ## drop dup and set to list
-        drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME'], keep=False)]
-        print(f"count after delete dup table_def: {len(drop_dup)}")
+        m_df = self.join_mvp(drop_dup=drop_dup)
         
-        mvp1, mvp2, mvp3, mvp4, mvp6 = self.join_mvp(drop_dup=drop_dup, args='yes')
-        # col = m_df[m_df["LIST"].str.split(",", n=1, expand=True)]
-        # format output to string
-        # intmap_to_str = ','.join(map(str, list(mvp1["LIST"]))) 
+        # check column duplicate MVP
+        mvp_dup = m_df.loc[m_df.duplicated(subset=['LIST','MVP']), :]
+        print(f"count duplicated table_definitaion: {len(mvp_dup)}")
+        print(f"delete duplicated table_definitaion: {mvp_dup['LIST'].values.tolist()}")
+        ## drop duplicate MVP and set to list
+        mvp_drop_dup = m_df[~m_df.duplicated(subset=['LIST','MVP'])]
+        print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
         
-        # write_list = [mvp1, mvp2, mvp3, mvp4, mvp6]
-        # self.write_to_gen_parameter(write_list=write_list, sheet="table_definition")
-    
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+
+        spilt_col1 = mvp1["LIST"].str.split(",", n=1, expand=True)
+        spilt_col2 = mvp2["LIST"].str.split(",", n=1, expand=True)
+        spilt_col3 = mvp3["LIST"].str.split(",", n=1, expand=True)
+        spilt_col4 = mvp4["LIST"].str.split(",", n=1, expand=True)
+        spilt_col6 = mvp6["LIST"].str.split(",", n=1, expand=True)
+        
+        # schema / table MVP1
+        write_list = []
+        if spilt_col1.empty is False:
+            schema_to_list1 = str(list(spilt_col1[0])).replace(" ", "")
+            table_to_list1 = str(list(spilt_col1[1])).replace(" ", "")
+            grouped = [f"schema: {schema_to_list1}", f"table: {table_to_list1}"]
+            write_list.append(grouped)
+        else:
+            grouped = ["schema: []", "table: []"]
+            write_list.append(grouped)
+            
+        # schema / table MVP2
+        if spilt_col2.empty is False:
+            schema_to_list2 = str(list(spilt_col2[0])).replace(" ", "")
+            table_to_list2 = str(list(spilt_col2[1])).replace(" ", "")
+            grouped = [f"schema: {schema_to_list2}", f"table: {table_to_list2}"]
+            write_list.append(grouped)
+        else:
+            grouped = ["schema: []", "table: []"]
+            write_list.append(grouped)
+            
+        # schema / table MVP3
+        if spilt_col3.empty is False:
+            schema_to_list3 = str(list(spilt_col3[0])).replace(" ", "")
+            table_to_list3 = str(list(spilt_col3[1])).replace(" ", "")
+            grouped = [f"schema: {schema_to_list3}", f"table: {table_to_list3}"]
+            write_list.append(grouped)
+        else:
+            grouped = ["schema: []", "table: []"]
+            write_list.append(grouped)
+            
+        # schema / table MVP4
+        if spilt_col4.empty is False:
+            schema_to_list4 = str(list(spilt_col4[0])).replace(" ", "")
+            table_to_list4 = str(list(spilt_col4[1])).replace(" ", "")
+            grouped = [f"schema: {schema_to_list4}", f"table: {table_to_list4}"]
+            write_list.append(grouped)
+        else:
+            grouped = ["schema: []", "table: []"]
+            write_list.append(grouped)
+            
+        # schema / table MVP6
+        if spilt_col6.empty is False:
+            schema_to_list6 = str(list(spilt_col6[0])).replace(" ", "")
+            table_to_list6 = str(list(spilt_col6[1])).replace(" ", "")
+            grouped = [f"schema: {schema_to_list6}", f"table: {table_to_list6}"]
+            write_list.append(grouped)
+        else:
+            grouped = ["schema: []", "table: []"]
+            write_list.append(grouped)
+        
+        self.write_to_gen_parameter(write_list=write_list, sheet="table_definition")
+        
         return 'table_def completed ..'
     
     async def spilt_system(self, dataframe):
@@ -111,11 +186,11 @@ class run_process_split():
         
         # check column duplicate MVP
         mvp_dup = m_df.loc[m_df.duplicated(subset=['LIST','MVP']), :]
-        print(f"count dup system_name: {len(mvp_dup)}")
-        print(f"delete dup system_name: {mvp_dup['LIST'].values.tolist()}")
+        print(f"count duplicated system_name: {len(mvp_dup)}")
+        print(f"delete duplicated system_name: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate MVP and set to list
         mvp_drop_dup = m_df[~m_df.duplicated(subset=['LIST','MVP'])]
-        print(f"count after delete dup system_name: {len(mvp_drop_dup)}")
+        print(f"count after delete duplicated system_name: {len(mvp_drop_dup)}")
         
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
         mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
@@ -137,7 +212,7 @@ class run_process_split():
         mvp4_to_str = ','.join(map(str, list(mvp4["LIST"])))
         mvp6_to_str = ','.join(map(str, list(mvp6["LIST"])))
         
-        write_list = [mvp1_to_str, mvp2_to_str, mvp3_to_str, mvp4_to_str, mvp6_to_str]
+        write_list = [[mvp1_to_str], [mvp2_to_str], [mvp3_to_str], [mvp4_to_str], [mvp6_to_str]]
         self.write_to_gen_parameter(write_list=write_list, sheet="system_name")
         
         # Add REGISTER_CONFIG_SYSTEM_ format
@@ -156,11 +231,10 @@ class run_process_split():
         mvp4_to_list = str(list(add_mvp4["SUFFIX"])).replace(" ", "")
         mvp6_to_list = str(list(add_mvp6["SUFFIX"])).replace(" ", "")
         
-        write_list = [mvp1_to_list, mvp2_to_list, mvp3_to_list, mvp4_to_list, mvp6_to_list]
+        write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
         self.write_to_gen_parameter(write_list=write_list, sheet="add_suffix_system_name")
         
         return 'system_name completed ..'
-    
     
     async def spilt_int_mapp(self, dataframe):
         
@@ -176,19 +250,17 @@ class run_process_split():
         
         # check column duplicate MVP
         mvp_dup = m_df.loc[m_df.duplicated(subset=['LIST','MVP']), :]
-        print(f"count dup system_name: {len(mvp_dup)}")
-        print(f"delete dup system_name: {mvp_dup['LIST'].values.tolist()}")
+        print(f"count duplicated int_mapping: {len(mvp_dup)}")
+        print(f"delete duplicated int_mapping: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate MVP and set to list
         mvp_drop_dup = m_df[~m_df.duplicated(subset=['LIST','MVP'])]
-        print(f"count after delete dup system_name: {len(mvp_drop_dup)}")
+        print(f"count after delete duplicated int_mapping: {len(mvp_drop_dup)}")
         
-        
-        m_df = self.join_mvp(drop_dup=drop_dup)
-        mvp1 = m_df[m_df['MVP'] == 'MVP1']
-        mvp2 = m_df[m_df['MVP'] == 'MVP2']
-        mvp3 = m_df[m_df['MVP'] == 'MVP3']
-        mvp4 = m_df[m_df['MVP'] == 'MVP4']
-        mvp6 = m_df[m_df['MVP'] == 'MVP6']
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
         
         # format output to list
         mvp1_to_list = str(list(mvp1["LIST"])).replace(" ", "")
@@ -197,30 +269,31 @@ class run_process_split():
         mvp4_to_list = str(list(mvp4["LIST"])).replace(" ", "")
         mvp6_to_list = str(list(mvp6["LIST"])).replace(" ", "")
         
-        write_list = [mvp1_to_list, mvp2_to_list, mvp3_to_list, mvp4_to_list, mvp6_to_list]
-        
+        write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
         self.write_to_gen_parameter(write_list=write_list, sheet="int_mapping")
     
         return 'int_mapping completed ..'
-        
         
     async def find_excel_file(self):
         
         current_path = os.getcwd() + '/parameter'
         list_of_files = glob.glob(f'{current_path}/*')
+        
         try:
             latest_file = max(list_of_files, key=os.path.getmtime)
             dataframe = pandas.read_excel(latest_file, sheet_name='Sheet1')
+            ddl_dataframe = pandas.read_excel(latest_file, sheet_name='Sheet2')
+            
             coros = [
                 asyncio.create_task(self.spilt_int_mapp(dataframe)),
                 asyncio.create_task(self.spilt_system(dataframe)),
-                # asyncio.create_task(self.spilt_table_def(dataframe)),
-                # asyncio.create_task(self.spilt_sheet_ddl(latest_file))
+                asyncio.create_task(self.spilt_table_def(dataframe)),
+                asyncio.create_task(self.spilt_sheet_ddl(ddl_dataframe))
             ]
             results = await asyncio.wait(coros)
-            # print(f'Completed task: {len(results[0])}')
-            # [print(f"- {completed_task.result()}") for completed_task in results[0]]    
-            # print(f'Uncompleted task: {len(results[1])}')
+            print(f'Completed task: {len(results[0])}')
+            [print(f"- {completed_task.result()}") for completed_task in results[0]]    
+            print(f'Uncompleted task: {len(results[1])}')
             
         except ValueError as err:
             raise Exception("File not found !!")
