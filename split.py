@@ -18,7 +18,6 @@ class run_process_split():
         self.file_name = f'{path}/gen_parameter_{self.date_fmt}.xlsx'
         self.sheet = self.wb.active
         
-        
     def run(self):
         loop = asyncio.get_event_loop()
         loop.run_until_complete(self.find_excel_file())
@@ -26,7 +25,7 @@ class run_process_split():
     def join_mvp(self, drop_dup, **args):
         parent_dir  = "./filename"
         ## last_update 20230220
-        mvp_file = 'SCB and list of GJ and Sys_20230220_update ctl_ID on GJ sheet.xlsx'
+        mvp_file = "SCB and list of GJ and Sys_20230220_update ctl_ID on GJ sheet.xlsx"
         path = os.path.join(parent_dir, mvp_file)
         
         df = pandas.read_excel(path, sheet_name='3. Group Job', skiprows=3)

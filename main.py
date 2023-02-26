@@ -16,13 +16,13 @@ class run_main:
     
     t1 = time.time()
     ## start split parameter
-    run_process_split(date=date).run()
+    # run_process_split(date=date).run()
     
     ## start change
     # check_files_for_deploy(date=date)
     
     ## start merge 
-    # run_process_merge(date=date, storage=storage, container=container)
+    run_process_merge(date=date, storage=storage, container=container)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
