@@ -33,24 +33,24 @@ class run_process_merge():
             raise ValueError("File not found !!")
         
         df_int_mapp = self.source_int_mapp(sheet1)
-        # df_sys_name = self.source_pl_config(sheet1)
-        # df_table_def = self.source_table_def(sheet1)
+        df_sys_name = self.source_pl_config(sheet1)
+        df_table_def = self.source_table_def(sheet1)
         
-        # for mvp in self.str_mvp:
-        #     sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
-        #     sum_df['Note UAT Deploy Date'] = self.date
-        #     sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/".format(self.date_fmt, x))
-        #     sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
-        #     sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
-        #     sum_df["Obsolete"] = ""
-        #     sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
+        for mvp in self.str_mvp:
+            sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
+            sum_df['Note UAT Deploy Date'] = self.date
+            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/".format(self.date_fmt, x))
+            sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
+            sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
+            sum_df["Obsolete"] = ""
+            sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
             
-        #     df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
-        #     if df_new.empty is False:
-        #         self.write_from_source(df_new, mvp)
-        #         print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
-        #     else:
-        #         raise Exception("Dataframe is empty !!")
+            df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
+            if df_new.empty is False:
+                self.write_from_source(df_new, mvp)
+                print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
+            else:
+                raise Exception("Dataframe is empty !!")
             
     def write_from_source(self, df, mvp):
         
@@ -82,13 +82,20 @@ class run_process_merge():
         
         return dict_df
     
-    def check_file_in_folder(self):
-        print("OK")
+    def check_file_in_folder(self, list_df, path):
+        for mvp, file in zip(self.str_mvp, list_df):
+            current_path = os.getcwd() + f'/filename/{path}/{self.date}'
+            
+            for name in file['LIST']:
+                full_name = str(name).upper() + '.csv'
+                self.full_path = os.path.join(current_path, mvp, full_name)
+                
+                if os.path.isfile(self.full_path) is False:
+                    print(f'file {full_name} does not exist in {path}/{self.date}/{mvp}')
         
     def crate_folder_mvp(self, files_name, dataframe, path):
         
         new_df = dataframe.apply(lambda x: x.astype(str).str.upper())
-        
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
         mvp3 = new_df[new_df['MVP'] == 'MVP3']
@@ -102,7 +109,6 @@ class run_process_merge():
             destination  = os.path.join(parent_dir, str_mvp)
             # print(f"Create folder and move file on {str_mvp}")
             os.makedirs(destination, exist_ok=True)
-            
             for file_name in all_mvp[all_mvp['LIST'].isin([Path(x).stem for x in files_name])]['LIST'].values.tolist():
                 full_name = f'{str(file_name).upper()}.csv'
                 if os.path.isfile(os.path.join(destination, full_name)):
@@ -123,13 +129,13 @@ class run_process_merge():
         current_path = os.getcwd() + r'/filename/U03_INT_MAPPING' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
-        
+
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, new_df, path='U03_INT_MAPPING')
-            self.check_file_in_folder()
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
+            self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U03_INT_MAPPING')
-        
+            
         print("=========================================")
             
         return dict_df
@@ -146,12 +152,12 @@ class run_process_merge():
         current_path = os.getcwd() + r'/filename/U99_PL_REGISTER_CONFIG' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
-        
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, add_col, path='U99_PL_REGISTER_CONFIG')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
+            self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
-        
+            
         print("=========================================")
         
         return dict_df
@@ -172,7 +178,10 @@ class run_process_merge():
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, new_df, path='U02_TABLE_DEFINITION')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
+            self.check_file_in_folder(list_df=list_df, path='U02_TABLE_DEFINITION')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U02_TABLE_DEFINITION')
+            
+        print("=========================================")
         
         return dict_df
     

@@ -101,7 +101,7 @@ class run_process_split():
         mvp6_to_list = str(list(mvp6["VIEW_TABLE"])).replace(" ", "\n")
         
         write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
-        self.write_to_gen_parameter(write_list=write_list, sheet="ddl")
+        self.write_to_gen_parameter(write_list=write_list, sheet="list_ddl")
         
         return 'sheet_ddl completed ..'
     
@@ -186,7 +186,7 @@ class run_process_split():
             grouped = ["schema: []", "table: []"]
             write_list.append(grouped)
         
-        self.write_to_gen_parameter(write_list=write_list, sheet="table_definition")
+        self.write_to_gen_parameter(write_list=write_list, sheet="list_table_definition")
         
         return 'table_def completed ..'
     
@@ -222,7 +222,7 @@ class run_process_split():
         mvp6_to_str = ','.join(map(str, list(mvp6["LIST"])))
         
         write_list = [[mvp1_to_str], [mvp2_to_str], [mvp3_to_str], [mvp4_to_str], [mvp6_to_str]]
-        self.write_to_gen_parameter(write_list=write_list, sheet="system_name")
+        self.write_to_gen_parameter(write_list=write_list, sheet="list_system_name")
         
         ######## Add REGISTER_CONFIG_SYSTEM_ format ############
         add_column = pandas.DataFrame(mvp_drop_dup)
@@ -247,7 +247,7 @@ class run_process_split():
         mvp6_to_list = str(list(add_mvp6["SUFFIX"])).replace(" ", "")
         
         write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
-        self.write_to_gen_parameter(write_list=write_list, sheet="add_suffix_system_name")
+        self.write_to_gen_parameter(write_list=write_list, sheet="list_add_suffix_system_name")
         
         return 'system_name completed ..'
     
@@ -283,7 +283,7 @@ class run_process_split():
         mvp6_to_list = str(list(mvp6["LIST"])).replace(" ", "")
         
         write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
-        self.write_to_gen_parameter(write_list=write_list, sheet="int_mapping")
+        self.write_to_gen_parameter(write_list=write_list, sheet="list_int_mapping")
 
         return 'int_mapping completed ..'
         
