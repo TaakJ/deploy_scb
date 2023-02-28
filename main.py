@@ -8,7 +8,7 @@ from change import check_files_for_deploy
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-03"
+    date = "2023-02-27"
     # Can specify storage 
     storage = "scbedwseasta001adlsuat"
     # Can specify container 
@@ -16,13 +16,14 @@ class run_main:
     
     t1 = time.time()
     ## start split parameter
-    run_process_split(date=date).run()
+    # run_process_split(date=date).run()
     
     ## start change
     # check_files_for_deploy(date=date)
     
     ## start merge 
-    # run_process_merge(date=date, storage=storage, container=container)
+    period_mvp = ['MVP1','MVP2','MVP4']
+    run_process_merge(date=date, storage=storage, container=container, period_mvp=period_mvp)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')

@@ -9,12 +9,13 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 
 class run_process_merge():
     
-    def __init__(self, date, storage, container):
+    def __init__(self, date, storage, container, period_mvp):
         
         self.date = date
         self.storage = storage
         self.container = container
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')
+        # self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         self.wb = openpyxl.load_workbook("./filename/deployment_checklist_xxxxxxx.xlsx")
         
@@ -87,7 +88,10 @@ class run_process_merge():
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
             
             for name in file['LIST']:
-                full_name = str(name).upper() + '.csv'
+                if path != 'U99_PL_REGISTER_CONFIG':
+                    full_name = f'{str(name).upper()}.csv'
+                else:
+                    full_name = f'{str(name).upper()}.xlsx'
                 self.full_path = os.path.join(current_path, mvp, full_name)
                 
                 if os.path.isfile(self.full_path) is False:
@@ -110,7 +114,11 @@ class run_process_merge():
             # print(f"Create folder and move file on {str_mvp}")
             os.makedirs(destination, exist_ok=True)
             for file_name in all_mvp[all_mvp['LIST'].isin([Path(x).stem for x in files_name])]['LIST'].values.tolist():
-                full_name = f'{str(file_name).upper()}.csv'
+                if path != 'U99_PL_REGISTER_CONFIG':
+                    full_name = f'{str(file_name).upper()}.csv'
+                else:
+                    full_name = f'{str(file_name).upper()}.xlsx'
+                    
                 if os.path.isfile(os.path.join(destination, full_name)):
                     os.remove(os.path.join(destination, full_name))
                 
