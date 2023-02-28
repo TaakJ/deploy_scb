@@ -22,8 +22,7 @@ class run_main:
     # check_files_for_deploy(date=date)
     
     ## start merge 
-    period_mvp = ['MVP1','MVP2','MVP4']
-    run_process_merge(date=date, storage=storage, container=container, period_mvp=period_mvp)
+    run_process_merge(date=date, storage=storage, container=container)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')

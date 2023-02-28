@@ -9,13 +9,12 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 
 class run_process_merge():
     
-    def __init__(self, date, storage, container, period_mvp):
+    def __init__(self, date, storage, container):
         
         self.date = date
         self.storage = storage
         self.container = container
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')
-        # self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         self.wb = openpyxl.load_workbook("./filename/deployment_checklist_xxxxxxx.xlsx")
         
@@ -40,7 +39,7 @@ class run_process_merge():
         for mvp in self.str_mvp:
             sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
             sum_df['Note UAT Deploy Date'] = self.date
-            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/".format(self.date_fmt, x))
+            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
             sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
             sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
             sum_df["Obsolete"] = ""
