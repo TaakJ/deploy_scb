@@ -70,7 +70,11 @@ class run_process_merge():
         
         dict_df = {}
         for str_mvp, mvp in zip(self.str_mvp, list_df):
-            mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv')
+            if path != 'U99_PL_REGISTER_CONFIG':
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv' )
+            else:
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.xlsx' )
+            
             df = pandas.DataFrame(mvp['File_Name'], columns=['File_Name']).reset_index(drop=True)
             df['Storage'] = self.storage
             df['Container'] = self.container

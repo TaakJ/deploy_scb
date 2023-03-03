@@ -32,7 +32,7 @@ class check_files_for_deploy:
             def safe_read_lines(path):
                 if not os.path.exists(path):
                     return []
-                f = open(path)
+                f = open(path, encoding='cp437')
                 try:
                     return f.readlines()
                 finally:
@@ -62,7 +62,7 @@ class check_files_for_deploy:
                         
                         if diffs:
                             print(f'{os.path.join(actual_file, filename)} => Changes')
-                            print(diffs)
+                            # print(diffs)
                         else:
                             print(f'{os.path.join(actual_file, filename)} => No Changes')
                     
