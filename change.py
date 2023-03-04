@@ -70,9 +70,4 @@ class check_files_for_deploy:
                     #     for filename in only:
                     #         print(f'{os.path.join(actual_file, filename)} => New add')
         print("================================================================")
-                        
-if __name__ == '__main__':
-    t1 = time.time()
-    check_files_for_deploy()
-    t2 = time.time() - t1
-    print(f'Executed in {t2:0.2f} seconds.')
+        
