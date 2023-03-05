@@ -1,0 +1,4 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VSGMF/ST_STACTM_2_0.sql,ddl_script_replace/process_migration/VSGMF/ST_STACTM_2_0.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VRBF_SDL20_PTPA_01.sql,ddl_script_replace/process_migration/VTXEDW/VRBF_SDL20_PTPA_01.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VSGMF/GN_MTLOG_1_0.sql,ddl_script_replace/process_migration/VSGMF/GN_MTLOG_1_0.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VUL_QUOTATIONACCT_01.sql,ddl_script_replace/process_migration/VTXEDW/VUL_QUOTATIONACCT_01.sql

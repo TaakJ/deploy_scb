@@ -25,7 +25,7 @@ class run_main:
     # check_files_for_deploy(date=date)
     
     ## start genfile
-    # run_process_genfile(date=date)
+    run_process_genfile(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')

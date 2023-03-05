@@ -1,0 +1,2 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VESL_T3_PARTY_TELEPHONE.sql,ddl_script_replace/process_migration/VTXEDW/VESL_T3_PARTY_TELEPHONE.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTPBIT/VBI_DIM_DATE.sql,ddl_script_replace/process_migration/VTPBIT/VBI_DIM_DATE.sql
