@@ -17,7 +17,7 @@ class check_files_for_deploy:
         ddl_path = [path + '/VIEW/', path + '/TABLE/']
         adls_path = [adls_path_view, adls_path_table]
         
-        self._compare_directories(ddl_path, adls_path)
+        # self._compare_directories(ddl_path, adls_path)
             
     def _compare_directories(self, ddl_path, adls_path):
         
@@ -70,4 +70,5 @@ class check_files_for_deploy:
                     #     for filename in only:
                     #         print(f'{os.path.join(actual_file, filename)} => New add')
         print("================================================================")
+        
         
