@@ -226,7 +226,6 @@ class run_process_merge():
                 if os.path.isfile(os.path.join(path_in, full_name)):
                     os.remove(os.path.join(path_out, full_name))
                     shutil.copy(os.path.join(path_in, full_name), path_out)
-                    # print(f"Copy file: {full_name}  to folder: '{str_mvp}'")
                 else:
                     print(f"file: {full_name} does not exist on folder: {fol}, '{str_mvp}'")
             
