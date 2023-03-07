@@ -1,7 +1,8 @@
 import os
 import time
 import filecmp
-import difflib 
+import difflib
+import glob
 import itertools
 
 class check_files_for_deploy:
@@ -12,13 +13,25 @@ class check_files_for_deploy:
         parent_dir  = "./filename/DDL/"
         path = os.path.join(parent_dir, self.date)
     
-        adls_path_view = r'D:\Document\Coding\Project\edwcloud_adls\src\VIEWS' + '/'  # right from git
-        adls_path_table = r'D:\Document\Coding\Project\edwcloud_adls\src\TABLES' + '/'
-        ddl_path = [path + '/VIEW/', path + '/TABLE/']
-        adls_path = [adls_path_view, adls_path_table]
+        # adls_path_view = r'D:\Document\Coding\Project\edwcloud_adls\src\VIEWS' + '/'  # right from git
+        # adls_path_table = r'D:\Document\Coding\Project\edwcloud_adls\src\TABLES' + '/'
+        # ddl_path = [path + '/VIEW/', path + '/TABLE/']
+        # adls_path = [adls_path_view, adls_path_table]
+        
+        
+        current_path = os.getcwd() + f'/output/{self.date}'
+        filename = max(glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'), key=os.path.getmtime)
+        if filename != "":
+            df_sheet, df_ddl = self.separate_sheet(filename)
+            self.check_deploy_release()
+        else:
+            raise ValueError("File not found !!")
         
         # self._compare_directories(ddl_path, adls_path)
-            
+    
+    def check_deploy_release(self):
+        print("OK")
+    
     def _compare_directories(self, ddl_path, adls_path):
         
         print("============================ check change ==============================")
