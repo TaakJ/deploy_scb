@@ -19,13 +19,13 @@ class run_main:
     # run_process_split(date=date).run()
     
     ## start merge 
-    # run_process_merge(date=date, storage=storage, container=container)
+    run_process_merge(date=date, storage=storage, container=container)
     
     ## start genfile
-    # run_process_genfile(date=date)
+    run_process_genfile(date=date)
     
     ## start change
-    check_files_for_deploy(date=date)
+    # check_files_for_deploy(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
