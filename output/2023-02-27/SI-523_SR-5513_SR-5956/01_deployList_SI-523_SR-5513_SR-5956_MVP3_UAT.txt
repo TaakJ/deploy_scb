@@ -1,2 +1,0 @@
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUPRM/TVPRM_CD_FES.sql,ddl_script_replace/process_migration/VEUPRM/TVPRM_CD_FES.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUPRM/TVPRM_CD_ENET.sql,ddl_script_replace/process_migration/VEUPRM/TVPRM_CD_ENET.sql

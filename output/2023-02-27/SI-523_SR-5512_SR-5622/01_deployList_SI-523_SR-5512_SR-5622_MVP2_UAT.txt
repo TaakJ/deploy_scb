@@ -1,4 +1,0 @@
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUATM/VATM_PAYROLL_ACCT.sql,ddl_script_replace/process_migration/VEUATM/VATM_PAYROLL_ACCT.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUTMS/VTMS_IRORSCG_D.sql,ddl_script_replace/process_migration/VEUTMS/VTMS_IRORSCG_D.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEULQ/VLQ_08_GL_BAL_SUM_OC_D.sql,ddl_script_replace/process_migration/VEULQ/VLQ_08_GL_BAL_SUM_OC_D.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEULQ/VLQ_07_GL_BAL_SUM_RC_D.sql,ddl_script_replace/process_migration/VEULQ/VLQ_07_GL_BAL_SUM_RC_D.sql
