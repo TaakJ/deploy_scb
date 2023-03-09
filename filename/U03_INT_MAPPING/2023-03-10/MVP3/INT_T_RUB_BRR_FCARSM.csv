@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_RUB_BRR_FCARSM","CustomerID","VBRR_FCARSM.CustomerID","0","1","1","1","1","0","0","0","0","1","2023-03-09 15:40:35.964","IBM_SARADHI"
+"INT_T_RUB_BRR_FCARSM","ArchiveID","VBRR_FCARSM.ArchiveID","0","1","1","1","1","0","0","0","0","2","2023-03-09 15:40:35.964","IBM_SARADHI"
+"INT_T_RUB_BRR_FCARSM","ArchivePoint","VBRR_FCARSM.ArchivePoint","0","1","1","1","1","0","0","0","0","3","2023-03-09 15:40:35.964","IBM_SARADHI"
+"INT_T_RUB_BRR_FCARSM","SADDKey","VBRR_FCARSM.SADDKey","0","1","1","1","1","0","0","0","0","4","2023-03-09 15:40:35.964","IBM_SARADHI"
+"INT_T_RUB_BRR_FCARSM","ItemValue","LEFT(ItemValue,256)","1","1","1","0","0","0","0","0","0","5","2023-03-09 15:40:35.964","Common_Team"
+"INT_T_RUB_BRR_FCARSM","Status","LEFT(Status,50)","1","1","1","0","0","0","0","0","0","6","2023-03-09 15:40:35.964","Common_Team"
+"INT_T_RUB_BRR_FCARSM","CTL_ID","'382'","1","1","1","0","0","0","0","1","0","10","2023-03-09 15:40:35.964","IBM_SARADHI"

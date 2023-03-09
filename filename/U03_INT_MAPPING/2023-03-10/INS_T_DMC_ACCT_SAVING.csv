@@ -1,0 +1,5 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INS_T_DMC_ACCT_SAVING","Businessdate","DMC_ACCT_SAVING.Businessdate","0","1","1","0","0","0","0","0","0","1","2023-03-09 16:30:34.001","Phase2"
+"INS_T_DMC_ACCT_SAVING","Party_Id","DMC_ACCT_SAVING.Party_Id","0","1","1","0","0","0","0","0","0","2","2023-03-09 16:30:34.001","Phase2"
+"INS_T_DMC_ACCT_SAVING","Organization_Num","DMC_ACCT_SAVING.Organization_Num","0","1","1","0","0","0","0","0","0","3","2023-03-09 16:30:34.001","Phase2"
+"INS_T_DMC_ACCT_SAVING","AVGAMT","DMC_ACCT_SAVING.AVGAMT","0","1","1","0","0","0","0","0","0","4","2023-03-09 16:30:34.001","Phase2"

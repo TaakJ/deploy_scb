@@ -1,0 +1,5 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"DTPEDW","DMC_ACCT_CURR_W_OD","Businessdate","date","0","0","0","","1","2023-03-08 08:51:04.209","Common_Team"
+"DTPEDW","DMC_ACCT_CURR_W_OD","Party_Id","int","0","0","1","","2","2023-03-08 08:51:04.209","Common_Team"
+"DTPEDW","DMC_ACCT_CURR_W_OD","Organization_Num","char","10","0","0","'          '","3","2023-03-08 08:51:04.209","Common_Team"
+"DTPEDW","DMC_ACCT_CURR_W_OD","AVGAMT","decimal","18","2","0","","4","2023-03-08 08:51:04.209","Common_Team"

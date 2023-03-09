@@ -1,0 +1,5 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTPEDW","DMC_ACCT_SAVING","Businessdate","date","0","0","0","","1","2023-03-08 23:15:37.540","montarat"
+"VTPEDW","DMC_ACCT_SAVING","Party_Id","int","0","0","0","","2","2023-03-08 23:15:37.540","montarat"
+"VTPEDW","DMC_ACCT_SAVING","Organization_Num","char","10","0","0","","3","2023-03-08 23:15:37.540","montarat"
+"VTPEDW","DMC_ACCT_SAVING","AVGAMT","decimal","38","12","0","","4","2023-03-08 23:15:37.540","montarat"
