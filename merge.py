@@ -32,26 +32,26 @@ class run_process_merge():
         else:
             raise ValueError("File not found !!")
         
-        # df_int_mapp = self.source_int_mapp(sheet1)
+        df_int_mapp = self.source_int_mapp(sheet1)
         df_sys_name = self.source_pl_config(sheet1)
-        # df_table_def = self.source_table_def(sheet1)
+        df_table_def = self.source_table_def(sheet1)
         df_ddl = self.source_ddl(sheet2)
         
-        # for mvp in self.str_mvp:
-        #     sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
-        #     sum_df['Note UAT Deploy Date'] = self.date
-        #     sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
-        #     sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
-        #     sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
-        #     sum_df["Obsolete"] = ""
-        #     sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
+        for mvp in self.str_mvp:
+            sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
+            sum_df['Note UAT Deploy Date'] = self.date
+            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
+            sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
+            sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
+            sum_df["Obsolete"] = ""
+            sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
             
-        #     df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
-        #     if df_new.empty is False:
-        #         self.write_from_source(df_new, mvp)
-        #         print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
-        #     else:
-        #         raise Exception("Dataframe is empty !!")
+            df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
+            if df_new.empty is False:
+                self.write_from_source(df_new, mvp)
+                print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
+            else:
+                raise Exception("Dataframe is empty !!")
             
     def write_from_source(self, df, mvp):
         

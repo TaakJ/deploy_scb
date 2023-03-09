@@ -1,0 +1,6 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"FILE","EDW_FEATURE_1_0","Feature_Category_Type_Cd","VARCHAR","40","0","0","","1","2023-03-08 13:54:15.580","Phase2"
+"FILE","EDW_FEATURE_1_0","Feature_Type_Cd","VARCHAR","40","0","0","","2","2023-03-08 13:54:15.580","Phase2"
+"FILE","EDW_FEATURE_1_0","Feature_Name","VARCHAR","200","0","0","","3","2023-03-08 13:54:15.580","Phase2"
+"FILE","EDW_FEATURE_1_0","Feature_Desc","VARCHAR","500","0","0","","4","2023-03-08 13:54:15.580","Phase2"
+"FILE","EDW_FEATURE_1_0","Feature_Classification_Cd","VARCHAR","100","0","0","","5","2023-03-08 13:54:15.580","Phase2"

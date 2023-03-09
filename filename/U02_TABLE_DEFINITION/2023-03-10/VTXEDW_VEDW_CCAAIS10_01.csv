@@ -1,0 +1,8 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTXEDW","VEDW_CCAAIS10_01","TBCCAA_KEY","string","0","0","0","","1","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","TBC_DESC","string","0","0","0","","2","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","EBC_DESC","string","0","0","0","","3","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","TBC_CDATE","string","0","0","0","","4","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","TBC_RCODE","string","0","0","0","","5","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","TBC_OCATM","string","0","0","0","","6","2023-03-09 06:16:52.529","Common_Team"
+"VTXEDW","VEDW_CCAAIS10_01","ZIP_CODE","string","0","0","0","","7","2023-03-09 06:16:52.529","Common_Team"

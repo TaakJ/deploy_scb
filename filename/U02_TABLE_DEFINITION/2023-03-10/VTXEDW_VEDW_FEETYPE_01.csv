@@ -1,0 +1,7 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTXEDW","VEDW_FEETYPE_01","Bank_Code","string","0","0","0","","1","2023-03-09 06:20:29.712","Common_Team"
+"VTXEDW","VEDW_FEETYPE_01","Financial_Type","string","0","0","0","","2","2023-03-09 06:20:29.712","Common_Team"
+"VTXEDW","VEDW_FEETYPE_01","Financial_Code","string","0","0","0","","3","2023-03-09 06:20:29.712","Common_Team"
+"VTXEDW","VEDW_FEETYPE_01","Description","string","0","0","0","","4","2023-03-09 06:20:29.712","Common_Team"
+"VTXEDW","VEDW_FEETYPE_01","Has_VAT","string","0","0","0","","5","2023-03-09 06:20:29.712","Common_Team"
+"VTXEDW","VEDW_FEETYPE_01","Remark","string","0","0","0","","6","2023-03-09 06:20:29.712","Common_Team"

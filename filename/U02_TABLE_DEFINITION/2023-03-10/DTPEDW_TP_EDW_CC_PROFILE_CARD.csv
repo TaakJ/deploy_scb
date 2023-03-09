@@ -1,0 +1,7 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","Card_Id","int","0","0","0","","1","2023-03-08 08:54:10.309","Common_Team"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","Card_Num","varchar","16","0","0","","2","2023-03-08 08:54:10.309","Common_Team"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","Card_Issue_Dt","date","0","0","0","","3","2023-03-08 08:54:10.309","Common_Team"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","Start_Dt","date","0","0","0","","4","2023-03-08 08:54:10.309","Common_Team"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","End_Dt","date","0","0","0","","5","2023-03-08 08:54:10.309","Common_Team"
+"DTPEDW","TP_EDW_CC_PROFILE_CARD","Record_Deleted_Flag","smallint","0","0","0","","6","2023-03-08 08:54:10.309","Common_Team"

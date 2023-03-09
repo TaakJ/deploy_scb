@@ -1,0 +1,6 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTXEDW","VEDW_PRDGLID10_PRODUCT_01","Product_Id","int","0","0","0","","1","2023-03-09 04:15:18.600","Common_Team"
+"VTXEDW","VEDW_PRDGLID10_PRODUCT_01","Product_Name","string","0","0","0","","2","2023-03-09 04:15:18.600","Common_Team"
+"VTXEDW","VEDW_PRDGLID10_PRODUCT_01","Host_Prod_Id","string","0","0","0","","3","2023-03-09 04:15:18.600","Common_Team"
+"VTXEDW","VEDW_PRDGLID10_PRODUCT_01","Product_Start_Dt","date","0","0","0","","4","2023-03-09 04:15:18.600","Common_Team"
+"VTXEDW","VEDW_PRDGLID10_PRODUCT_01","Product_End_Dt","date","0","0","0","","5","2023-03-09 04:15:18.600","Common_Team"

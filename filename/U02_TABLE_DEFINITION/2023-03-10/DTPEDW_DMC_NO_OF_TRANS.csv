@@ -1,0 +1,6 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"DTPEDW","DMC_NO_OF_TRANS","Businessdate","date","0","0","0","","1","2023-03-08 08:51:21.746","montarat"
+"DTPEDW","DMC_NO_OF_TRANS","Party_Id","int","0","0","1","","2","2023-03-08 08:51:21.746","montarat"
+"DTPEDW","DMC_NO_OF_TRANS","Organization_Num","char","10","0","0","'          '","3","2023-03-08 08:51:21.746","montarat"
+"DTPEDW","DMC_NO_OF_TRANS","NO_OF_TXN","decimal","18","2","0","","4","2023-03-08 08:51:21.746","montarat"
+"DTPEDW","DMC_NO_OF_TRANS","Event_Amt","decimal","18","2","0","","5","2023-03-08 08:51:21.746","montarat"

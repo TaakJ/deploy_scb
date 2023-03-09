@@ -1,0 +1,8 @@
+"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Card_Id","int","0","0","0","","1","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Card_Number","varchar","16","0","0","","2","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Next_Fee_Dt","date","0","0","0","","3","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Registration_Num","varchar","250","0","0","","4","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Corp_Id","varchar","100","0","0","","5","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Corp_Name_EN","varchar","100","0","0","","6","2023-03-09 03:04:01.598","Common_Team"
+"VTXEDW","FACT_ATM_CASH_CARD_INFO","Corp_Name_TH","string","0","0","0","","7","2023-03-09 03:04:01.598","Common_Team"
