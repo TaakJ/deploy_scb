@@ -1,7 +1,7 @@
 import os
 import time
 from split import run_process_split
-from connect import run_process_connect
+from deploy_release import run_process_genfile
 from merge import run_process_merge
 from change import check_files_for_deploy
 

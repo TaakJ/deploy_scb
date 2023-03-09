@@ -35,6 +35,7 @@ class run_process_merge():
         df_int_mapp = self.source_int_mapp(sheet1)
         df_sys_name = self.source_pl_config(sheet1)
         df_table_def = self.source_table_def(sheet1)
+        df_ddl = self.source_ddl(sheet2)
         
         for mvp in self.str_mvp:
             sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
@@ -73,8 +74,8 @@ class run_process_merge():
             if path != 'U99_PL_REGISTER_CONFIG':
                 mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv' )
             else:
-                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.xlsx')
-                    
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.xlsx' )
+            
             df = pandas.DataFrame(mvp['File_Name'], columns=['File_Name']).reset_index(drop=True)
             df['Storage'] = self.storage
             df['Container'] = self.container
@@ -91,11 +92,10 @@ class run_process_merge():
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
             
             for name in file['LIST']:
-                if path == 'U99_PL_REGISTER_CONFIG':
-                    full_name = str(name).upper() + '.xlsx'
+                if path != 'U99_PL_REGISTER_CONFIG':
+                    full_name = f'{str(name).upper()}.csv'
                 else:
-                    full_name = str(name).upper() + '.csv'
-
+                    full_name = f'{str(name).upper()}.xlsx'
                 self.full_path = os.path.join(current_path, mvp, full_name)
                 
                 if os.path.isfile(self.full_path) is False:
@@ -118,10 +118,11 @@ class run_process_merge():
             # print(f"Create folder and move file on {str_mvp}")
             os.makedirs(destination, exist_ok=True)
             for file_name in all_mvp[all_mvp['LIST'].isin([Path(x).stem for x in files_name])]['LIST'].values.tolist():
-                if path == 'U99_PL_REGISTER_CONFIG':
-                    full_name = f'{str(file_name).upper()}.xlsx'
-                else:
+                if path != 'U99_PL_REGISTER_CONFIG':
                     full_name = f'{str(file_name).upper()}.csv'
+                else:
+                    full_name = f'{str(file_name).upper()}.xlsx'
+                    
                 if os.path.isfile(os.path.join(destination, full_name)):
                     os.remove(os.path.join(destination, full_name))
                 
@@ -196,3 +197,65 @@ class run_process_merge():
         
         return dict_df
     
+    def source_ddl(self, dataframe):
+        
+        print("================= ddl ===================")
+        new_df = dataframe.loc[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME', 'MVP']), :]
+
+        if new_df.empty is False:
+            new_col = new_df['VIEW_TABLE'].map(lambda x: str(x)[2:]).str.split(".", n=1, expand=True)
+            new_df["Folder"]= new_col[0]
+            new_df["File"]= new_col[1]
+            print(f"count file ddl: {len(new_df)} files")
+            
+            mvp1 = new_df[new_df['MVP'] == 'MVP1']
+            mvp2 = new_df[new_df['MVP'] == 'MVP2']
+            mvp3 = new_df[new_df['MVP'] == 'MVP3']
+            mvp4 = new_df[new_df['MVP'] == 'MVP4']
+            mvp6 = new_df[new_df['MVP'] == 'MVP6']
+            all_mvp = [mvp1,mvp2,mvp3,mvp4,mvp6]
+            
+            parent_dir = os.getcwd() + f'/filename/DDL/{self.date}'
+            
+            for str_mvp, all_mvp in zip(self.str_mvp, all_mvp):
+                destination  = os.path.join(parent_dir, str_mvp)
+                for fol, file in zip(all_mvp['Folder'].values.tolist(), all_mvp['File'].values.tolist()):
+                    path_in = f'{parent_dir}/VIEW/{fol}'
+                    path_out = f'{destination}/{fol}'
+                    os.makedirs(path_out, exist_ok=True)
+                    full_name = str(file) + '.sql'
+                    
+                    if os.path.isfile(os.path.join(path_in, full_name)):
+                        os.remove(os.path.join(path_out, full_name))
+                        shutil.copy(os.path.join(path_in, full_name), path_out)
+                    else:
+                        print(f"file: {full_name} does not exist on folder: {fol}, '{str_mvp}'")
+                
+                # set dataframe
+                sum_df = pandas.DataFrame(zip(all_mvp['File'].values.tolist(), all_mvp['Folder'].values.tolist()), columns=['File', 'Folder']).reset_index(drop=True)
+                sum_df['File_Name'] = sum_df['File'].apply(lambda x: str(x).upper() + '.sql')
+                sum_df['Note UAT Deploy Date'] = self.date
+                sum_df['Storage'] = self.storage
+                sum_df['Container'] = self.container
+                sum_df['Storage_Path'] = sum_df[["Folder", "File_Name"]].apply(lambda x: "/".join(x), axis=1)
+                sum_df["Git_Path"] =  sum_df['Storage_Path'].apply(lambda x: "VIEWS/{}".format(x)) 
+                sum_df["Checklist"] =  sum_df['Storage_Path'].apply(lambda x: "ddl_script_replace/process_migration/{}".format(x)) 
+                df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
+                
+                # write to sheet 
+                print(f"{str_mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
+                sheet_name = f'Checklist_DDL_{str_mvp}'
+                self.sheet = self.wb.create_sheet(sheet_name)
+                self.sheet.title = sheet_name
+                rows = dataframe_to_rows(df_new, header=True, index=False)
+                for r_idx, row in enumerate(rows, 1):
+                    for c_idx, val in enumerate(row, 1):
+                        value = self.sheet.cell(row=r_idx, column=c_idx)
+                        value.value = val
+                
+                self.file_name = f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
+                self.wb.save(self.file_name)
+        else:
+            print("count file ddl: empty files")
+            
+        print("=========================================")
