@@ -39,7 +39,7 @@ class run_process_merge():
         for mvp in self.str_mvp:
             sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
             sum_df['Note UAT Deploy Date'] = self.date
-            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/".format(self.date_fmt, x))
+            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
             sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
             sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
             sum_df["Obsolete"] = ""
@@ -70,7 +70,11 @@ class run_process_merge():
         
         dict_df = {}
         for str_mvp, mvp in zip(self.str_mvp, list_df):
-            mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv')
+            if path != 'U99_PL_REGISTER_CONFIG':
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv' )
+            else:
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.xlsx')
+                    
             df = pandas.DataFrame(mvp['File_Name'], columns=['File_Name']).reset_index(drop=True)
             df['Storage'] = self.storage
             df['Container'] = self.container
@@ -87,7 +91,11 @@ class run_process_merge():
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
             
             for name in file['LIST']:
-                full_name = str(name).upper() + '.csv'
+                if path == 'U99_PL_REGISTER_CONFIG':
+                    full_name = str(name).upper() + '.xlsx'
+                else:
+                    full_name = str(name).upper() + '.csv'
+
                 self.full_path = os.path.join(current_path, mvp, full_name)
                 
                 if os.path.isfile(self.full_path) is False:
@@ -110,7 +118,10 @@ class run_process_merge():
             # print(f"Create folder and move file on {str_mvp}")
             os.makedirs(destination, exist_ok=True)
             for file_name in all_mvp[all_mvp['LIST'].isin([Path(x).stem for x in files_name])]['LIST'].values.tolist():
-                full_name = f'{str(file_name).upper()}.csv'
+                if path == 'U99_PL_REGISTER_CONFIG':
+                    full_name = f'{str(file_name).upper()}.xlsx'
+                else:
+                    full_name = f'{str(file_name).upper()}.csv'
                 if os.path.isfile(os.path.join(destination, full_name)):
                     os.remove(os.path.join(destination, full_name))
                 
