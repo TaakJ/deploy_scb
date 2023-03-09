@@ -1,0 +1,2 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEULQ/VLQ_05_GL_ACCT_SEGMENT.sql,ddl_script_replace/process_migration/VEULQ/VLQ_05_GL_ACCT_SEGMENT.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEULQ/VLQ_10_SUM_DEP_WD_MON_BASIS.sql,ddl_script_replace/process_migration/VEULQ/VLQ_10_SUM_DEP_WD_MON_BASIS.sql
