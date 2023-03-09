@@ -25,13 +25,16 @@ class run_process_split():
     def join_mvp(self, drop_dup):
         parent_dir  = "./filename"
         ## last_update 20230220
-        mvp_file = "SCB and list of GJ and Sys_20230220_update ctl_ID on GJ sheet.xlsx"
+        # mvp_file = "SCB and list of GJ and Sys_20230220_update ctl_ID on GJ sheet.xlsx"
+        mvp_file = "Status Report to SCB and list of GJ and Sys.xlsx"
         mvp_df = pandas.read_excel(os.path.join(parent_dir, mvp_file), sheet_name='3. Group Job', skiprows=3)
         
         df1 = drop_dup.apply(lambda x: x.astype(str).str.upper())
         df2 = mvp_df.apply(lambda x: x.astype(str).str.upper())
         m_df = pandas.merge(df1, df2, left_on='GROUP_JOB_NAME', right_on='Group Job')
         m_df = m_df.drop(m_df.columns[5:], axis=1)  
+        
+        print(m_df)
         
         return m_df
     
