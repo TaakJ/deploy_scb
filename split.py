@@ -22,14 +22,15 @@ class run_process_split():
         loop = asyncio.get_event_loop()
         loop.run_until_complete(self.find_excel_file())
         
-    def join_mvp(self, drop_dup, **args):
+    def join_mvp(self, drop_dup):
         parent_dir  = "./filename"
         ## last_update 20230220
         mvp_file = "SCB and list of GJ and Sys_20230220_update ctl_ID on GJ sheet.xlsx"
-        path = os.path.join(parent_dir, mvp_file)
+        mvp_df = pandas.read_excel(os.path.join(parent_dir, mvp_file), sheet_name='3. Group Job', skiprows=3)
         
-        df = pandas.read_excel(path, sheet_name='3. Group Job', skiprows=3)
-        m_df = pandas.merge(drop_dup, df, left_on='GROUP_JOB_NAME', right_on='Group Job')
+        df1 = drop_dup.apply(lambda x: x.astype(str).str.upper())
+        df2 = mvp_df.apply(lambda x: x.astype(str).str.upper())
+        m_df = pandas.merge(df1, df2, left_on='GROUP_JOB_NAME', right_on='Group Job')
         m_df = m_df.drop(m_df.columns[5:], axis=1)  
         
         return m_df
@@ -38,9 +39,8 @@ class run_process_split():
         
         df1 = mvp_drop_dup.apply(lambda x: x.astype(str).str.upper())
         df2 = period_deploy.apply(lambda x: x.astype(str).str.upper())
-        
         grouped = pandas.merge(df1, df2, left_on='GROUP_JOB_NAME', right_on='GROUP_JOB_NAME', how='left')
-
+        
         self.sheet = self.wb.create_sheet(sheet)
         self.sheet.title = sheet
         
@@ -82,11 +82,11 @@ class run_process_split():
         mvp_drop_dup = dataframe[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME','MVP'])]
         print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
         
-        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(mvp_drop_dup, period_deploy, sheet='ddl')
-        
         ## check name duplicate 
         new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['VIEW_TABLE','MVP'])]
+        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_df, period_deploy, sheet='ddl')
+        
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
         mvp3 = new_df[new_df['MVP'] == 'MVP3']
@@ -118,11 +118,11 @@ class run_process_split():
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
         print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
         
-        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(mvp_drop_dup, period_deploy, sheet='table_definition')
-        
         ## check name duplicate 
         new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
+        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_df, period_deploy, sheet='table_definition')
+        
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
         mvp3 = new_df[new_df['MVP'] == 'MVP3']
@@ -203,11 +203,12 @@ class run_process_split():
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
         print(f"count after delete duplicated system_name: {len(mvp_drop_dup)}")
         
+        # check name duplicate 
+        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(mvp_drop_dup, period_deploy, sheet='system_name')
+        self.check_period_deploy(new_df, period_deploy, sheet='system_name')
         
         ## check name duplicate 
-        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
         mvp3 = new_df[new_df['MVP'] == 'MVP3']
@@ -228,11 +229,11 @@ class run_process_split():
         add_column = pandas.DataFrame(mvp_drop_dup)
         add_column['SUFFIX'] = add_column['LIST'].apply(lambda x: "{}{}".format('REGISTER_CONFIG_SYSTEM_', x))
         
-        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(add_column, period_deploy, sheet='add_suffix_system_name')
-        
-        ## check name duplicate 
+        # check name duplicate 
         new_add_str = add_column[~add_column.duplicated(subset=['LIST','MVP'])]
+        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_add_str, period_deploy, sheet='add_suffix_system_name')
+        
         add_mvp1 = new_add_str[new_add_str['MVP'] == 'MVP1']
         add_mvp2 = new_add_str[new_add_str['MVP'] == 'MVP2']
         add_mvp3 = new_add_str[new_add_str['MVP'] == 'MVP3']
@@ -255,7 +256,7 @@ class run_process_split():
         
         print("============== int_mapping ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
-
+        
         # check column duplicate 
         mvp_dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP']), :]
         print(f"count duplicated int_mapping: {len(mvp_dup)}")
@@ -264,11 +265,11 @@ class run_process_split():
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
         print(f"count after delete duplicated int_mapping: {len(mvp_drop_dup)}")
         
-        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(mvp_drop_dup, period_deploy, sheet='int_mapping')
-        
         ## check name duplicate 
         new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
+        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_df, period_deploy, sheet='int_mapping')
+        
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
         mvp3 = new_df[new_df['MVP'] == 'MVP3']

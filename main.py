@@ -1,14 +1,14 @@
 import os
 import time
 from split import run_process_split
-from connect import run_process_connect
+from deploy_release import run_process_genfile
 from merge import run_process_merge
 from change import check_files_for_deploy
 
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-01"
+    date = "2023-03-10"
     # Can specify storage 
     storage = "scbedwseasta001adlsuat"
     # Can specify container 
@@ -18,11 +18,14 @@ class run_main:
     ## start split parameter
     run_process_split(date=date).run()
     
-    ## start change
-    # check_files_for_deploy(date=date)
-    
     ## start merge 
     # run_process_merge(date=date, storage=storage, container=container)
+    
+    ## start genfile
+    # run_process_genfile(date=date)
+    
+    ## start change
+    # check_files_for_deploy(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
