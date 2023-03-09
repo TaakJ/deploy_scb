@@ -16,10 +16,10 @@ class run_main:
     
     t1 = time.time()
     ## start split parameter
-    run_process_split(date=date).run()
+    # run_process_split(date=date).run()
     
     ## start merge 
-    # run_process_merge(date=date, storage=storage, container=container)
+    run_process_merge(date=date, storage=storage, container=container)
     
     ## start genfile
     # run_process_genfile(date=date)
