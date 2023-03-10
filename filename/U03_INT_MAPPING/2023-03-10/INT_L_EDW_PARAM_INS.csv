@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_L_EDW_PARAM_INS","Parameter_Type","PARAM_INS.Parameter_Type","0","1","1","0","0","0","0","0","0","1","2023-03-09 07:46:42.277","Phase2"
+"INT_L_EDW_PARAM_INS","Field_Name","PARAM_INS.Field_Name","0","1","1","0","0","0","0","0","0","2","2023-03-09 07:46:42.277","Phase2"
+"INT_L_EDW_PARAM_INS","Parameter_Values","PARAM_INS.Parameter_Values","0","1","1","0","0","0","0","0","0","3","2023-03-09 07:46:42.277","Phase2"
+"INT_L_EDW_PARAM_INS","Return_Values","PARAM_INS.Return_Values","0","1","1","0","0","0","0","0","0","4","2023-03-09 07:46:42.277","Phase2"
+"INT_L_EDW_PARAM_INS","Parameter_Description","LEFT(Parameter_Description,100)","1","1","1","0","0","0","0","0","0","5","2023-03-09 07:46:42.277","Common_Team"
+"INT_L_EDW_PARAM_INS","Parameter_Flag","PARAM_INS.Parameter_Flag","0","1","1","0","0","0","0","0","0","6","2023-03-09 07:46:42.277","Phase2"

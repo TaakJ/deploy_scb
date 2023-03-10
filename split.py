@@ -29,9 +29,9 @@ class run_process_split():
         mvp_file = "Status Report to SCB and list of GJ and Sys.xlsx"
         mvp_df = pandas.read_excel(os.path.join(parent_dir, mvp_file), sheet_name='3. Group Job', skiprows=3)
         
-        df1 = drop_dup.apply(lambda x: x.astype(str).str.upper())
-        df2 = mvp_df.apply(lambda x: x.astype(str).str.upper())
-        m_df = pandas.merge(df1, df2, left_on='GROUP_JOB_NAME', right_on='Group Job')
+        df1 = drop_dup.apply(lambda x: x.astype(str).str.strip().str.upper())
+        df2 = mvp_df.apply(lambda x: x.astype(str).str.strip().str.upper())
+        m_df = pandas.merge(df1, df2, left_on='GROUP_JOB_NAME', right_on='Group Job', how='left')
         m_df = m_df.drop(m_df.columns[5:], axis=1)
         
         return m_df
@@ -63,11 +63,16 @@ class run_process_split():
         i = 0
         for (col, li_val) in zip(column, write_list):
             for val in li_val:
-                column = self.sheet.cell(row=i + 1, column=1)
-                column.value = col
-                value = self.sheet.cell(row=i + 2, column=1)
-                value.value = val
-                i += 3
+                if len(val) <= 32767:
+                    column = self.sheet.cell(row=i + 1, column=1)
+                    column.value = col
+                    value = self.sheet.cell(row=i + 2, column=1)
+                    value.value = val
+                    i += 3
+                else:
+                    txtfile=open(f"./output/{self.date}/{sheet}_{col}.txt", "wt")
+                    txtfile.write(val)
+                    txtfile.close()
             
         self.wb.save(self.file_name)
         
@@ -77,22 +82,31 @@ class run_process_split():
         
         # check column duplicate
         mvp_dup = dataframe.loc[dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME','MVP']), :]
-        print(f"count duplicated table_definitaion: {len(mvp_dup)}")
-        print(f"delete duplicated table_definitaion: {mvp_dup['VIEW_TABLE'].values.tolist()}")
+        print(f"count duplicated ddl: {len(mvp_dup)}")
+        print(f"delete duplicated ddl: {mvp_dup['VIEW_TABLE'].values.tolist()}")
         ## drop duplicate and set to list
         mvp_drop_dup = dataframe[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME','MVP'])]
-        print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
+        print(f"count ddl: {len(mvp_drop_dup)}")
         
-        ## check name duplicate 
-        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['VIEW_TABLE','MVP'])]
-        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        # mvp1
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp1 = mvp1[~mvp1.duplicated(subset=['VIEW_TABLE','MVP'])]
+        # mvp2
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp2 = mvp2[~mvp2.duplicated(subset=['VIEW_TABLE','MVP'])]
+        # mvp3
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp3 = mvp3[~mvp3.duplicated(subset=['VIEW_TABLE','MVP'])]
+        # mvp4
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp4 = mvp4[~mvp4.duplicated(subset=['VIEW_TABLE','MVP'])]
+        # mvp6
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+        mvp6 = mvp6[~mvp6.duplicated(subset=['VIEW_TABLE','MVP'])]
+        
+        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         self.check_period_deploy(new_df, period_deploy, sheet='ddl')
-        
-        mvp1 = new_df[new_df['MVP'] == 'MVP1']
-        mvp2 = new_df[new_df['MVP'] == 'MVP2']
-        mvp3 = new_df[new_df['MVP'] == 'MVP3']
-        mvp4 = new_df[new_df['MVP'] == 'MVP4']
-        mvp6 = new_df[new_df['MVP'] == 'MVP6']
         
         ## format output to list
         mvp1_to_list = str(list(mvp1["VIEW_TABLE"])).replace(" ", "\n")
@@ -117,18 +131,23 @@ class run_process_split():
         print(f"delete duplicated table_definitaion: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate MVP and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count after delete duplicated table_definitaion: {len(mvp_drop_dup)}")
+        print(f"count table_definitaion: {len(mvp_drop_dup)}")
         
-        ## check name duplicate 
-        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
-        ## check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(new_df, period_deploy, sheet='table_definition')
-        
-        mvp1 = new_df[new_df['MVP'] == 'MVP1']
-        mvp2 = new_df[new_df['MVP'] == 'MVP2']
-        mvp3 = new_df[new_df['MVP'] == 'MVP3']
-        mvp4 = new_df[new_df['MVP'] == 'MVP4']
-        mvp6 = new_df[new_df['MVP'] == 'MVP6']
+        # mvp1
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
+        # mvp2
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp2 = mvp2[~mvp2.duplicated(subset=['LIST','MVP'])]
+        # mvp3
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp3 = mvp3[~mvp3.duplicated(subset=['LIST','MVP'])]
+        # mvp4
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp4 = mvp4[~mvp4.duplicated(subset=['LIST','MVP'])]
+        # mvp6
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+        mvp6 = mvp6[~mvp6.duplicated(subset=['LIST','MVP'])]
 
         spilt_col1 = mvp1["LIST"].str.split(",", n=1, expand=True)
         spilt_col2 = mvp2["LIST"].str.split(",", n=1, expand=True)
@@ -186,6 +205,11 @@ class run_process_split():
         else:
             grouped = ["schema: []", "table: []"]
             write_list.append(grouped)
+            
+        # check name duplicate 
+        new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
+        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_df, period_deploy, sheet='table_definition')
         
         self.write_to_gen_parameter(write_list=write_list, sheet="list_table_definition")
         
@@ -202,19 +226,28 @@ class run_process_split():
         print(f"delete duplicated system_name: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count after delete duplicated system_name: {len(mvp_drop_dup)}")
+        print(f"count system_name: {len(mvp_drop_dup)}")
+        
+        # mvp1
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
+        # mvp2
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp2 = mvp2[~mvp2.duplicated(subset=['LIST','MVP'])]
+        # mvp3
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp3 = mvp3[~mvp3.duplicated(subset=['LIST','MVP'])]
+        # mvp4
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp4 = mvp4[~mvp4.duplicated(subset=['LIST','MVP'])]
+        # mvp6
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+        mvp6 = mvp6[~mvp6.duplicated(subset=['LIST','MVP'])]
         
         # check name duplicate 
-        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
+        new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
         self.check_period_deploy(new_df, period_deploy, sheet='system_name')
-        
-        ## check name duplicate 
-        mvp1 = new_df[new_df['MVP'] == 'MVP1']
-        mvp2 = new_df[new_df['MVP'] == 'MVP2']
-        mvp3 = new_df[new_df['MVP'] == 'MVP3']
-        mvp4 = new_df[new_df['MVP'] == 'MVP4']
-        mvp6 = new_df[new_df['MVP'] == 'MVP6']
         
         ## format output to str
         mvp1_to_str = ','.join(map(str, list(mvp1["LIST"])))
@@ -230,23 +263,33 @@ class run_process_split():
         add_column = pandas.DataFrame(mvp_drop_dup)
         add_column['SUFFIX'] = add_column['LIST'].apply(lambda x: "{}{}".format('REGISTER_CONFIG_SYSTEM_', x))
         
-        # check name duplicate 
-        new_add_str = add_column[~add_column.duplicated(subset=['LIST','MVP'])]
-        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
-        self.check_period_deploy(new_add_str, period_deploy, sheet='add_suffix_system_name')
+        # mvp1
+        add_mvp1 = add_column[add_column['MVP'] == 'MVP1']
+        add_mvp1 = add_mvp1[~add_mvp1.duplicated(subset=['LIST','MVP'])]
+        # mvp2
+        add_mvp2 = add_column[add_column['MVP'] == 'MVP2']
+        add_mvp2 = add_mvp2[~add_mvp2.duplicated(subset=['LIST','MVP'])]
+        # mvp3
+        add_mvp3 = add_column[add_column['MVP'] == 'MVP3']
+        add_mvp3 = add_mvp3[~add_mvp3.duplicated(subset=['LIST','MVP'])]
+        # mvp4
+        add_mvp4 = add_column[add_column['MVP'] == 'MVP4']
+        add_mvp4 = add_mvp4[~add_mvp4.duplicated(subset=['LIST','MVP'])]
+        # mvp6
+        add_mvp6 = add_column[add_column['MVP'] == 'MVP6']
+        add_mvp6 = add_mvp6[~add_mvp6.duplicated(subset=['LIST','MVP'])]
         
-        add_mvp1 = new_add_str[new_add_str['MVP'] == 'MVP1']
-        add_mvp2 = new_add_str[new_add_str['MVP'] == 'MVP2']
-        add_mvp3 = new_add_str[new_add_str['MVP'] == 'MVP3']
-        add_mvp4 = new_add_str[new_add_str['MVP'] == 'MVP4']
-        add_mvp6 = new_add_str[new_add_str['MVP'] == 'MVP6']
-
         ## format output to list
         mvp1_to_list = str(list(add_mvp1["SUFFIX"])).replace(" ", "")
         mvp2_to_list = str(list(add_mvp2["SUFFIX"])).replace(" ", "")
         mvp3_to_list = str(list(add_mvp3["SUFFIX"])).replace(" ", "")
         mvp4_to_list = str(list(add_mvp4["SUFFIX"])).replace(" ", "")
         mvp6_to_list = str(list(add_mvp6["SUFFIX"])).replace(" ", "")
+        
+        # check name duplicate 
+        new_add_str = pandas.concat([add_mvp1,add_mvp2,add_mvp3,add_mvp4,add_mvp6], axis=0, ignore_index=True)
+        # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        self.check_period_deploy(new_add_str, period_deploy, sheet='add_suffix_system_name')
         
         write_list = [[mvp1_to_list], [mvp2_to_list], [mvp3_to_list], [mvp4_to_list], [mvp6_to_list]]
         self.write_to_gen_parameter(write_list=write_list, sheet="list_add_suffix_system_name")
@@ -257,25 +300,33 @@ class run_process_split():
         
         print("============== int_mapping ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
-        
         # check column duplicate 
         mvp_dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP']), :]
         print(f"count duplicated int_mapping: {len(mvp_dup)}")
         print(f"delete duplicated int_mapping: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate  and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count after delete duplicated int_mapping: {len(mvp_drop_dup)}")
+        print(f"count int_mapping: {len(mvp_drop_dup)}")
         
-        ## check name duplicate 
-        new_df = mvp_drop_dup[~mvp_drop_dup.duplicated(subset=['LIST','MVP'])]
+        # mvp1
+        mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
+        mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
+        # mvp2
+        mvp2 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP2']
+        mvp2 = mvp2[~mvp2.duplicated(subset=['LIST','MVP'])]
+        # mvp3
+        mvp3 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP3']
+        mvp3 = mvp3[~mvp3.duplicated(subset=['LIST','MVP'])]
+        # mvp4
+        mvp4 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP4']
+        mvp4 = mvp4[~mvp4.duplicated(subset=['LIST','MVP'])]
+        # mvp6
+        mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
+        mvp6 = mvp6[~mvp6.duplicated(subset=['LIST','MVP'])]
+        
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
+        new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         self.check_period_deploy(new_df, period_deploy, sheet='int_mapping')
-        
-        mvp1 = new_df[new_df['MVP'] == 'MVP1']
-        mvp2 = new_df[new_df['MVP'] == 'MVP2']
-        mvp3 = new_df[new_df['MVP'] == 'MVP3']
-        mvp4 = new_df[new_df['MVP'] == 'MVP4']
-        mvp6 = new_df[new_df['MVP'] == 'MVP6']
         
         # format output to list
         mvp1_to_list = str(list(mvp1["LIST"])).replace(" ", "")
@@ -296,6 +347,8 @@ class run_process_split():
         
         try:
             latest_file = max(list_of_files, key=os.path.getmtime)
+            a = pandas.read_excel(latest_file, sheet_name='all')
+            
             sheet1 = self.join_mvp(drop_dup=pandas.read_excel(latest_file, sheet_name='all'))
             sheet2 = self.join_mvp(drop_dup=pandas.read_excel(latest_file, sheet_name='ddl'))
             sheet3 = pandas.read_excel(latest_file, sheet_name='period')

@@ -1,0 +1,4 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_E_CSENT_MINOR","Cust_Id","LEFT(Cust_Id,50)","1","1","1","0","0","0","0","0","0","1","2023-03-09 15:32:26.123","Common_Team"
+"INT_E_CSENT_MINOR","Cust_Type","LEFT(Cust_Type,20)","1","1","1","0","0","0","0","0","0","2","2023-03-09 15:32:26.123","Common_Team"
+"INT_E_CSENT_MINOR","Date_Of_Birth","VCSENT_MINOR.Date_Of_Birth","0","1","1","0","0","0","0","0","0","3","2023-03-09 15:32:26.123","INT_WANCHAIK"

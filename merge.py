@@ -16,6 +16,9 @@ class run_process_merge():
         self.container = container
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
+        
+        # check periord
+        self.periord = ['MVP3', 'MVP4']
         self.wb = openpyxl.load_workbook("./filename/deployment_checklist_xxxxxxx.xlsx")
         
         # output deployment_checklist
@@ -29,6 +32,7 @@ class run_process_merge():
         if filename != "":
             sheet1 = pandas.read_excel(filename, sheet_name='all')
             sheet2 = pandas.read_excel(filename, sheet_name='ddl')
+            # sheet3 = pandas.read_excel(filename, sheet_name='period')
         else:
             raise ValueError("File not found !!")
         
@@ -83,6 +87,11 @@ class run_process_merge():
             temp_cols = df.columns.tolist()
             re_cols = temp_cols[1:] + temp_cols[0:1]
             df = df[re_cols]
+            
+            # write to excel
+            if df.empty is False:
+                df.to_excel(f'./filename/{path}/deploy_{str_mvp}_{self.date_fmt}.xlsx')
+            
             dict_df.update({str_mvp: df})
         
         return dict_df
@@ -90,14 +99,12 @@ class run_process_merge():
     def check_file_in_folder(self, list_df, path):
         for mvp, file in zip(self.str_mvp, list_df):
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
-            
             for name in file['LIST']:
                 if path != 'U99_PL_REGISTER_CONFIG':
                     full_name = f'{str(name).upper()}.csv'
                 else:
                     full_name = f'{str(name).upper()}.xlsx'
                 self.full_path = os.path.join(current_path, mvp, full_name)
-                
                 if os.path.isfile(self.full_path) is False:
                     print(f'file {full_name} does not exist in {path}/{self.date}/{mvp}')
         
@@ -123,11 +130,10 @@ class run_process_merge():
                 else:
                     full_name = f'{str(file_name).upper()}.xlsx'
                     
-                if os.path.isfile(os.path.join(destination, full_name)):
-                    os.remove(os.path.join(destination, full_name))
-                
-                shutil.move(os.path.join(parent_dir, full_name), destination)
-                print(f"Move file: {full_name} to folder: '{str_mvp}'")
+                if os.path.isfile(os.path.join(destination, full_name)) is False:
+                    # os.remove(os.path.join(destination, full_name))
+                    shutil.copy(os.path.join(parent_dir, full_name), destination)
+                    print(f"Copy file: {full_name} to folder: '{str_mvp}'")
                 
         return mvp1, mvp2, mvp3, mvp4, mvp6
         
@@ -145,6 +151,7 @@ class run_process_merge():
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, new_df, path='U03_INT_MAPPING')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
+            
             self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U03_INT_MAPPING')
             
@@ -164,9 +171,11 @@ class run_process_merge():
         current_path = os.getcwd() + r'/filename/U99_PL_REGISTER_CONFIG' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
+        
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, add_col, path='U99_PL_REGISTER_CONFIG')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
+            
             self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
             
