@@ -8,7 +8,7 @@ from change import check_files_for_deploy
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-10"
+    date = "2023-03-13"
     # Can specify storage 
     storage = "scbedwseasta001adlsuat"
     # Can specify container 
@@ -16,10 +16,10 @@ class run_main:
     
     t1 = time.time()
     ## start split parameter
-    # run_process_split(date=date).run()
+    run_process_split(date=date).run()
     
     ## start merge 
-    run_process_merge(date=date, storage=storage, container=container)
+    # run_process_merge(date=date, storage=storage, container=container)
     
     ## start genfile
     run_process_genfile(date=date)
