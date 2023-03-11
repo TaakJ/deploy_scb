@@ -16,9 +16,6 @@ class run_process_merge():
         self.container = container
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
-        
-        # check periord
-        self.periord = ['MVP3', 'MVP4']
         self.wb = openpyxl.load_workbook("./filename/deployment_checklist_xxxxxxx.xlsx")
         
         # output deployment_checklist
@@ -38,27 +35,28 @@ class run_process_merge():
         
         df_int_mapp = self.source_int_mapp(sheet1)
         df_sys_name = self.source_pl_config(sheet1)
-        df_table_def = self.source_table_def(sheet1)
-        df_ddl = self.source_ddl(sheet2)
+        # df_table_def = self.source_table_def(sheet1)
+        # df_ddl = self.source_ddl(sheet2)
         
-        for mvp in self.str_mvp:
-            sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
-            sum_df['Note UAT Deploy Date'] = self.date
-            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
-            sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
-            sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
-            sum_df["Obsolete"] = ""
-            sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
+        
+        
+        # for mvp in self.str_mvp:
+        #     sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
+        #     sum_df['Note UAT Deploy Date'] = self.date
+        #     sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
+        #     sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
+        #     sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
+        #     sum_df["Obsolete"] = ""
+        #     sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
             
-            df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
-            if df_new.empty is False:
-                self.write_from_source(df_new, mvp)
-                print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
-            else:
-                raise Exception("Dataframe is empty !!")
-            
+        #     df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
+        #     if df_new.empty is False:
+        #         self.write_from_source(df_new, mvp)
+        #         print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
+        #     else:
+        #         raise Exception("Dataframe is empty !!")
+    
     def write_from_source(self, df, mvp):
-        
         sheet_name = f'Checklist_ADLS_{mvp}'
         self.sheet = self.wb.create_sheet(sheet_name)
         self.sheet.title = sheet_name
@@ -70,11 +68,27 @@ class run_process_merge():
         
         self.file_name = f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
         self.wb.save(self.file_name)
+        
+    def check_old_deploy(self, sheet):
+        current_path = os.getcwd() + r'/filename/OLD_DEPLOY' 
+        files_deploy = glob.glob(f'{current_path}/{self.date}/*')
+        if files_deploy != []:
+            df_old = pandas.read_excel(''.join(files_deploy), sheet_name=sheet)
+        
+        return df_old
     
     def genarate_datafeame(self, list_df, path):
         
         dict_df = {}
+        
+        df_old = self.check_old_deploy(path)
         for str_mvp, mvp in zip(self.str_mvp, list_df):
+            if df_old.empty is False:
+                # print(str_mvp)
+                mvp = pandas.merge(mvp, df_old, how='left', on=['LIST', 'MVP'], indicator=True)
+                mvp = mvp[mvp['_merge'] == 'left_only'].drop('_merge',axis=1)
+                # print(mvp)
+                
             if path != 'U99_PL_REGISTER_CONFIG':
                 mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv' )
             else:
@@ -88,50 +102,58 @@ class run_process_merge():
             re_cols = temp_cols[1:] + temp_cols[0:1]
             df = df[re_cols]
             
-            # write to excel
-            if df.empty is False:
-                df.to_excel(f'./filename/{path}/deploy_{str_mvp}_{self.date_fmt}.xlsx')
-            
             dict_df.update({str_mvp: df})
         
         return dict_df
     
     def check_file_in_folder(self, list_df, path):
+        
         for mvp, file in zip(self.str_mvp, list_df):
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
             for name in file['LIST']:
                 if path != 'U99_PL_REGISTER_CONFIG':
                     full_name = f'{str(name).upper()}.csv'
                 else:
-                    full_name = f'{str(name).upper()}.xlsx'
-                self.full_path = os.path.join(current_path, mvp, full_name)
-                if os.path.isfile(self.full_path) is False:
-                    print(f'file {full_name} does not exist in {path}/{self.date}/{mvp}')
+                    full_name = f'REGISTER_CONFIG_SYSTEM_{str(name).upper()}.xlsx'
+                    
+                if any(os.scandir(os.path.join(current_path, mvp))):
+                    if os.path.isfile(os.path.join(current_path, mvp, full_name)) is False:
+                        print(f'file {full_name} does not exist in {path}/{self.date}/{mvp}')
+                
         
     def crate_folder_mvp(self, files_name, dataframe, path):
         
         new_df = dataframe.apply(lambda x: x.astype(str).str.upper())
+        
+        # mvp1
         mvp1 = new_df[new_df['MVP'] == 'MVP1']
+        mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
+        # mvp2
         mvp2 = new_df[new_df['MVP'] == 'MVP2']
+        mvp2 = mvp2[~mvp2.duplicated(subset=['LIST','MVP'])]
+        # mvp3
         mvp3 = new_df[new_df['MVP'] == 'MVP3']
+        mvp3 = mvp3[~mvp3.duplicated(subset=['LIST','MVP'])]
+        # mvp4
         mvp4 = new_df[new_df['MVP'] == 'MVP4']
+        mvp4 = mvp4[~mvp4.duplicated(subset=['LIST','MVP'])]
+        # mvp6
         mvp6 = new_df[new_df['MVP'] == 'MVP6']
+        mvp6 = mvp6[~mvp6.duplicated(subset=['LIST','MVP'])]
         
         parent_dir  = f"./filename/{path}/{self.date}"
-        all_mvp = [mvp1,mvp2,mvp3,mvp4,mvp6] 
+        all_mvp = [mvp1,mvp2,mvp3,mvp4,mvp6]
         
         for str_mvp, all_mvp in zip(self.str_mvp, all_mvp):
             destination  = os.path.join(parent_dir, str_mvp)
-            # print(f"Create folder and move file on {str_mvp}")
             os.makedirs(destination, exist_ok=True)
-            for file_name in all_mvp[all_mvp['LIST'].isin([Path(x).stem for x in files_name])]['LIST'].values.tolist():
+            for name in all_mvp[all_mvp['LIST'].isin([f'REGISTER_CONFIG_SYSTEM_{x}' if path == 'U99_PL_REGISTER_CONFIG' else Path(x).stem for x in files_name])]['LIST'].values.tolist():
                 if path != 'U99_PL_REGISTER_CONFIG':
-                    full_name = f'{str(file_name).upper()}.csv'
+                    full_name = f'{str(name).upper()}.csv'
                 else:
-                    full_name = f'{str(file_name).upper()}.xlsx'
+                    full_name = f'{str(name).upper()}.xlsx'
                     
                 if os.path.isfile(os.path.join(destination, full_name)) is False:
-                    # os.remove(os.path.join(destination, full_name))
                     shutil.copy(os.path.join(parent_dir, full_name), destination)
                     print(f"Copy file: {full_name} to folder: '{str_mvp}'")
                 
@@ -141,15 +163,14 @@ class run_process_merge():
         
         print("============== int_mapping ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
-        new_df = df.loc[~df.duplicated(subset=['LIST','MVP']), :]
-        print(f"count file int_mapping: {len(new_df)} files")
+        print(f"count file int_mapping: {len(df)} files")
         
         current_path = os.getcwd() + r'/filename/U03_INT_MAPPING' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
 
         if files_name != []:
-            mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, new_df, path='U03_INT_MAPPING')
+            mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, df, path='U03_INT_MAPPING')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
             
             self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
@@ -163,17 +184,14 @@ class run_process_merge():
         
         print("============== pl_config ================")
         df = dataframe.loc[dataframe['COL_NM'] == 'SYSTEM_NAME']
-        new_df = df.loc[~df.duplicated(subset=['LIST','MVP']), :]
-        add_col = pandas.DataFrame(new_df)
-        add_col['LIST'] = add_col['LIST'].apply(lambda x: "{}{}".format('REGISTER_CONFIG_SYSTEM_', x))
-        print(f"count file pl_config: {len(add_col)} files")
+        print(f"count file pl_config: {len(df)} files")
         
         current_path = os.getcwd() + r'/filename/U99_PL_REGISTER_CONFIG' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
         
         if files_name != []:
-            mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, add_col, path='U99_PL_REGISTER_CONFIG')
+            mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, df, path='U99_PL_REGISTER_CONFIG')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
             
             self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
