@@ -100,7 +100,7 @@ class run_process_genfile():
                     deploy_list = os.path.join(self.mvp4_path, f'02_deployList_SI-523_SR-5515_SR-12745_{mvp}_RegisterConfig_UAT.txt')
             
                 files = open(deploy_list,"w+")
-                files.write(f"{content} \n")
+                files.write(f"{content} ")
                 files.close()
                     
         

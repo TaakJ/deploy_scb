@@ -97,15 +97,14 @@ class run_process_split():
         
     async def spilt_sheet_ddl(self, dataframe, period_deploy):
         
-        print("============== ddl ==============")
-        
+        print("================ ddl ====================")
+        print(f"count ddl all: {len(dataframe)}")
         # check column duplicate
         mvp_dup = dataframe.loc[dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME','MVP']), :]
         print(f"count duplicated ddl: {len(mvp_dup)}")
         print(f"delete duplicated ddl: {mvp_dup['VIEW_TABLE'].values.tolist()}")
         ## drop duplicate and set to list
         mvp_drop_dup = dataframe[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME','MVP'])]
-        print(f"count ddl: {len(mvp_drop_dup)}")
         
         # mvp1
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
@@ -126,13 +125,14 @@ class run_process_split():
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
         new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         self.check_period_deploy(new_df, period_deploy, sheet='ddl')
+        print(f"count ddl: {len(new_df)}")
         
         ## format output to list
-        mvp1_to_list = str(list(mvp1["VIEW_TABLE"])).replace(" ", "\n")
-        mvp2_to_list = str(list(mvp2["VIEW_TABLE"])).replace(" ", "\n")
-        mvp3_to_list = str(list(mvp3["VIEW_TABLE"])).replace(" ", "\n")
-        mvp4_to_list = str(list(mvp4["VIEW_TABLE"])).replace(" ", "\n")
-        mvp6_to_list = str(list(mvp6["VIEW_TABLE"])).replace(" ", "\n")
+        mvp1_to_list = str(list(mvp1["VIEW_TABLE"])).replace(" ", "")
+        mvp2_to_list = str(list(mvp2["VIEW_TABLE"])).replace(" ", "")
+        mvp3_to_list = str(list(mvp3["VIEW_TABLE"])).replace(" ", "")
+        mvp4_to_list = str(list(mvp4["VIEW_TABLE"])).replace(" ", "")
+        mvp6_to_list = str(list(mvp6["VIEW_TABLE"])).replace(" ", "")
         
         ## format output to list
         write_dict = {}
@@ -148,8 +148,9 @@ class run_process_split():
     
     async def spilt_table_def(self, dataframe, period_deploy):
         
-        print("============== table_def ==============")
+        print("=============== table_def ===============")
         df = dataframe.loc[dataframe['COL_NM'] == 'TABLE']
+        print(f"count table_definitaion all: {len(df)}")
         
         ## check column duplicate MVP
         mvp_dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP']), :]
@@ -157,7 +158,6 @@ class run_process_split():
         print(f"delete duplicated table_definitaion: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate MVP and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count table_definitaion: {len(mvp_drop_dup)}")
         
         # mvp1
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
@@ -179,6 +179,7 @@ class run_process_split():
         new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
         data_all = self.check_period_deploy(new_df, period_deploy, sheet='U02_TABLE_DEFINITION')
+        print(f"count table_definitaion: {len(data_all)}")
         
         ## format output to list
         write_dict = {}
@@ -194,8 +195,9 @@ class run_process_split():
     
     async def spilt_system(self, dataframe, period_deploy):
         
-        print("============== system_name ==============")
+        print("=============== system_name =============")
         df = dataframe.loc[dataframe['COL_NM'] == 'SYSTEM_NAME']
+        print(f"count system_name all: {len(df)}")
         
         # check column duplicate 
         mvp_dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP']), :]
@@ -203,8 +205,7 @@ class run_process_split():
         print(f"delete duplicated system_name: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count system_name: {len(mvp_drop_dup)}")
-        
+            
         # mvp1
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
         mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
@@ -225,6 +226,7 @@ class run_process_split():
         new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
         data_all = self.check_period_deploy(new_df, period_deploy, sheet='U99_PL_REGISTER_CONFIG')
+        print(f"count system_name: {len(data_all)}")
         
         ## format output to str
         write_dict = {}
@@ -247,15 +249,16 @@ class run_process_split():
     async def spilt_int_mapp(self, dataframe, period_deploy):
         
         print("============== int_mapping ==============")
+        
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
+        print(f"count int_mapping all: {len(df)}")
         # check column duplicate 
         mvp_dup = df.loc[df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP']), :]
         print(f"count duplicated int_mapping: {len(mvp_dup)}")
         print(f"delete duplicated int_mapping: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate  and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
-        print(f"count int_mapping: {len(mvp_drop_dup)}")
-        
+                
         # mvp1
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
         mvp1 = mvp1[~mvp1.duplicated(subset=['LIST','MVP'])]
@@ -275,6 +278,7 @@ class run_process_split():
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
         new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         data_all = self.check_period_deploy(new_df, period_deploy, sheet='U03_INT_MAPPING')
+        print(f"count int_mapping: {len(data_all)} ")
 
         ## format output to list
         write_dict = {}
