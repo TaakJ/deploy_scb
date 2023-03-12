@@ -149,6 +149,8 @@ class run_process_merge():
             else:
                 mvp['File_Name'] = mvp['LIST'].apply(lambda x:  f'REGISTER_CONFIG_SYSTEM_{str(x).upper()}.xlsx')
             
+            print(f"count file path {str(path).lower()}: '{len(mvp)}' files on {str_mvp}")
+            
             for full_name in mvp['File_Name']:
                 if any(os.scandir(os.path.join(current_path, str_mvp))):
                     if os.path.isfile(os.path.join(current_path, str_mvp, full_name)) is False:
@@ -200,7 +202,6 @@ class run_process_merge():
         
         print("============== int_mapping ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
-        print(f"count file int_mapping: {len(df)} files")
         
         current_path = os.getcwd() + r'/filename/U03_INT_MAPPING' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
