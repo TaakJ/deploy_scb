@@ -70,32 +70,11 @@ class run_process_merge():
         
         self.file_name = f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
         self.wb.save(self.file_name)
-        
-    def check_old_deploy(self, sheet):
-        current_path = os.getcwd() + r'/filename/OLD_DEPLOY' 
-        files_deploy = glob.glob(f'{current_path}/{self.re_deploy}/*')
-        if files_deploy != []:
-            df_old = pandas.read_excel(''.join(files_deploy), sheet_name=sheet)
-            
-        return df_old
     
-    def genarate_datafeame(self, list_df, path):
+    def genarate_datafeame(self, list_mvp, path):
         
         dict_df = {}
-        
-        df_old = self.check_old_deploy(path)
-        for str_mvp, mvp in zip(self.str_mvp, list_df):
-            if df_old.empty is False:
-                if path == 'U02_TABLE_DEFINITION':
-                    mvp['LIST'] = mvp['LIST'].apply(lambda x: str(x).replace('_', ',', 1))
-                mvp = pandas.merge(mvp, df_old, how='left', on=['LIST', 'MVP'], indicator=True)
-                mvp = mvp[mvp['_merge'] == 'left_only'].drop('_merge',axis=1)
-                
-            if path != 'U99_PL_REGISTER_CONFIG':
-                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.csv' )
-            else:
-                mvp['File_Name'] = mvp['LIST'].apply(lambda x: str(x).upper() + '.xlsx' )
-            
+        for str_mvp, mvp in zip(self.str_mvp, list_mvp):
             df = pandas.DataFrame(mvp['File_Name'], columns=['File_Name']).reset_index(drop=True)
             df['Storage'] = self.storage
             df['Container'] = self.container
@@ -105,23 +84,41 @@ class run_process_merge():
             df = df[re_cols]
             
             dict_df.update({str_mvp: df})
-        
         return dict_df
+    
+    def check_old_deploy(self, sheet):
+        current_path = os.getcwd() + r'/filename/OLD_DEPLOY' 
+        files_deploy = glob.glob(f'{current_path}/{self.re_deploy}/*')
+        if files_deploy != []:
+            df_old = pandas.read_excel(''.join(files_deploy), sheet_name=sheet)
+            
+        return df_old
     
     def check_file_in_folder(self, list_df, path):
         
-        for mvp, file in zip(self.str_mvp, list_df):
+        df_old = self.check_old_deploy(path)
+        list_mvp = []
+        for str_mvp, mvp in zip(self.str_mvp, list_df):
+            if df_old.empty is False:
+                mvp = pandas.merge(mvp, df_old, how='left', on=['LIST', 'MVP'], indicator=True)
+                mvp = mvp[mvp['_merge'] == 'left_only'].drop('_merge',axis=1)
+            
+            # path stored
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
-            for name in file['LIST']:
-                if path != 'U99_PL_REGISTER_CONFIG':
-                    full_name = f'{str(name).upper()}.csv'
-                else:
-                    full_name = f'REGISTER_CONFIG_SYSTEM_{str(name).upper()}.xlsx'
-                    
-                if any(os.scandir(os.path.join(current_path, mvp))):
-                    if os.path.isfile(os.path.join(current_path, mvp, full_name)) is False:
-                        print(f'file {full_name} does not exist in {path}/{self.date}/{mvp}')
-                
+            
+            if path != 'U99_PL_REGISTER_CONFIG':
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x:  f'{str(x).upper()}.csv')
+            else:
+                mvp['File_Name'] = mvp['LIST'].apply(lambda x:  f'REGISTER_CONFIG_SYSTEM_{str(x).upper()}.xlsx')
+            
+            for full_name in mvp['File_Name']:
+                if any(os.scandir(os.path.join(current_path, str_mvp))):
+                    if os.path.isfile(os.path.join(current_path, str_mvp, full_name)) is False:
+                        print(f'file {full_name} does not exist in {path}/{self.date}/{str_mvp}')
+                        
+            list_mvp.append(mvp)
+            
+        return list_mvp
         
     def crate_folder_mvp(self, files_name, dataframe, path):
         
@@ -175,8 +172,8 @@ class run_process_merge():
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, df, path='U03_INT_MAPPING')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
             
-            self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
-            dict_df = self.genarate_datafeame(list_df=list_df, path='U03_INT_MAPPING')
+            list_mvp = self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
+            dict_df = self.genarate_datafeame(list_mvp=list_mvp, path='U03_INT_MAPPING')
         else:
             raise FileNotFoundError("File not found in folder 'U03_INT_MAPPING'")
             
@@ -198,8 +195,9 @@ class run_process_merge():
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, df, path='U99_PL_REGISTER_CONFIG')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
             
-            self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
-            dict_df = self.genarate_datafeame(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
+            list_mvp = self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
+            dict_df = self.genarate_datafeame(list_mvp=list_mvp, path='U99_PL_REGISTER_CONFIG')
+            
         else:
             raise FileNotFoundError("File not found in folder 'U99_PL_REGISTER_CONFIG'")
             
@@ -224,8 +222,9 @@ class run_process_merge():
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, new_df, path='U02_TABLE_DEFINITION')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]
             
-            self.check_file_in_folder(list_df=list_df, path='U02_TABLE_DEFINITION')
-            dict_df = self.genarate_datafeame(list_df=list_df, path='U02_TABLE_DEFINITION')
+            list_mvp = self.check_file_in_folder(list_df=list_df, path='U02_TABLE_DEFINITION')
+            dict_df = self.genarate_datafeame(list_mvp=list_mvp, path='U02_TABLE_DEFINITION')
+            
         else:
             raise FileNotFoundError("File not found in folder 'U02_TABLE_DEFINITION'")
             
