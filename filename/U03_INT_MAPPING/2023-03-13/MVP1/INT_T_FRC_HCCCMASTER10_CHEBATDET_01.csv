@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Event_Id","VFRC_HCCCMASTER10_CHEBATDET_01.Event_Id","0","1","1","0","1","0","0","0","0","1","2023-03-11 23:23:29.433","Phase2"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","2","2023-03-11 23:23:29.433","Phase2"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Check_Batch_Detail_Seq_Num","LEFT(CHECK_Batch_Detail_Seq_Num,50)","1","1","1","0","1","0","0","0","0","3","2023-03-11 23:23:29.433","Common_Team"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Denomination_Val","VFRC_HCCCMASTER10_CHEBATDET_01.Denomination_Val","0","1","1","0","0","0","0","0","0","4","2023-03-11 23:23:29.433","Phase2"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Check_Batch_Cnt","VFRC_HCCCMASTER10_CHEBATDET_01.Check_Batch_Cnt","0","1","1","0","0","0","0","0","0","7","2023-03-11 23:23:29.433","Phase2"
+"INT_T_FRC_HCCCMASTER10_CHEBATDET_01","Ctl_Id","'036'","1","1","1","0","0","0","0","1","0","11","2023-03-11 23:23:29.433","Phase2"

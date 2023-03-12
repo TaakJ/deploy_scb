@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_AM_ACCOCREDLIMI_01","Account_Num","LEFT(ACCOUNT_NUM,100)","1","1","1","0","1","0","0","0","0","1","2023-03-12 01:27:46.168","Common_Team"
+"INT_T_AM_ACCOCREDLIMI_01","Account_Modifier_Num","LEFT(ACCOUNT_MODIFIER_NUM,20)","1","1","1","0","1","0","0","0","0","2","2023-03-12 01:27:46.168","Common_Team"
+"INT_T_AM_ACCOCREDLIMI_01","Limit_Type_Cd","VAM_ACCOCREDLIMI_01.LIMIT_TYPE_CD","0","1","1","0","1","0","0","0","0","3","2023-03-12 01:27:46.168","Phase1"
+"INT_T_AM_ACCOCREDLIMI_01","Credit_Limit_Start_Dttm","date_format(Credit_Limit_Start_Dttm,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","4","2023-03-12 01:27:46.168","Phase1"
+"INT_T_AM_ACCOCREDLIMI_01","Credit_Limit_End_Dttm","VAM_ACCOCREDLIMI_01.CREDIT_LIMIT_END_DTTM","0","1","1","0","0","0","0","0","0","5","2023-03-12 01:27:46.168","Phase1"
+"INT_T_AM_ACCOCREDLIMI_01","Acct_Crncy_Credit_Limit_Amt","VAM_ACCOCREDLIMI_01.ACCT_CRNCY_CREDIT_LIMIT_AMT","0","1","1","0","0","0","0","0","0","7","2023-03-12 01:27:46.168","Phase1"
+"INT_T_AM_ACCOCREDLIMI_01","Ctl_Id","'004'","1","1","1","0","0","0","0","1","0","11","2023-03-12 01:27:46.168","Phase1"

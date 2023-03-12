@@ -1,0 +1,4 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_L_CDMS_EDW_PRODACCTTYPE_01","Product_Type","CDMS_PRODACCTTYPE_1_0.Product_Type","9","1","1","0","0","0","0","0","0","1","2023-03-12 06:48:50.148","Phase2"
+"INT_L_CDMS_EDW_PRODACCTTYPE_01","Account_Type","CDMS_PRODACCTTYPE_1_0.Account_Type","9","1","1","0","0","0","0","0","1","2","2023-03-12 06:48:50.148","Common_Team"
+"INT_L_CDMS_EDW_PRODACCTTYPE_01","Description_Account_Type","CDMS_PRODACCTTYPE_1_0.Description_Account_Type","9","1","1","0","0","0","0","0","0","3","2023-03-12 06:48:50.148","Phase2"

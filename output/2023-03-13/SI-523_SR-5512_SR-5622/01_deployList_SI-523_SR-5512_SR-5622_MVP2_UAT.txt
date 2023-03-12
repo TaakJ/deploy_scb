@@ -1,0 +1,1 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUCCP/VCCP_TXN_M.sql,ddl_script_replace/process_migration/VEUCCP/VCCP_TXN_M.sql

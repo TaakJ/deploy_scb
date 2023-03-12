@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_IVR_FINANCEVENT_01","Event_Id","VIVR_FINANCEVENT_01.Event_Id","0","1","1","0","0","0","0","0","0","1","2023-03-12 04:35:57.977","Phase2"
+"INT_T_IVR_FINANCEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","0","0","0","0","0","2","2023-03-12 04:35:57.977","Phase2"
+"INT_T_IVR_FINANCEVENT_01","Event_Currency_Cd","VIVR_FINANCEVENT_01.Event_Currency_Cd","0","1","1","0","0","0","0","0","0","3","2023-03-12 04:35:57.977","Phase2"
+"INT_T_IVR_FINANCEVENT_01","Event_Amt","VIVR_FINANCEVENT_01.Event_Amt","0","1","1","0","0","0","0","0","0","5","2023-03-12 04:35:57.977","Phase2"
+"INT_T_IVR_FINANCEVENT_01","Financial_Event_Comment_Txt","VIVR_FINANCEVENT_01.Financial_Event_COMMENT_Txt","0","1","1","0","0","0","0","0","0","8","2023-03-12 04:35:57.977","Phase2"
+"INT_T_IVR_FINANCEVENT_01","Fund_Transfer_Event_Ind","LEFT(Fund_Transfer_Event_Ind,3)","1","1","1","0","0","0","0","0","0","27","2023-03-12 04:35:57.977","Common_Team"
+"INT_T_IVR_FINANCEVENT_01","Ctl_Id","'030'","1","1","1","0","0","0","0","0","0","41","2023-03-12 04:35:57.977","Phase2"

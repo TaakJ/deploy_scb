@@ -1,0 +1,6 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_RBF_PARTYIDENT_01","Party_Id","VRBF_PARTYIDENT_01.PARTY_ID","0","1","1","1","1","0","0","0","0","1","2023-03-12 00:38:14.993","Phase1"
+"INT_T_RBF_PARTYIDENT_01","Party_Identification_Type_Cd","VRBF_PARTYIDENT_01.PARTY_IDENTIFICATION_TYPE_CD","0","1","1","1","1","0","0","0","0","2","2023-03-12 00:38:14.993","Phase1"
+"INT_T_RBF_PARTYIDENT_01","Party_Identification_Start_Dt","date_format(Party_Identification_Start_Dt,'yyyy-MM-dd')","1","1","1","1","1","0","0","0","0","3","2023-03-12 00:38:14.993","Phase1"
+"INT_T_RBF_PARTYIDENT_01","Party_Identification_Num","LEFT(PARTY_IDENTIFICATION_NUM,100)","1","1","1","0","0","0","0","0","0","5","2023-03-12 00:38:14.993","Common_Team"
+"INT_T_RBF_PARTYIDENT_01","Ctl_Id","'035'","1","1","1","0","0","0","0","1","0","11","2023-03-12 00:38:14.993","Phase1"

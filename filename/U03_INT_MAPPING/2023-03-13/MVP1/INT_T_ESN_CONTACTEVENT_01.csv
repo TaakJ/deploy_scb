@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_ESN_CONTACTEVENT_01","Event_Id","VESN_CONTACTEVENT_01.Event_Id","0","1","1","0","0","0","0","0","0","1","2023-03-12 00:02:17.638","Phase1"
+"INT_T_ESN_CONTACTEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","0","0","0","0","0","2","2023-03-12 00:02:17.638","Phase1"
+"INT_T_ESN_CONTACTEVENT_01","Channel_Type_Cd","VESN_CONTACTEVENT_01.Channel_Type_Cd","0","1","1","0","0","0","0","0","0","4","2023-03-12 00:02:17.638","Phase1"
+"INT_T_ESN_CONTACTEVENT_01","IP_Address_Num","LEFT(IP_Address_Num,100)","1","1","1","0","0","0","0","0","0","16","2023-03-12 00:02:17.638","Common_Team"
+"INT_T_ESN_CONTACTEVENT_01","LANGUAGE_CD","VESN_CONTACTEVENT_01.Language_Cd","0","1","1","0","0","0","0","0","0","27","2023-03-12 00:02:17.638","Phase1"
+"INT_T_ESN_CONTACTEVENT_01","Ctl_Id","'044'","1","1","1","0","0","0","0","0","0","30","2023-03-12 00:02:17.638","Phase1"

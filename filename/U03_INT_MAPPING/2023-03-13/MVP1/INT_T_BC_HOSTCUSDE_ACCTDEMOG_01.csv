@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Account_Num","LEFT(ACCOUNT_NUM,100)","1","1","1","0","1","0","0","0","0","1","2023-03-12 02:14:37.948","Common_Team"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Account_Modifier_Num","LEFT(ACCOUNT_MODIFIER_NUM,20)","1","1","1","0","1","0","0","0","0","2","2023-03-12 02:14:37.948","Common_Team"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Demog_Cd","VBC_HOSTCUSDE_ACCTDEMOG_01.DEMOG_CD","0","1","1","0","1","0","0","0","0","3","2023-03-12 02:14:37.948","Phase2"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Data_Source_Cd","VBC_HOSTCUSDE_ACCTDEMOG_01.DATA_SOURCE_CD","0","1","1","0","1","0","0","0","0","4","2023-03-12 02:14:37.948","Phase2"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Acct_Demographic_Start_Dt","date_format(Acct_Demographic_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","5","2023-03-12 02:14:37.948","Phase2"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Acct_Demographic_Val","LEFT(ACCT_DEMOGRAPHIC_VAL,250)","1","1","1","0","0","0","0","0","0","9","2023-03-12 02:14:37.948","Common_Team"
+"INT_T_BC_HOSTCUSDE_ACCTDEMOG_01","Ctl_Id","'042'","1","1","1","0","0","0","0","1","0","13","2023-03-12 02:14:37.948","Phase2"

@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_FLTC_CUST_PARTDEMO_01","Party_Id","VFLTC_CUST_PARTDEMO_01.Party_Id","0","1","1","0","1","0","0","0","0","1","2023-03-11 23:40:43.623","S91630"
+"INT_T_FLTC_CUST_PARTDEMO_01","Demog_Cd","VFLTC_CUST_PARTDEMO_01.Demog_Cd","0","1","1","0","1","0","0","0","0","2","2023-03-11 23:40:43.623","S91630"
+"INT_T_FLTC_CUST_PARTDEMO_01","Data_Source_Cd","VFLTC_CUST_PARTDEMO_01.Data_Source_Cd","0","1","1","0","1","0","0","0","0","3","2023-03-11 23:40:43.623","S91630"
+"INT_T_FLTC_CUST_PARTDEMO_01","Party_Demog_Start_Dt","date_format(Party_Demog_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","4","2023-03-11 23:40:43.623","S91630"
+"INT_T_FLTC_CUST_PARTDEMO_01","Party_Demog_Val","LEFT(Party_Demog_Val,250)","1","1","1","0","0","0","0","0","0","5","2023-03-11 23:40:43.623","Common_Team"
+"INT_T_FLTC_CUST_PARTDEMO_01","Ctl_Id","'395'","1","1","1","0","0","0","0","1","0","6","2023-03-11 23:40:43.623","S91630"

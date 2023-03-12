@@ -1,0 +1,1 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUOBM/VOBM_18_PART_INFO_NSCB.sql,ddl_script_replace/process_migration/VEUOBM/VOBM_18_PART_INFO_NSCB.sql

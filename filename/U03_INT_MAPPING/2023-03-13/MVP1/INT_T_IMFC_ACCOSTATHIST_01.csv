@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_IMFC_ACCOSTATHIST_01","Account_Num","LEFT(ACCOUNT_NUM,100)","1","1","1","0","1","0","0","0","0","1","2023-03-12 00:21:09.766","Common_Team"
+"INT_T_IMFC_ACCOSTATHIST_01","Account_Modifier_Num","LEFT(ACCOUNT_MODIFIER_NUM,20)","1","1","1","0","1","0","0","0","0","2","2023-03-12 00:21:09.766","Common_Team"
+"INT_T_IMFC_ACCOSTATHIST_01","Acct_Status_Start_Dttm","date_format(Acct_Status_Start_Dttm,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","3","2023-03-12 00:21:09.766","Phase2"
+"INT_T_IMFC_ACCOSTATHIST_01","Acct_Status_Type_Cd","VIMFC_ACCOSTATHIST_01.ACCT_STATUS_TYPE_CD","0","1","1","0","1","0","0","0","0","4","2023-03-12 00:21:09.766","Phase2"
+"INT_T_IMFC_ACCOSTATHIST_01","Acct_Status_Reason_Cd","VIMFC_ACCOSTATHIST_01.ACCT_STATUS_REASON_CD","0","1","1","0","0","0","0","0","0","5","2023-03-12 00:21:09.766","Phase2"
+"INT_T_IMFC_ACCOSTATHIST_01","Acct_Status_End_Dttm","VIMFC_ACCOSTATHIST_01.ACCT_STATUS_END_DTTM","0","1","1","0","0","0","0","0","0","6","2023-03-12 00:21:09.766","Phase2"
+"INT_T_IMFC_ACCOSTATHIST_01","Ctl_Id","'039'","1","1","1","0","0","0","0","1","0","10","2023-03-12 00:21:09.766","Phase2"

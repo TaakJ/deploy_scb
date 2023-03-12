@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_E_BKL_PERSON_INFO","As_Of_Dt","LEFT(As_Of_Dt,10)","1","1","1","0","0","0","0","0","0","1","2023-03-12 06:46:27.772","Common_Team"
+"INT_E_BKL_PERSON_INFO","BKL_Id","VBKL_PERSON_INFO.BKL_Id","0","1","1","0","0","0","0","0","0","2","2023-03-12 06:46:27.772","Phase2"
+"INT_E_BKL_PERSON_INFO","BKL_Type_Id","LEFT(BKL_Type_Id,2)","1","1","1","0","0","0","0","0","0","3","2023-03-12 06:46:27.772","Common_Team"
+"INT_E_BKL_PERSON_INFO","BKL_Name","VBKL_PERSON_INFO.BKL_Name","0","1","1","0","0","0","0","0","0","4","2023-03-12 06:46:27.772","Phase2"
+"INT_E_BKL_PERSON_INFO","BKL_Sub_Type_Id","VBKL_PERSON_INFO.BKL_Sub_Type_Id","0","1","1","0","0","0","0","0","0","5","2023-03-12 06:46:27.772","Phase2"
+"INT_E_BKL_PERSON_INFO","BKL_Id_Card","VBKL_PERSON_INFO.BKL_Id_Card","0","1","1","0","0","0","0","0","0","6","2023-03-12 06:46:27.772","Phase2"
+"INT_E_BKL_PERSON_INFO","Flag_Active","LEFT(Flag_Active,1)","1","1","1","0","0","0","0","0","0","7","2023-03-12 06:46:27.772","Common_Team"

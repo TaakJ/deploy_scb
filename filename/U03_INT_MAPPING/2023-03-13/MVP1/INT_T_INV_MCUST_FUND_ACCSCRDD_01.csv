@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Account_Num","LEFT(Account_Num,100)","1","1","1","0","1","0","0","0","0","1","2023-03-11 23:48:56.103","Common_Team"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Account_Modifier_Num","LEFT(Account_Modifier_Num,20)","1","1","1","0","1","0","0","0","0","2","2023-03-11 23:48:56.103","Common_Team"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Model_Id","VINV_MCUST_FUND_ACC_SCR_DD_01.Model_Id","0","1","1","0","1","0","0","0","0","3","2023-03-11 23:48:56.103","Phase2"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Account_Score_Start_Dt","VINV_MCUST_FUND_ACC_SCR_DD_01.Account_Score_Start_Dt","0","1","1","0","1","0","0","0","0","4","2023-03-11 23:48:56.103","Phase2"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Account_Score_Val","LEFT(Account_Score_Val,50)","1","1","1","0","0","0","0","0","0","5","2023-03-11 23:48:56.103","Common_Team"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Account_Score_End_Dt","VINV_MCUST_FUND_ACC_SCR_DD_01.Account_Score_End_Dt","0","1","1","0","0","0","0","0","0","6","2023-03-11 23:48:56.103","Phase2"
+"INT_T_INV_MCUST_FUND_ACCSCRDD_01","Ctl_Id","'032'","1","1","1","0","0","0","0","1","0","10","2023-03-11 23:48:56.103","Phase2"

@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_SIP_ACCOUNEVENT_01","Event_Id","VSIP_ACCOUNEVENT_01.Event_Id","0","1","1","0","0","0","0","0","0","1","2023-03-12 01:01:07.519","Phase2"
+"INT_T_SIP_ACCOUNEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","0","0","0","0","0","2","2023-03-12 01:01:07.519","Phase2"
+"INT_T_SIP_ACCOUNEVENT_01","Account_Num","VSIP_ACCOUNEVENT_01.ACCOUNT_Num","0","1","1","0","0","0","0","0","0","3","2023-03-12 01:01:07.519","Phase2"
+"INT_T_SIP_ACCOUNEVENT_01","Account_Modifier_Num","LEFT(ACCOUNT_Modifier_Num,20)","1","1","1","0","0","0","0","0","0","4","2023-03-12 01:01:07.519","Common_Team"
+"INT_T_SIP_ACCOUNEVENT_01","Account_Event_Type_Cd","VSIP_ACCOUNEVENT_01.ACCOUNT_Event_TYPE_CD","0","1","1","0","0","0","0","0","0","5","2023-03-12 01:01:07.519","Phase2"
+"INT_T_SIP_ACCOUNEVENT_01","Ctl_Id","'053'
+","1","1","1","0","0","0","0","0","0","9","2023-03-12 01:01:07.519","Phase2"

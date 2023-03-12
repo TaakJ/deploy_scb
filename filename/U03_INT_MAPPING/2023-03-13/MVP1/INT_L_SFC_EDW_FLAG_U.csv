@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_L_SFC_EDW_FLAG_U","CITIZEN_ID","LEFT(REPLACE(CITIZEN_ID,'""',''),255)","1","1","1","0","0","0","0","0","0","1","2023-03-12 03:57:24.078","Common_Team"
+"INT_L_SFC_EDW_FLAG_U","RMID","LEFT(REPLACE(RMID,'""',''),255)","1","1","1","0","0","0","0","0","0","2","2023-03-12 03:57:24.078","Common_Team"
+"INT_L_SFC_EDW_FLAG_U","CARD_REF","LEFT(REPLACE(CARD_REF,'""',''),16)","1","1","1","0","0","0","0","0","0","3","2023-03-12 03:57:24.078","Common_Team"
+"INT_L_SFC_EDW_FLAG_U","FLAG_U","LEFT(REPLACE(FLAG_U,'""',''),1)","1","1","1","0","0","0","0","0","0","4","2023-03-12 03:57:24.078","Common_Team"
+"INT_L_SFC_EDW_FLAG_U","CREATE_DATE","(CASE WHEN COALESCE(REPLACE(SFC_FLAG_U_1_0.CREATE_DATE,'""',''),'') IN ('',' ')  THEN to_date('1000-01-03') ELSE to_date(REPLACE(SFC_FLAG_U_1_0.CREATE_DATE,'""',''), 'yyyy-MM-dd') END )","9","1","1","0","0","0","0","0","0","5","2023-03-12 03:57:24.078","hathaipat"
+"INT_L_SFC_EDW_FLAG_U","LAST_MODIFY_DATE","(CASE WHEN COALESCE(REPLACE(SFC_FLAG_U_1_0.LAST_MODIFY_DATE,'""',''),'') IN ('',' ')  THEN to_date('1000-01-03') ELSE to_date(REPLACE(SFC_FLAG_U_1_0.LAST_MODIFY_DATE,'""',''), 'yyyy-MM-dd') END )","9","1","1","0","0","0","0","0","0","6","2023-03-12 03:57:24.078","hathaipat"

@@ -1,0 +1,5 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_S1_PRODUCT_01","Product_Id","VS1_PRODUCT_01.Product_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 04:00:15.912","Phase2"
+"INT_T_S1_PRODUCT_01","Product_Name","LEFT(Product_Name,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 04:00:15.912","Common_Team"
+"INT_T_S1_PRODUCT_01","Host_Prod_Id","LEFT(Host_Prod_Id,35)","1","1","1","0","0","0","0","0","0","5","2023-03-12 04:00:15.912","Common_Team"
+"INT_T_S1_PRODUCT_01","Ctl_Id","'051'","1","1","1","0","0","0","0","1","0","12","2023-03-12 04:00:15.912","Phase2"
