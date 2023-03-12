@@ -177,6 +177,8 @@ class run_process_merge():
             
             self.check_file_in_folder(list_df=list_df, path='U03_INT_MAPPING')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U03_INT_MAPPING')
+        else:
+            raise FileNotFoundError("File not found in folder 'U03_INT_MAPPING'")
             
         print("=========================================")
             
@@ -198,6 +200,8 @@ class run_process_merge():
             
             self.check_file_in_folder(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U99_PL_REGISTER_CONFIG')
+        else:
+            raise FileNotFoundError("File not found in folder 'U99_PL_REGISTER_CONFIG'")
             
         print("=========================================")
         
@@ -222,11 +226,12 @@ class run_process_merge():
             
             self.check_file_in_folder(list_df=list_df, path='U02_TABLE_DEFINITION')
             dict_df = self.genarate_datafeame(list_df=list_df, path='U02_TABLE_DEFINITION')
+        else:
+            raise FileNotFoundError("File not found in folder 'U02_TABLE_DEFINITION'")
             
         print("=========================================")
         
         return dict_df
-    
     
     def source_ddl(self, dataframe):
         

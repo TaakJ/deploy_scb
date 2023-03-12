@@ -20,7 +20,7 @@ class run_main:
     run_process_split(date=date, re_deploy=re_deploy).run()
     
     ## start merge 
-    # run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
+    run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
     
     ## start genfile
     # run_process_genfile(date=date)
