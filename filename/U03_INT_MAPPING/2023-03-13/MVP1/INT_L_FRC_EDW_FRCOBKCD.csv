@@ -1,0 +1,58 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_L_FRC_EDW_FRCOBKCD","CIFID","LEFT(CIFID,20)","1","1","0","0","0","0","0","0","0","1","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","DDA","LEFT(DDA,12)","1","1","0","0","0","0","0","0","0","2","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ACDIND","LEFT(ACDIND,1)","1","1","0","0","0","0","0","0","0","3","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","SWIFTTID","LEFT(SWIFTTID,12)","1","1","0","0","0","0","0","0","0","4","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","CHIPSUID","LEFT(CHIPSUID,6)","1","1","0","0","0","0","0","0","0","5","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","CHIPSABA","LEFT(CHIPSABA,4)","1","1","0","0","0","0","0","0","0","6","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","FEDABA","LEFT(FEDABA,30)","1","1","0","0","0","0","0","0","0","7","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","FEDABAIND","LEFT(FEDABAIND,1)","1","1","0","0","0","0","0","0","0","8","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","FEDACHIND","LEFT(FEDACHIND,1)","1","1","0","0","0","0","0","0","0","9","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","NAME","LEFT(NAME,50)","1","1","0","0","0","0","0","0","0","10","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ADDR1","LEFT(ADDR1,40)","1","1","0","0","0","0","0","0","0","11","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ADDR2","LEFT(ADDR2,40)","1","1","0","0","0","0","0","0","0","12","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ADDR3","LEFT(ADDR3,40)","1","1","0","0","0","0","0","0","0","13","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","CITY","LEFT(CITY,30)","1","1","0","0","0","0","0","0","0","14","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","STATE","LEFT(STATE,30)","1","1","0","0","0","0","0","0","0","15","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ZIP","LEFT(ZIP,10)","1","1","0","0","0","0","0","0","0","16","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","COUNTRY","LEFT(COUNTRY,30)","1","1","0","0","0","0","0","0","0","17","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","SWIFTIND","LEFT(SWIFTIND,1)","1","1","0","0","0","0","0","0","0","18","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","CORPIND","LEFT(CORPIND,2)","1","1","0","0","0","0","0","0","0","19","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ABAS1","LEFT(ABAS1,180)","1","1","0","0","0","0","0","0","0","20","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ABAS2","LEFT(ABAS2,180)","1","1","0","0","0","0","0","0","0","21","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","DATASOURCE","LEFT(DATASOURCE,1)","1","1","0","0","0","0","0","0","0","22","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","DDALEN","LEFT(DDALEN,2)","1","1","0","0","0","0","0","0","0","23","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","TTKEY","LEFT(TTKEY,1)","1","1","0","0","0","0","0","0","0","24","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","SWKEY","LEFT(SWKEY,1)","1","1","0","0","0","0","0","0","0","25","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","PREFIX","LEFT(PREFIX,2)","1","1","0","0","0","0","0","0","0","26","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","STATUS","LEFT(STATUS,2)","1","1","0","0","0","0","0","0","0","27","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","ADDDATE","COALESCE(to_date(FRC_FRCOBKCD_1_0.ADDDATE, 'yyyy-MM-dd'), to_date('1000-01-03'))","1","1","0","0","0","0","0","0","0","28","2023-03-12 01:10:30.039","thanakit"
+"INT_L_FRC_EDW_FRCOBKCD","UPDDATE","COALESCE(to_date(FRC_FRCOBKCD_1_0.UPDDATE, 'yyyy-MM-dd'), to_date('1000-01-03'))","1","1","0","0","0","0","0","0","0","29","2023-03-12 01:10:30.039","thanakit"
+"INT_L_FRC_EDW_FRCOBKCD","UPDTIME","(CASE WHEN COALESCE(TRIM(FRC_FRCOBKCD_1_0.UPDTIME),'') = '' THEN 
+ to_timestamp('00:00:00') ELSE 
+ (SUBSTR(FRC_FRCOBKCD_1_0.UPDTIME,1,2))|| ':' || 
+ (SUBSTR(FRC_FRCOBKCD_1_0.UPDTIME,4,2)) || ':' || 
+ (SUBSTR(FRC_FRCOBKCD_1_0.UPDTIME,7,2)) END)","1","1","0","0","0","0","0","0","0","30","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","USERID","LEFT(USERID,20)","1","1","0","0","0","0","0","0","0","31","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","BLCKLIST","LEFT(BLCKLIST,1)","1","1","0","0","0","0","0","0","0","32","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","REMARK","LEFT(REMARK,35)","1","1","0","0","0","0","0","0","0","33","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","START_DT","","0","1","0","0","0","0","0","0","0","34","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","END_DT","","0","1","0","0","0","0","0","0","0","35","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","RECORD_DELETED_FLAG","","0","1","0","0","0","0","0","0","0","36","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","CTL_ID","","0","1","0","0","0","0","0","0","0","37","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","INS_PROC_NAME","","0","1","0","0","0","0","0","0","0","38","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","INS_TXF_BATCHID","","0","1","0","0","0","0","0","0","0","39","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","UPD_PROC_NAME","","0","1","0","0","0","0","0","0","0","40","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","UPD_TXF_BATCHID","","0","1","0","0","0","0","0","0","0","41","2023-03-12 01:10:30.039","hathaipat"
+"INT_L_FRC_EDW_FRCOBKCD","BK_PARTY_121_001","(COALESCE(TRIM(FRC_FRCOBKCD_1_0.SWIFTTID),'')|| '_121')
+","1","1","0","0","0","0","0","1","1","42","2023-03-12 01:10:30.039","Common_Team"
+"INT_L_FRC_EDW_FRCOBKCD","BK_LOCATION_123_001","( Coalesce(trim(FRC_FRCOBKCD_1_0.ADDR1),'')
+||'_'|| Coalesce(trim(FRC_FRCOBKCD_1_0.ADDR2),'')
+||'_'|| Coalesce(trim(FRC_FRCOBKCD_1_0.ADDR3),'')
+||'_'|| Coalesce(trim(FRC_FRCOBKCD_1_0.CITY),'')
+||'_'||''
+||'_'||''
+||'_'||''
+||'_'|| Coalesce(trim(FRC_FRCOBKCD_1_0.ZIP),'')
+||'_'|| Coalesce(trim(FRC_FRCOBKCD_1_0.COUNTRY),'') || '_123' )
+","1","1","0","0","0","0","0","1","1","43","2023-03-12 01:10:30.039","Common_Team"

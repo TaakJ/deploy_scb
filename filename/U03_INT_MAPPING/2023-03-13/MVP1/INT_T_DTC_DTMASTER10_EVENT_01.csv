@@ -1,0 +1,12 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Id","VDTC_DTMASTER10_EVENT_01.Event_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Activity_Type_Cd","VDTC_DTMASTER10_EVENT_01.Event_Activity_TYPE_CD","0","1","1","0","0","0","0","0","0","2","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Status_Cd","VDTC_DTMASTER10_EVENT_01.Event_Status_CD","0","1","1","0","0","0","0","0","0","4","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Status_Reason_Cd","VDTC_DTMASTER10_EVENT_01.Event_Status_Reason_CD","0","1","1","0","0","0","0","0","0","5","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Transaction_Id","VDTC_DTMASTER10_EVENT_01.TRANSACTION_Id","0","1","1","0","0","0","0","0","0","6","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","7","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Event_Start_Tm","VDTC_DTMASTER10_EVENT_01.Event_Start_Tm","0","1","1","0","0","0","0","0","0","8","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Financial_Ind","LEFT(Financial_Ind,3)","1","1","1","0","0","0","0","0","0","12","2023-03-12 00:55:56.121","Common_Team"
+"INT_T_DTC_DTMASTER10_EVENT_01","Host_Transaction_Code_Num","VDTC_DTMASTER10_EVENT_01.Host_TRANSACTION_Code_Num","0","1","1","0","0","0","0","0","0","21","2023-03-12 00:55:56.121","Phase2"
+"INT_T_DTC_DTMASTER10_EVENT_01","Ctl_Id","'043'
+","1","1","1","0","0","0","0","0","0","34","2023-03-12 00:55:56.121","Phase2"

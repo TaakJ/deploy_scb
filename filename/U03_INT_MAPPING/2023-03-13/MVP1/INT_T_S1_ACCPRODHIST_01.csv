@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_S1_ACCPRODHIST_01","Account_Num","LEFT(Account_Num,100)","1","1","1","0","1","0","0","0","0","1","2023-03-12 01:28:51.050","Common_Team"
+"INT_T_S1_ACCPRODHIST_01","Account_Modifier_Num","LEFT(Account_Modifier_Num,20)","1","1","1","0","1","0","0","0","0","2","2023-03-12 01:28:51.050","Common_Team"
+"INT_T_S1_ACCPRODHIST_01","Product_Id","VS1_ACCPRODHIST_01.Product_Id","0","1","1","0","1","0","0","0","0","3","2023-03-12 01:28:51.050","Phase2"
+"INT_T_S1_ACCPRODHIST_01","Agreement_Product_Role_Cd","VS1_ACCPRODHIST_01.Agreement_Product_Role_Cd","0","1","1","0","1","0","0","0","0","4","2023-03-12 01:28:51.050","Phase2"
+"INT_T_S1_ACCPRODHIST_01","Acct_Product_Assoc_Start_Dt","date_format(Acct_Product_Assoc_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","5","2023-03-12 01:28:51.050","Phase2"
+"INT_T_S1_ACCPRODHIST_01","Ctl_Id","'051'","1","1","1","0","0","0","0","1","0","10","2023-03-12 01:28:51.050","Phase2"

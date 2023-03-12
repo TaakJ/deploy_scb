@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_AIS_AGMAGMCLASS_01","Account_Num","LEFT(Account_Num,100)","1","1","1","1","1","0","0","0","0","1","2023-03-12 02:36:44.313","Common_Team"
+"INT_T_AIS_AGMAGMCLASS_01","Account_Modifier_Num","LEFT(Account_Modifier_Num,20)","1","1","1","1","1","0","0","0","0","2","2023-03-12 02:36:44.313","Common_Team"
+"INT_T_AIS_AGMAGMCLASS_01","Agreement_Classification_Cd","VAIS_AGMAGMCLASS_01.Agreement_Classification_Cd","0","1","1","1","1","0","0","0","0","3","2023-03-12 02:36:44.313","Phase2"
+"INT_T_AIS_AGMAGMCLASS_01","Agreement_Class_Start_Dt","date_format(Agreement_Class_Start_Dt,'yyyy-MM-dd')","1","1","1","1","1","0","0","0","0","4","2023-03-12 02:36:44.313","Phase2"
+"INT_T_AIS_AGMAGMCLASS_01","Agreement_Class_Value_Cd","VAIS_AGMAGMCLASS_01.Agreement_Class_Value_Cd","0","1","1","0","0","0","0","0","0","5","2023-03-12 02:36:44.313","Phase2"
+"INT_T_AIS_AGMAGMCLASS_01","Agreement_Class_End_Dt","VAIS_AGMAGMCLASS_01.Agreement_Class_End_Dt","0","1","1","0","0","0","0","0","0","6","2023-03-12 02:36:44.313","Phase2"
+"INT_T_AIS_AGMAGMCLASS_01","Ctl_Id","'081'","1","1","1","0","0","0","0","1","0","10","2023-03-12 02:36:44.313","Phase2"

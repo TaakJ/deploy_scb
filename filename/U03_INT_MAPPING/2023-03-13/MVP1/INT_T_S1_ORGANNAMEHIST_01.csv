@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_S1_ORGANNAMEHIST_01","Org_Party_Id","VS1_ORGANNAMEHIST_01.Org_Party_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 02:20:50.904","Phase2"
+"INT_T_S1_ORGANNAMEHIST_01","Name_Type_Cd","VS1_ORGANNAMEHIST_01.Name_Type_Cd","0","1","1","0","1","0","0","0","0","2","2023-03-12 02:20:50.904","Phase2"
+"INT_T_S1_ORGANNAMEHIST_01","Org_Name_Start_Dt","date_format(Org_Name_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","3","2023-03-12 02:20:50.904","Phase2"
+"INT_T_S1_ORGANNAMEHIST_01","Language_Cd","VS1_ORGANNAMEHIST_01.Language_Cd","0","1","1","0","1","0","0","0","0","4","2023-03-12 02:20:50.904","Phase2"
+"INT_T_S1_ORGANNAMEHIST_01","Org_Name","LEFT(Org_Name,100)","1","1","1","0","0","0","0","0","0","5","2023-03-12 02:20:50.904","Common_Team"
+"INT_T_S1_ORGANNAMEHIST_01","Ctl_Id","'051'","1","1","1","0","0","0","0","1","0","12","2023-03-12 02:20:50.904","Phase2"

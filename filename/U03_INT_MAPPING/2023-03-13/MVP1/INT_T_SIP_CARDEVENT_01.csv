@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_SIP_CARDEVENT_01","Event_Id","VSIP_CARDEVENT_01.Event_Id","0","1","1","0","0","0","0","0","0","1","2023-03-12 01:29:02.800","Phase2"
+"INT_T_SIP_CARDEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","0","0","0","0","0","2","2023-03-12 01:29:02.800","Phase2"
+"INT_T_SIP_CARDEVENT_01","Card_Num","LEFT(Card_Num,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 01:29:02.800","Common_Team"
+"INT_T_SIP_CARDEVENT_01","Card_Transaction_Type_Cd","VSIP_CARDEVENT_01.Card_TRANSACTION_TYPE_CD","0","1","1","0","0","0","0","0","0","12","2023-03-12 01:29:02.800","Phase2"
+"INT_T_SIP_CARDEVENT_01","Card_Type_Cd","VSIP_CARDEVENT_01.Card_TYPE_CD","0","1","1","0","0","0","0","0","0","16","2023-03-12 01:29:02.800","Phase2"
+"INT_T_SIP_CARDEVENT_01","Ctl_Id","'053'","1","1","1","0","0","0","0","0","0","21","2023-03-12 01:29:02.800","Phase2"

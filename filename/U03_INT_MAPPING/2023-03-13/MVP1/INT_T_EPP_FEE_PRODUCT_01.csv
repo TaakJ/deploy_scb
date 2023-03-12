@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_EPP_FEE_PRODUCT_01","Product_Id","VEPP_FEE_PRODUCT_01.Product_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 00:03:08.937","Phase2"
+"INT_T_EPP_FEE_PRODUCT_01","Product_Type_Cd","VEPP_FEE_PRODUCT_01.Product_TYPE_CD","0","1","1","0","0","0","0","0","0","2","2023-03-12 00:03:08.937","Phase2"
+"INT_T_EPP_FEE_PRODUCT_01","Product_Desc","LEFT(Product_DESC,250)","1","1","1","0","0","0","0","0","0","3","2023-03-12 00:03:08.937","Common_Team"
+"INT_T_EPP_FEE_PRODUCT_01","Product_Name","LEFT(Product_Name,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 00:03:08.937","Common_Team"
+"INT_T_EPP_FEE_PRODUCT_01","Host_Prod_Id","VEPP_FEE_PRODUCT_01.Host_Prod_Id","0","1","1","0","0","0","0","0","0","5","2023-03-12 00:03:08.937","Phase2"
+"INT_T_EPP_FEE_PRODUCT_01","Ctl_Id","'054'
+","1","1","1","0","0","0","0","1","0","12","2023-03-12 00:03:08.937","Phase2"

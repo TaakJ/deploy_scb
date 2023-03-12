@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_OLS_FINEVENT_01","Event_Id","VOLS_FINEVENT_01.EVENT_ID","0","1","1","1","1","0","0","0","0","1","2023-03-12 00:50:15.494","Phase2"
+"INT_T_OLS_FINEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","1","1","0","0","0","0","2","2023-03-12 00:50:15.494","Phase2"
+"INT_T_OLS_FINEVENT_01","Event_Amt","VOLS_FINEVENT_01.EVENT_AMT","0","1","1","0","0","0","0","0","0","5","2023-03-12 00:50:15.494","Phase2"
+"INT_T_OLS_FINEVENT_01","Event_Local_Amt","VOLS_FINEVENT_01.EVENT_LOCAL_AMT","0","1","1","0","0","0","0","0","0","6","2023-03-12 00:50:15.494","Phase2"
+"INT_T_OLS_FINEVENT_01","Additional_Comment_Txt","LEFT(ADDITIONAL_COMMENT_TXT,1000)","1","1","1","0","0","0","0","0","0","9","2023-03-12 00:50:15.494","Common_Team"
+"INT_T_OLS_FINEVENT_01","Ctl_Id","'344'","1","1","1","0","0","0","0","1","0","42","2023-03-12 00:50:15.494","Phase2"

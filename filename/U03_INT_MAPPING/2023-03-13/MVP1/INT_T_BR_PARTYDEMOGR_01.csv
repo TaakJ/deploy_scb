@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_BR_PARTYDEMOGR_01","Party_Id","VBR_PARTYDEMOGR_01.Party_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 01:10:17.984","Phase2"
+"INT_T_BR_PARTYDEMOGR_01","Demog_Cd","VBR_PARTYDEMOGR_01.Demog_Cd","0","1","1","0","1","0","0","0","0","2","2023-03-12 01:10:17.984","Phase2"
+"INT_T_BR_PARTYDEMOGR_01","Data_Source_Cd","VBR_PARTYDEMOGR_01.Data_Source_Cd","0","1","1","0","1","0","0","0","0","3","2023-03-12 01:10:17.984","Phase2"
+"INT_T_BR_PARTYDEMOGR_01","Party_Demog_Start_Dt","date_format(Party_Demog_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","4","2023-03-12 01:10:17.984","Phase2"
+"INT_T_BR_PARTYDEMOGR_01","Party_Demog_Val","LEFT(Party_Demog_Val,250)","1","1","1","0","0","0","0","0","0","9","2023-03-12 01:10:17.984","Common_Team"
+"INT_T_BR_PARTYDEMOGR_01","Ctl_Id","'022'","1","1","1","0","0","0","0","1","0","13","2023-03-12 01:10:17.984","Phase2"

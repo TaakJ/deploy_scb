@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_BSB_CONTEVENT_01","Event_Id","VBSB_CONTEVENT_01.EVENT_ID","0","1","1","1","1","0","0","0","0","1","2023-03-11 23:52:42.543","Phase2"
+"INT_T_BSB_CONTEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","1","1","0","0","0","0","2","2023-03-11 23:52:42.543","Phase2"
+"INT_T_BSB_CONTEVENT_01","Channel_Type_Cd","VBSB_CONTEVENT_01.CHANNEL_TYPE_CD","0","1","1","0","0","0","0","0","0","4","2023-03-11 23:52:42.543","Phase2"
+"INT_T_BSB_CONTEVENT_01","Host_Branch_Num","LEFT(HOST_BRANCH_NUM,4)","1","1","1","0","0","0","0","0","0","21","2023-03-11 23:52:42.543","Common_Team"
+"INT_T_BSB_CONTEVENT_01","Host_Branch_Name","VBSB_CONTEVENT_01.HOST_BRANCH_NAME","0","1","1","0","0","0","0","0","0","22","2023-03-11 23:52:42.543","Phase2"
+"INT_T_BSB_CONTEVENT_01","Ctl_Id","'085'","1","1","1","0","0","0","0","1","0","26","2023-03-11 23:52:42.543","Phase2"

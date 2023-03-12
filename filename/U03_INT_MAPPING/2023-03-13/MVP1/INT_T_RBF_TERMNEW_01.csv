@@ -1,0 +1,5 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_RBF_TERMNEW_01","Terminal_Id","LEFT(Terminal_Id,10)","1","1","1","0","0","0","0","0","0","1","2023-03-12 02:24:03.839","Common_Team"
+"INT_T_RBF_TERMNEW_01","User_Id","LEFT(User_Id,10)","1","1","1","0","1","0","0","0","0","2","2023-03-12 02:24:03.839","Common_Team"
+"INT_T_RBF_TERMNEW_01","Branch_id","LEFT(Branch_id,4)","1","1","1","0","1","0","0","0","0","3","2023-03-12 02:24:03.839","Common_Team"
+"INT_T_RBF_TERMNEW_01","Ctl_Id","'035'","1","1","1","0","0","0","0","1","0","4","2023-03-12 02:24:03.839","ADI_KRITSANA"

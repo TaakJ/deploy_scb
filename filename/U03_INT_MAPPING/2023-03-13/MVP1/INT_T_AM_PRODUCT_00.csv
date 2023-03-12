@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_AM_PRODUCT_00","Product_Id","VAM_PRODUCT_00.PRODUCT_ID","0","1","1","0","1","0","0","0","0","1","2023-03-12 01:10:56.459","Phase1"
+"INT_T_AM_PRODUCT_00","Product_Type_Cd","VAM_PRODUCT_00.PRODUCT_TYPE_CD","0","1","1","0","0","0","0","0","0","2","2023-03-12 01:10:56.459","Phase1"
+"INT_T_AM_PRODUCT_00","Product_Name","LEFT(PRODUCT_NAME,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 01:10:56.459","Common_Team"
+"INT_T_AM_PRODUCT_00","Host_Prod_Id","LEFT(HOST_PROD_ID,35)","1","1","1","0","0","0","0","0","0","5","2023-03-12 01:10:56.459","Common_Team"
+"INT_T_AM_PRODUCT_00","Balance_Sheet_Cd","VAM_PRODUCT_00.BALANCE_SHEET_CD","0","1","1","0","0","0","0","0","0","8","2023-03-12 01:10:56.459","Phase1"
+"INT_T_AM_PRODUCT_00","Ctl_Id","'004'","1","1","1","0","0","0","0","1","0","12","2023-03-12 01:10:56.459","Phase1"

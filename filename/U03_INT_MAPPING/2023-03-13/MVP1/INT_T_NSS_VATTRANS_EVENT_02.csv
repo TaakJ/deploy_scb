@@ -1,0 +1,10 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_NSS_VATTRANS_EVENT_02","Event_Id","VNSS_VATTRANS_EVENT_02.EVENT_ID","0","1","1","0","0","0","0","0","0","1","2023-03-12 01:44:51.865","Phase2"
+"INT_T_NSS_VATTRANS_EVENT_02","Event_Activity_Type_Cd","VNSS_VATTRANS_EVENT_02.EVENT_ACTIVITY_TYPE_CD","0","1","1","0","0","0","0","0","0","2","2023-03-12 01:44:51.865","Phase2"
+"INT_T_NSS_VATTRANS_EVENT_02","Transaction_Id","LEFT(TRANSACTION_ID,100)","1","1","1","0","0","0","0","0","0","6","2023-03-12 01:44:51.865","Common_Team"
+"INT_T_NSS_VATTRANS_EVENT_02","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","0","0","0","0","0","0","7","2023-03-12 01:44:51.865","Phase2"
+"INT_T_NSS_VATTRANS_EVENT_02","Account_Ind","LEFT(ACCOUNT_IND,3)","1","1","1","0","0","0","0","0","0","11","2023-03-12 01:44:51.865","Common_Team"
+"INT_T_NSS_VATTRANS_EVENT_02","Financial_Ind","LEFT(FINANCIAL_IND,3)","1","1","1","0","0","0","0","0","0","12","2023-03-12 01:44:51.865","Common_Team"
+"INT_T_NSS_VATTRANS_EVENT_02","Event_Purpose_Type_Cd","VNSS_VATTRANS_EVENT_02.EVENT_PURPOSE_TYPE_CD","0","1","1","0","0","0","0","0","0","22","2023-03-12 01:44:51.865","Phase2"
+"INT_T_NSS_VATTRANS_EVENT_02","Ctl_Id","'071'
+","1","1","1","0","0","0","0","1","0","34","2023-03-12 01:44:51.865","Phase2"

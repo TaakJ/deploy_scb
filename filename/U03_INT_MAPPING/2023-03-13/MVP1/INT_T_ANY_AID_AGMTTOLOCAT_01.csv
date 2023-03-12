@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Account_Num","LEFT(Account_Num,100)","1","1","1","0","1","0","0","0","0","1","2023-03-12 01:27:34.494","Common_Team"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Account_Modifier_Num","LEFT(Account_Modifier_Num,20)","1","1","1","0","1","0","0","0","0","2","2023-03-12 01:27:34.494","Common_Team"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Contract_Location_Rel_Cd","VANY_AID_AGMTTOLOCAT_01.Contract_Location_Rel_Cd","0","1","1","0","1","0","0","0","0","3","2023-03-12 01:27:34.494","INT_NIRAMON"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Location_Id","VANY_AID_AGMTTOLOCAT_01.Location_Id","0","1","1","0","1","0","0","0","0","4","2023-03-12 01:27:34.494","INT_NIRAMON"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Account_Location_Start_Dt","date_format(Account_Location_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","5","2023-03-12 01:27:34.494","INT_NIRAMON"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Account_Location_End_Dt","VANY_AID_AGMTTOLOCAT_01.Account_Location_End_Dt","0","1","1","0","0","0","0","0","0","6","2023-03-12 01:27:34.494","INT_NIRAMON"
+"INT_T_ANY_AID_AGMTTOLOCAT_01","Ctl_Id","'368'","1","1","1","0","0","0","0","1","0","7","2023-03-12 01:27:34.494","INT_NIRAMON"

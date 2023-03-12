@@ -1,0 +1,6 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_OLS_CARDEVENT_01","Event_Id","VOLS_CARDEVENT_01.EVENT_ID","0","1","1","1","1","0","0","0","0","1","2023-03-12 04:20:47.515","Phase2"
+"INT_T_OLS_CARDEVENT_01","Event_Start_Dt","date_format(Event_Start_Dt,'yyyy-MM-dd')","1","1","1","1","1","0","0","0","0","2","2023-03-12 04:20:47.515","Phase2"
+"INT_T_OLS_CARDEVENT_01","Card_Num","LEFT(CARD_NUM,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 04:20:47.515","Common_Team"
+"INT_T_OLS_CARDEVENT_01","Merchant_Num","LEFT(MERCHANT_NUM,18)","1","1","1","0","0","0","0","0","0","5","2023-03-12 04:20:47.515","Common_Team"
+"INT_T_OLS_CARDEVENT_01","Ctl_Id","'344'","1","1","1","0","0","0","0","1","0","21","2023-03-12 04:20:47.515","Phase2"

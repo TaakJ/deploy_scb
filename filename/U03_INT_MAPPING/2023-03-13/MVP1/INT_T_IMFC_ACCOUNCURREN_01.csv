@@ -1,0 +1,8 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_IMFC_ACCOUNCURREN_01","Currency_Use_Cd","VIMFC_ACCOUNCURREN_01.CURRENCY_USE_CD","0","1","1","0","1","0","0","0","0","1","2023-03-12 01:04:38.671","Phase2"
+"INT_T_IMFC_ACCOUNCURREN_01","Account_Currency_Cd","VIMFC_ACCOUNCURREN_01.ACCOUNT_CURRENCY_CD","0","1","1","0","1","0","0","0","0","2","2023-03-12 01:04:38.671","Phase2"
+"INT_T_IMFC_ACCOUNCURREN_01","Account_Num","LEFT(ACCOUNT_NUM,100)","1","1","1","0","1","0","0","0","0","3","2023-03-12 01:04:38.671","Common_Team"
+"INT_T_IMFC_ACCOUNCURREN_01","Account_Modifier_Num","LEFT(ACCOUNT_MODIFIER_NUM,20)","1","1","1","0","1","0","0","0","0","4","2023-03-12 01:04:38.671","Common_Team"
+"INT_T_IMFC_ACCOUNCURREN_01","Account_Currency_Start_Dt","date_format(Account_Currency_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","5","2023-03-12 01:04:38.671","Phase2"
+"INT_T_IMFC_ACCOUNCURREN_01","Account_Currency_End_Dt","VIMFC_ACCOUNCURREN_01.ACCOUNT_CURRENCY_END_DT","0","1","1","0","0","0","0","0","0","6","2023-03-12 01:04:38.671","Phase2"
+"INT_T_IMFC_ACCOUNCURREN_01","Ctl_Id","'039'","1","1","1","0","0","0","0","1","0","10","2023-03-12 01:04:38.671","Phase2"

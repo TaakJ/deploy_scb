@@ -1,0 +1,7 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_ANY_AID_ELETRONICADDR_01","Electronic_Address_Id","VANY_AID_ELETRONICADDR_01.Electronic_Address_Id","0","1","1","0","1","0","0","0","0","1","2023-03-12 03:16:20.690","INT_NIRAMON"
+"INT_T_ANY_AID_ELETRONICADDR_01","Electronic_Address_Type_Cd","VANY_AID_ELETRONICADDR_01.Electronic_Address_Type_Cd","0","1","1","0","0","0","0","0","0","2","2023-03-12 03:16:20.690","INT_NIRAMON"
+"INT_T_ANY_AID_ELETRONICADDR_01","Electronic_Address_Txt","LEFT(Electronic_Address_Txt,1000)","1","1","1","0","0","0","0","0","0","3","2023-03-12 03:16:20.690","Common_Team"
+"INT_T_ANY_AID_ELETRONICADDR_01","Electronic_Address_Domain_Name","LEFT(Electronic_Address_Domain_Name,100)","1","1","1","0","0","0","0","0","0","4","2023-03-12 03:16:20.690","Common_Team"
+"INT_T_ANY_AID_ELETRONICADDR_01","Domain_Root_Cd","LEFT(Domain_Root_Cd,100)","1","1","1","0","0","0","0","0","0","5","2023-03-12 03:16:20.690","Common_Team"
+"INT_T_ANY_AID_ELETRONICADDR_01","Ctl_Id","'368'","1","1","1","0","0","0","0","1","0","6","2023-03-12 03:16:20.690","INT_NIRAMON"

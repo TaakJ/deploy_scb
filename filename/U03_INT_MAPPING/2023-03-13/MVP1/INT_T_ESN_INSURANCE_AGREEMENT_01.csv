@@ -1,0 +1,4 @@
+"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
+"INT_T_ESN_INSURANCE_AGREEMENT_01","Account_Num","LEFT(Account_Num,100)","1","1","1","1","1","0","0","0","0","1","2023-03-12 00:19:09.260","Common_Team"
+"INT_T_ESN_INSURANCE_AGREEMENT_01","Account_Modifier_Num","LEFT(Account_Modifier_Num,20)","1","1","1","1","1","0","0","0","0","2","2023-03-12 00:19:09.260","Common_Team"
+"INT_T_ESN_INSURANCE_AGREEMENT_01","Ctl_Id","'044'","1","1","1","0","0","0","0","1","0","22","2023-03-12 00:19:09.260","Phase1"
