@@ -272,7 +272,7 @@ class run_process_merge():
         
         print("================= ddl ===================")
         
-        self.date = self.re_deploy
+        # elf.date = self.re_deploy
         ddl_path = os.getcwd() + f'/filename/DDL/{self.date}'
         
         df = dataframe.loc[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME', 'MVP']), :]
