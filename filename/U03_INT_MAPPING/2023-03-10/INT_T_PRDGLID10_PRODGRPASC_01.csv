@@ -1,5 +1,0 @@
-"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"INT_T_PRDGLID10_PRODGRPASC_01","Product_Id","VEDW_PRDGLID10_PRODGRPASC_01.Product_Id","0","1","1","0","1","0","0","0","0","1","2023-03-09 02:08:47.332","Phase2"
-"INT_T_PRDGLID10_PRODGRPASC_01","Product_Group_Id","VEDW_PRDGLID10_PRODGRPASC_01.Product_Group_Id","0","1","1","0","1","0","0","0","0","2","2023-03-09 02:08:47.332","Phase2"
-"INT_T_PRDGLID10_PRODGRPASC_01","Prod_Assoc_Start_Dt","date_format(Prod_Assoc_Start_Dt,'yyyy-MM-dd')","1","1","1","0","1","0","0","0","0","3","2023-03-09 02:08:47.332","Phase2"
-"INT_T_PRDGLID10_PRODGRPASC_01","Ctl_Id","'099'","1","1","1","0","0","0","0","1","0","8","2023-03-09 02:08:47.332","Phase2"

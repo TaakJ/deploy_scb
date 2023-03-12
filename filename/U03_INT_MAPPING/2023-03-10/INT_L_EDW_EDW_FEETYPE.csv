@@ -1,7 +1,0 @@
-"INTERFACE_NAME","COL_NAME","EXPRESSION","EXE_DB","INSERT_FLAG","UPDATE_FLAG","KEY_UPD","UD1","UD2","UD3","UD4","UD5","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"INT_L_EDW_EDW_FEETYPE","Bank_Code","EDW_FEETYPE_1_0.Bank_Code","0","1","1","1","0","0","0","0","0","1","2023-03-09 05:55:41.924","Phase2"
-"INT_L_EDW_EDW_FEETYPE","Financial_Type","EDW_FEETYPE_1_0.Financial_Type","0","1","1","1","0","0","0","0","0","2","2023-03-09 05:55:41.924","Phase2"
-"INT_L_EDW_EDW_FEETYPE","Financial_Code","EDW_FEETYPE_1_0.Financial_Code","0","1","1","1","0","0","0","0","0","3","2023-03-09 05:55:41.924","Phase2"
-"INT_L_EDW_EDW_FEETYPE","Description","LEFT(Description,100)","1","1","1","0","0","0","0","0","0","4","2023-03-09 05:55:41.924","Common_Team"
-"INT_L_EDW_EDW_FEETYPE","Has_VAT","EDW_FEETYPE_1_0.Has_VAT","0","1","1","0","0","0","0","0","0","5","2023-03-09 05:55:41.924","Phase2"
-"INT_L_EDW_EDW_FEETYPE","Remark","LEFT(Remark,200)","1","1","1","0","0","0","0","0","0","6","2023-03-09 05:55:41.924","Common_Team"

@@ -1,5 +1,0 @@
-"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"VTXEDW","VBI_BIPRMLGTYPE_01","Purpose","varchar","10","0","0","","1","2023-03-09 01:04:00.810","Common_Team"
-"VTXEDW","VBI_BIPRMLGTYPE_01","Sub_Purpose","varchar","10","0","0","","2","2023-03-09 01:04:00.810","Common_Team"
-"VTXEDW","VBI_BIPRMLGTYPE_01","LG_Main_Type","varchar","250","0","0","","3","2023-03-09 01:04:00.810","Common_Team"
-"VTXEDW","VBI_BIPRMLGTYPE_01","LG_Sub_Type","varchar","250","0","0","","4","2023-03-09 01:04:00.810","Common_Team"

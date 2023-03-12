@@ -1,7 +1,0 @@
-"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Product_Grp_L1_Cd","varchar","10","0","0","","1","2023-03-09 04:02:43.613","montarat"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Product_Grp_L2_Cd","varchar","10","0","0","","2","2023-03-09 04:02:43.613","montarat"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Month_DT","char","8","0","0","","3","2023-03-09 04:02:43.613","montarat"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Billing_Cycle_Day","char","2","0","0","","4","2023-03-09 04:02:43.613","montarat"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Billing_Close_Dt","char","8","0","0","","5","2023-03-09 04:02:43.613","montarat"
-"VTXEDW","VBI_BIUSRBLGDT_BKEYUSR_BLG_01","Billing_Due_Dt","char","8","0","0","","6","2023-03-09 04:02:43.613","montarat"
