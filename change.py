@@ -28,14 +28,13 @@ class check_files_for_deploy:
     
     @property
     def _compare_directories(self):
-        
-        print("============================ check change ==============================")
-        for expected_dir, actual_dir in itertools.zip_longest(ddl_path, self.adls_path):
-            if os.path.exists(expected_dir) and os.path.exists(actual_dir):
-                dir_diff = filecmp.dircmp(expected_dir, actual_dir)
-                diff_files = list(itertools.chain(dir_diff.diff_files, dir_diff.left_only)) # base from deploy
-            else:
-                raise Exception("Find not found folder for deploy !!")
+        a = ''
+        # for expected_dir, actual_dir in itertools.zip_longest(ddl_path, self.adls_path):
+        #     if os.path.exists(expected_dir) and os.path.exists(actual_dir):
+        #         dir_diff = filecmp.dircmp(expected_dir, actual_dir)
+        #         diff_files = list(itertools.chain(dir_diff.diff_files, dir_diff.left_only)) # base from deploy
+        #     else:
+        #         raise Exception("Find not found folder for deploy !!")
                 
         #     def safe_read_lines(path):
         #         if not os.path.exists(path):
@@ -74,6 +73,5 @@ class check_files_for_deploy:
         #                 else:
         #                     print(f'{os.path.join(actual_file, filename)} => No Changes')
                             
-        print("================================================================")
         
         

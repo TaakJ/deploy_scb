@@ -37,14 +37,14 @@ class run_process_merge():
         else:
             raise ValueError("File not found !!")
         
-        df_int_mapp = self.source_int_mapp(sheet1) 
-        df_sys_name = self.source_pl_config(sheet1)
-        df_table_def = self.source_table_def(sheet1)
+        # df_int_mapp = self.source_int_mapp(sheet1) 
+        # df_sys_name = self.source_pl_config(sheet1)
+        # df_table_def = self.source_table_def(sheet1)
         
-        if bool(df_int_mapp) is True and bool(df_sys_name) is True and bool(df_table_def):
-            self.auto_gen_file(df_int_mapp, df_sys_name, df_table_def)
+        # if bool(df_int_mapp) is True and bool(df_sys_name) is True and bool(df_table_def):
+        #     self.auto_gen_file(df_int_mapp, df_sys_name, df_table_def)
         
-        # df_ddl = self.source_ddl(sheet2)
+        df_ddl = self.source_ddl(sheet2)
         
     def auto_gen_file(self, df_int_mapp, df_sys_name, df_table_def):
         for mvp in self.str_mvp:
@@ -84,21 +84,21 @@ class run_process_merge():
         for mvp in self.str_mvp:
             new_df = dict(tuple(df[mvp].loc[:, ["File_Name","MVP"]].groupby('MVP')))
             if 'MVP1' in new_df.keys():
-                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
                 n = 1
+                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
             elif 'MVP2' in new_df.keys():
-                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
                 n = 4
+                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
             elif 'MVP3' in new_df.keys():
-                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
                 n = 7
+                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
             elif 'MVP4' in new_df.keys():
-                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
                 n = 10
-            elif 'MVP6' in new_df.keys():
                 rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
+            elif 'MVP6' in new_df.keys():
                 n = 13
-            
+                rows = dataframe_to_rows(new_df[mvp], header=True, index=False)
+                
             for r_idx, row in enumerate(rows, 1):
                 for c_idx, val in enumerate(row, n):
                     value = self.sheet.cell(row=r_idx, column=c_idx)
@@ -272,7 +272,7 @@ class run_process_merge():
         print("================= ddl ===================")
         
         ddl_path = os.getcwd() + f'/filename/DDL/{self.date}'
-        check_files_for_deploy(self.date, ddl_path=ddl_path)._compare_directories
+        check_files_for_deploy(self.date, ddl_path=ddl_path)
         
         
         # new_df = dataframe.loc[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME', 'MVP']), :]
