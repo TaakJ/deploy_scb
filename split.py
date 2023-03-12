@@ -8,8 +8,12 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 
 class run_process_split():
     
-    def __init__(self, date):
+    def __init__(self, date, re_deploy):
         self.date = date
+        self.re_deploy = re_deploy
+        if self.re_deploy == '':
+            self.re_deploy = self.date
+        
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')        
         self.wb = openpyxl.Workbook()
         parent_dir  = "./output"
@@ -38,9 +42,8 @@ class run_process_split():
     def check_period_deploy(self, mvp_drop_dup, period_deploy, sheet):
         
         # old deploy
-        date_change = '2023-03-10'
         current_path = os.getcwd() + r'/filename/OLD_DEPLOY' 
-        files_deploy = glob.glob(f'{current_path}/{date_change}/*')
+        files_deploy = glob.glob(f'{current_path}/{self.re_deploy}/*')
         if files_deploy != [] and sheet != 'ddl':
             df_old = pandas.read_excel(''.join(files_deploy), sheet_name=sheet)
         else:

@@ -9,6 +9,7 @@ class run_main:
     
     # Can specify deploy date
     date = "2023-03-13"
+    re_deploy = "2023-03-10"
     # Can specify storage 
     storage = "scbedwseasta001adlsuat"
     # Can specify container 
@@ -16,10 +17,10 @@ class run_main:
     
     t1 = time.time()
     ## start split parameter
-    run_process_split(date=date).run()
+    # run_process_split(date=date, re_deploy=re_deploy).run()
     
     ## start merge 
-    run_process_merge(date=date, storage=storage, container=container)
+    run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
     
     ## start genfile
     run_process_genfile(date=date)
