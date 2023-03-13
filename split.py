@@ -16,10 +16,9 @@ class run_process_split():
         
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')        
         self.wb = openpyxl.Workbook()
-        parent_dir  = "./output"
-        path = os.path.join(parent_dir, self.date)
-        os.makedirs(path, exist_ok=True)
-        self.file_name = f'{path}/gen_parameter_{self.date_fmt}.xlsx'
+        self.path = os.getcwd() + f'/output/{self.date}'
+        os.makedirs(self.path, exist_ok=True)
+        self.file_name = f'{self.path}/gen_parameter_{self.date_fmt}.xlsx'
         self.sheet = self.wb.active
         
     def run(self):
@@ -158,6 +157,7 @@ class run_process_split():
         print(f"delete duplicated table_definitaion: {mvp_dup['LIST'].values.tolist()}")
         ## drop duplicate MVP and set to list
         mvp_drop_dup = df[~df.duplicated(subset=['LIST','GROUP_JOB_NAME','MVP'])]
+        mvp_drop_dup['LIST'] = mvp_drop_dup['LIST'].apply(lambda x: str(x).replace(",", "_"))
         
         # mvp1
         mvp1 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP1']
@@ -174,7 +174,7 @@ class run_process_split():
         # mvp6
         mvp6 = mvp_drop_dup[mvp_drop_dup['MVP'] == 'MVP6']
         mvp6 = mvp6[~mvp6.duplicated(subset=['LIST','MVP'])]
-            
+        
         # check name duplicate 
         new_df = pandas.concat([mvp1,mvp2,mvp3,mvp4,mvp6], axis=0, ignore_index=True)
         # check with deploy from sheet period ./output/template_{date_deploy}.xlsx
@@ -184,10 +184,10 @@ class run_process_split():
         ## format output to list
         write_dict = {}
         for mvp, data in data_all.groupby("MVP"):
-            _spilt = data['LIST'].str.split(",", n=1, expand=True)
+            _spilt = data['LIST'].str.split('_', n=1, expand=True)
             schema = str(list(_spilt[0])).replace(" ", "")
             table = str(list(_spilt[1])).replace(" ", "")
-            write_dict.update({mvp: f"schema:  {schema}" + ",                 " + f"table:  {table}"})
+            write_dict.update({mvp: f"schema:  {schema}" + ",     " + f"table:  {table}"})
         
         self.write_to_gen_parameter(write_list=[write_dict], sheet="list_table_definition")
         
