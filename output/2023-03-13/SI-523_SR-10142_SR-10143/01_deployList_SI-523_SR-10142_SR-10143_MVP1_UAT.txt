@@ -1,5 +1,0 @@
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VS1_EVENTDETAIL_01.sql,ddl_script_replace/process_migration/VTXEDW/VS1_EVENTDETAIL_01.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VS1_EVENTGRPASS_01.sql,ddl_script_replace/process_migration/VTXEDW/VS1_EVENTGRPASS_01.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VESN_EVENT_01.sql,ddl_script_replace/process_migration/VTXEDW/VESN_EVENT_01.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VSGMF/B2K_BCMSTAUX_1_0.sql,ddl_script_replace/process_migration/VSGMF/B2K_BCMSTAUX_1_0.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VEPP_FGM_EVENT_01.sql,ddl_script_replace/process_migration/VTXEDW/VEPP_FGM_EVENT_01.sql

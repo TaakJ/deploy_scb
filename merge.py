@@ -24,8 +24,7 @@ class run_process_merge():
         self.wb = openpyxl.load_workbook("./filename/deployment_checklist_xxxxxxx.xlsx")
         
         # output deployment_checklist
-        parent_dir  = "./output"
-        self.path = os.path.join(parent_dir, self.date)
+        self.path = os.getcwd() + f'/output/{self.date}'
         os.makedirs(self.path, exist_ok=True)
         self.sheet = self.wb.active
         
@@ -324,12 +323,11 @@ class run_process_merge():
         
         # write to sheet
         for mvp in self.str_mvp:
-            
             if mvp in dict_df.keys():
                 df_new = dict_df[mvp].loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
                 print(f"{mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
-                sheet_name = f'Checklist_DDL_{mvp}'
                 
+                sheet_name = f'Checklist_DDL_{mvp}'
                 self.sheet = self.wb.create_sheet(sheet_name)
                 self.sheet.title = sheet_name
                 rows = dataframe_to_rows(df_new, header=True, index=False)
@@ -337,9 +335,10 @@ class run_process_merge():
                     for c_idx, val in enumerate(row, 1):
                         value = self.sheet.cell(row=r_idx, column=c_idx)
                         value.value = val
-                        
-                self.file_name = f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
+                
+                self.file_name =  f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
                 self.wb.save(self.file_name)
                 
             else:
                 print(f"{mvp} ddl files is empty")
+                

@@ -36,26 +36,20 @@ class run_process_genfile():
         df_sheet = {}
         df_ddl = {}
         for mvp in self.str_mvp:
-            # sheet
             try:
+                # sheet
                 sheet_name = f'Checklist_ADLS_{mvp}'
                 df = pandas.read_excel(filename, sheet_name=sheet_name)
                 df["Path"] = df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
                 df["Full_Path"] = df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
                 df["Deploy"] = df[["Storage", "Container", "Full_Path", "Path"]].apply(lambda x: ",".join(x), axis =1)
-                
-                # self.create_jsonfile(df, mvp)
                 df_sheet.update({mvp: df["Deploy"]})
                 
-            except:
-                pass
-                
-            # ddl
-            try:
+                # ddl sheet
                 sheet_name = f'Checklist_DDL_{mvp}'
-                df1 = pandas.read_excel(filename, sheet_name=sheet_name)
-                df1["Deploy"] = df1[["Storage", "Container", "Git_Path", "Checklist"]].apply(lambda x: ",".join(x), axis =1)
-                df_ddl.update({mvp: df1["Deploy"]})
+                ddl = pandas.read_excel(filename, sheet_name=sheet_name)
+                ddl["Deploy"] = ddl[["Storage", "Container", "Git_Path", "Checklist"]].apply(lambda x: ",".join(x), axis =1)
+                df_ddl.update({mvp: ddl["Deploy"]})
                 
             except:
                 pass
@@ -99,57 +93,61 @@ class run_process_genfile():
                 elif mvp == "MVP4":
                     deploy_list = os.path.join(self.mvp4_path, f'02_deployList_SI-523_SR-5515_SR-12745_{mvp}_RegisterConfig_UAT.txt')
             
-                files = open(deploy_list,"w+")
-                files.write(f"{content} ")
-                files.close()
+            files = open(deploy_list,"w+")
+            files.write(f"{content} ")
+            files.close()
                     
         
-    
     def create_textfile(self, df_sheet, df_ddl):
+        
         for mvp in self.str_mvp:
-            if (mvp == 'MVP1') and df_sheet:
+            
+            if mvp == 'MVP1':
                 # sheet
-                if 'MVP1' in df_sheet.keys():
+                if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp1_path, f'00_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')       
                     df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
                 # ddl
-                if 'MVP1' in df_ddl.keys():
+                if mvp in df_ddl.keys():
                     deploy_list = os.path.join(self.mvp1_path, f'01_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')
                     df_ddl[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
-            if mvp == 'MVP2':
+            
+            elif mvp == 'MVP2':
                 # sheet
-                if 'MVP2' in df_sheet.keys():
+                if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp2_path, f'00_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
-                    df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')  
+                    df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
                 # ddl
-                if 'MVP2' in df_ddl.keys():
+                if mvp in df_ddl.keys():
                     deploy_list = os.path.join(self.mvp2_path, f'01_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
                     df_ddl[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
-            if mvp == 'MVP3':
+            
+            elif mvp == 'MVP3':
                 # sheet
-                if 'MVP3' in df_sheet.keys():
+                if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp3_path, f'00_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
                     df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
                 # ddl
-                if 'MVP3' in df_ddl.keys():
+                if mvp in df_ddl.keys():
                     deploy_list = os.path.join(self.mvp3_path, f'01_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
                     df_ddl[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
-            if mvp == 'MVP4':
-                # sheet
-                if 'MVP4' in df_sheet.keys():
+            
+            elif mvp == 'MVP4':  
+                # sheet  
+                if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp4_path, f'00_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
                     df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
                 # ddl
-                if 'MVP4' in df_ddl.keys():
+                if mvp in df_ddl.keys():
                     deploy_list = os.path.join(self.mvp4_path, f'01_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
                     df_ddl[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
-                    
-            if mvp == 'MVP6':
+                
+            elif mvp == 'MVP6':
                 # sheet
-                if 'MVP6' in df_sheet.keys():
+                if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp6_path, f'00_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
                     df_sheet[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')
                 # ddl
-                if 'MVP6' in df_ddl.keys():
+                if mvp in df_ddl.keys():
                     deploy_list = os.path.join(self.mvp6_path, f'01_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
                     df_ddl[mvp].to_csv(deploy_list, header=None, index=None, sep='\t')

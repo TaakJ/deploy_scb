@@ -6,6 +6,7 @@ import glob
 import itertools
 import datetime
 import pandas
+from pathlib import Path
 
 class check_files_for_deploy:
     
@@ -71,11 +72,8 @@ class check_files_for_deploy:
                         diffs = [x for x in d.compare(glines, flines) if x[0] in ('+', '-')]
                         
                         if diffs:
-                            print(f'{i}. {filename} => Changes')
+                            shema_views = Path(actual_file).stem
+                            print(f'{i}. {os.path.join(shema_views, filename)} => Changes')
                         else:
-                            print(f'{i}. {filename} => No Changes')
+                            print(f'{i}. {os.path.join(shema_views, filename)} => No Changes')
                         i += 1
-                    
-                            
-        
-        
