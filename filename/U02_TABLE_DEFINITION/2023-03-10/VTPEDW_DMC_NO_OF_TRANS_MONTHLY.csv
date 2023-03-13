@@ -1,8 +1,0 @@
-"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Businessdate","date","0","0","0","","1","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Party_Id","int","0","0","0","","2","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Organization_Num","char","10","0","0","","3","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Account_Num","varchar","100","0","0","","4","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Account_Modifier_Num","varchar","20","0","0","","5","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","NO_OF_TXN","bigint","0","0","0","","6","2023-03-08 23:32:21.864","montarat"
-"VTPEDW","DMC_NO_OF_TRANS_MONTHLY","Event_Amt","decimal","28","2","0","","7","2023-03-08 23:32:21.864","montarat"

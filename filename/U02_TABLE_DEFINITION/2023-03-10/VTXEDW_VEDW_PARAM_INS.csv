@@ -1,7 +1,0 @@
-"SCHEMA_NAME","TBL_NAME","COL_NAME","DATA_TYPE","LEN","SCALE","MANDATORY","DEFAULT_VALUE","COL_POSITION","LAST_UPDATE_DATE","LAST_UPDATE_USER"
-"VTXEDW","VEDW_PARAM_INS","Parameter_Type","string","0","0","0","","1","2023-03-09 05:13:05.316","Common_Team"
-"VTXEDW","VEDW_PARAM_INS","Field_Name","string","0","0","0","","2","2023-03-09 05:13:05.316","Common_Team"
-"VTXEDW","VEDW_PARAM_INS","Parameter_Values","string","0","0","0","","3","2023-03-09 05:13:05.316","Common_Team"
-"VTXEDW","VEDW_PARAM_INS","Return_Values","string","0","0","0","","4","2023-03-09 05:13:05.316","Common_Team"
-"VTXEDW","VEDW_PARAM_INS","Parameter_Description","string","0","0","0","","5","2023-03-09 05:13:05.316","Common_Team"
-"VTXEDW","VEDW_PARAM_INS","Parameter_Flag","string","0","0","0","","6","2023-03-09 05:13:05.316","Common_Team"

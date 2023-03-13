@@ -1,0 +1,113 @@
+CREATE OR REPLACE VIEW P1VTXEDW.VEPP_FGM_EVENT_01 (
+  Event_Id,
+  Event_Start_Dt,
+  Event_Activity_TYPE_CD,
+  Event_Status_CD,
+  TRANSACTION_Id,
+  Event_Start_Tm,
+  ACCOUNT_Ind,
+  Financial_Ind,
+  Event_Amount_Ind)
+AS SELECT
+  CASE
+    WHEN CS12950.SOURCE_KEY = 'Payment' THEN EDW_RECORD_NO
+    WHEN CS12950.SOURCE_KEY = 'Fee' THEN EDW_RECORD_NO + 1
+  END AS Event_Id,
+  /* CAST(EPP_FEEREP.DATE_CREATE AS DATE FORMAT 'YYYY-MM-DD') AS Event_Start_Dt, << mig orig*/
+  TO_DATE(EPP_FEEREP.DATE_CREATE, 'yyyy-MM-dd') AS Event_Start_Dt,
+  CS12950.EDW_CODE AS Event_Activity_TYPE_CD,
+  CS13400.EDW_CODE AS Event_Status_CD,
+  CAST(EPP_FEEREP.PAYM_ID AS VARCHAR(100)) AS TRANSACTION_Id,
+  CAST(EPP_FEEREP.TIME_CREATE AS TIMESTAMP) AS Event_Start_Tm,
+  CASE
+    WHEN CS12950.SOURCE_KEY = 'Payment' THEN CAST('YES' AS CHAR(3))
+    WHEN CS12950.SOURCE_KEY = 'Fee' THEN CAST(NULL AS CHAR(3))
+  END AS ACCOUNT_Ind,
+  CASE
+    WHEN CS12950.SOURCE_KEY = 'Payment' THEN CASE
+      WHEN EPP_FEEREP.PAYM_AMT IS NULL THEN CAST('No' AS CHAR(3))
+      WHEN EPP_FEEREP.PAYM_AMT = 0 THEN CAST('No' AS CHAR(3))
+      ELSE CAST('Yes' AS CHAR(3))
+    END
+    WHEN CS12950.SOURCE_KEY = 'Fee' THEN CAST('Yes' AS CHAR(3))
+  END AS Financial_Ind,
+  CAST(NULL AS CHAR(3)) AS Event_Amount_Ind
+FROM
+  P1VSTEDW.EPP_FEEREP_1_0 AS EPP_FEEREP
+  CROSS JOIN P1VUTEDW.M12950_EVENT_ACTVY_TYPE AS CS12950
+  LEFT OUTER JOIN P1VUTEDW.M13400_EVENT_STS AS CS13400 ON CS13400.SOURCE_KEY = EPP_FEEREP.PAYM_STATUS
+  AND CS13400.SRC_CTL_ID = '054'
+  AND CS13400.SOURCE_ID = 1
+WHERE
+  CS12950.SOURCE_KEY IN ('Payment', 'Fee')
+  AND CS12950.SRC_CTL_ID = '054'
+  AND CS12950.SOURCE_ID = 1
+  AND (
+    (CS12950.SOURCE_KEY = 'Payment')
+    OR (
+      CS12950.SOURCE_KEY = 'FEE'
+      AND (
+        (COALESCE(EPP_FEEREP.FEE_AMT, '') <> '')
+        AND (EPP_FEEREP.FEE_AMT <> 0)
+      )
+    )
+  ) -----------------------------------------------------------------------------------
+UNION ALL
+  -----------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------
+  --Part 2
+  --VEPP_RPTDDET10_Event_01
+  --VEPP_RPTDDET10_Event_02
+  ---------------------------------------------------------------------------
+SELECT
+  CASE
+    WHEN TMP.MSEQ = 1 THEN EPP_RPTDDET.EDW_RECORD_NO
+    WHEN TMP.MSEQ = 2 THEN EPP_RPTDDET.EDW_RECORD_NO + 1
+  END AS Event_Id,
+  TO_DATE(EPP_RPTDDET.PAYM_DATE, 'yyyy-MM-dd') AS Event_Start_Dt,
+  CS12950.EDW_CODE AS Event_Activity_TYPE_CD,
+  CS13400.EDW_CODE AS Event_Status_CD,
+  CAST(EPP_RPTDDET.PAYM_ID AS VARCHAR(100)) AS TRANSACTION_Id,
+  CAST(NULL AS TIMESTAMP) AS Event_Start_Tm,
+  CAST(NULL AS CHAR(3)) AS ACCOUNT_Ind,
+  CAST('Yes' AS CHAR(3)) AS Financial_Ind,
+  CASE
+    WHEN TMP.MSEQ = 1 THEN CASE
+      WHEN EPP_RPTDDET.BILL_AMT IS NULL THEN CAST('No' AS CHAR(3))
+      WHEN EPP_RPTDDET.BILL_AMT = 0 THEN CAST('No' AS CHAR(3))
+      ELSE CAST('Yes' AS CHAR(3))
+    END
+    ELSE CAST(NULL AS CHAR(3))
+  END AS Event_Amount_Ind --  ,CAST(EPP_RPTDDET.PAYM_PENALTY_AMT AS INT)
+FROM
+  P1VSTEDW.EPP_RPTDDET_1_0 AS EPP_RPTDDET
+  CROSS JOIN P1VUTEDW.M12950_EVENT_ACTVY_TYPE AS CS12950
+  LEFT OUTER JOIN P1VUTEDW.M13400_EVENT_STS AS CS13400 ON CS13400.SOURCE_KEY = EPP_RPTDDET.PAYM_STATUS
+  AND CS13400.SRC_CTL_ID = '054'
+  AND CS13400.SOURCE_ID = 1
+  CROSS JOIN (
+    SELECT
+      CAST ((datediff(day,  CDT.DEFAULT_DATE, CURRENT_DATE)  + 1) AS INT) AS MSEQ
+    FROM
+      P1VUTEDW.CHAR_CALENDAR AS CDT
+    WHERE
+      DEFAULT_DATE BETWEEN (CURRENT_DATE - 2)
+      AND CURRENT_DATE
+  ) AS TMP
+WHERE
+  CS12950.SOURCE_KEY = 'FGM Report'
+  AND CS12950.SRC_CTL_ID = '054'
+  AND CS12950.SOURCE_ID = 1
+  AND (
+    (TMP.MSEQ = 1)
+    OR --+++++++++++++++++++++++++++++++++++++++++++++++--
+    -- CHANGE CONDITION DATE 6/01/2008
+    --+++++++++++++++++++++++++++++++++++++++++++++++--
+    (
+      TMP.MSEQ = 2
+      AND (
+        (COALESCE(EPP_RPTDDET.PAYM_PENALTY_AMT, '') <> '')
+        AND (EPP_RPTDDET.PAYM_PENALTY_AMT <> 0)
+      )
+    )
+  )
