@@ -1,2 +1,0 @@
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTPLLFP/TV_LLFP_RL_ACCT_STATUS_FINAL.sql,ddl_script_replace/process_migration/VTPLLFP/TV_LLFP_RL_ACCT_STATUS_FINAL.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTPBU/VBU_BUSINESSDATE_M.sql,ddl_script_replace/process_migration/VTPBU/VBU_BUSINESSDATE_M.sql

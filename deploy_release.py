@@ -10,17 +10,7 @@ class run_process_genfile():
         self.date = date
         self.date_fmt = datetime.datetime.strptime(self.date, '%Y-%m-%d').strftime('%Y%m%d')
         
-        parent_dir  = f"./output/{self.date}"
-        self.mvp1_path = os.path.join(parent_dir, 'SI-523_SR-10142_SR-10143')
-        os.makedirs(self.mvp1_path, exist_ok=True)
-        self.mvp2_path = os.path.join(parent_dir, 'SI-523_SR-5512_SR-5622')
-        os.makedirs(self.mvp2_path, exist_ok=True)
-        self.mvp3_path = os.path.join(parent_dir, 'SI-523_SR-5513_SR-5956')
-        os.makedirs(self.mvp3_path, exist_ok=True)
-        self.mvp4_path = os.path.join(parent_dir, 'SI-523_SR-5515_SR-12745')
-        os.makedirs(self.mvp4_path, exist_ok=True)
-        self.mvp6_path = os.path.join(parent_dir, 'SI-523_SR-16276_SR-16280')
-        os.makedirs( self.mvp6_path, exist_ok=True)
+        self._path = None
         
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         current_path = os.getcwd() + f'/output/{self.date}'
@@ -28,8 +18,25 @@ class run_process_genfile():
         if filename != "":
             df_sheet, df_ddl = self.separate_sheet(filename)
             self.create_textfile(df_sheet, df_ddl)
+            # self.create_jsonfile(df_sheet, df_ddl)
         else:
             raise ValueError("File not found !!")
+        
+    @property
+    def path_define(self):
+        return self._path
+    
+    @path_define.setter
+    def path_define(self, path):
+        
+        self._path = path
+        self.mvp1_path = os.path.join(self._path, 'SI-523_SR-10142_SR-10143_MVP1', self.date)
+        self.mvp2_path = os.path.join(self._path, 'SI-523_SR-5512_SR-5622_MVP2', self.date)
+        self.mvp3_path = os.path.join(self._path, 'SI-523_SR-5513_SR-5956_MVP3', self.date)
+        self.mvp4_path = os.path.join(self._path, 'SI-523_SR-5515_SR-12745_MVP4', self.date)
+        self.mvp6_path = os.path.join(self._path, 'SI-523_SR-16276_SR-16280_MVP6', self.date)
+        
+        return self._path
         
     def separate_sheet(self, filename):
         
@@ -55,12 +62,14 @@ class run_process_genfile():
                 pass
             
         return df_sheet, df_ddl
-        
+    
     def create_textfile(self, df_sheet, df_ddl):
         
+        self.path_define = './adls'
+        
         for mvp in self.str_mvp:
-            
             if mvp == 'MVP1':
+                os.makedirs(self.mvp1_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp1_path, f'00_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')       
@@ -71,6 +80,7 @@ class run_process_genfile():
                     df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP2':
+                os.makedirs(self.mvp2_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp2_path, f'00_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
@@ -81,6 +91,7 @@ class run_process_genfile():
                     df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP3':
+                os.makedirs(self.mvp3_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp3_path, f'00_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
@@ -90,7 +101,8 @@ class run_process_genfile():
                     deploy_list = os.path.join(self.mvp3_path, f'01_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
             
-            elif mvp == 'MVP4':  
+            elif mvp == 'MVP4':
+                os.makedirs(self.mvp4_path, exist_ok=True)
                 # sheet  
                 if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp4_path, f'00_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
@@ -101,6 +113,7 @@ class run_process_genfile():
                     df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
                 
             elif mvp == 'MVP6':
+                os.makedirs(self.mvp6_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
                     deploy_list = os.path.join(self.mvp6_path, f'00_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
@@ -110,7 +123,7 @@ class run_process_genfile():
                     deploy_list = os.path.join(self.mvp6_path, f'01_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
                     
-    def create_jsonfile(self, df_sheet):
+    def create_jsonfile(self, df_sheet, df_ddl):
         
         # def condition(x):
         #     if x == "U03":
@@ -156,3 +169,4 @@ class run_process_genfile():
         #     files = open(deploy_list,"w+")
         #     files.write(f"{content} ")
         #     files.close()
+        
