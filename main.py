@@ -15,17 +15,17 @@ class run_main:
     # Can specify container 
     container = "edw-ctn-landing"
     
-    t1 = time.time()
-    ## start split parameter
+    t1 = time.time() 
+    ## start split parameter 2
     # run_process_split(date=date, re_deploy=re_deploy).run()
     
-    ## start merge 
+    ## start merge 1
     run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
     
-    ## start genfile
+    ## start genfile 1
     run_process_genfile(date=date)
     
-    ## start change
+    ## start change 1
     check_files_for_deploy(date=date)
     
     t2 = time.time() - t1

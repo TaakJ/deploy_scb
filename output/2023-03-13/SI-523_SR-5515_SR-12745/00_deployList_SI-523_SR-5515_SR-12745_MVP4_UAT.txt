@@ -1,0 +1,3 @@
+scbedwseasta001adlsuat,edw-ctn-landing,20230313/utilities/import/U03_INT_MAPPING/MVP4/INS_T_EDW_ACCOUNT_BALANCE_04_TR.csv,utilities/import/U03_INT_MAPPING/INS_T_EDW_ACCOUNT_BALANCE_04_TR.csv
+scbedwseasta001adlsuat,edw-ctn-landing,20230313/utilities/import/U03_INT_MAPPING/MVP4/INS_T_EDW_ACCOUNT_BALANCE_02_AM.csv,utilities/import/U03_INT_MAPPING/INS_T_EDW_ACCOUNT_BALANCE_02_AM.csv
+scbedwseasta001adlsuat,edw-ctn-landing,20230313/utilities/import/U03_INT_MAPPING/MVP4/INS_T_EDW_ACCOUNT_BALANCE_03_TF.csv,utilities/import/U03_INT_MAPPING/INS_T_EDW_ACCOUNT_BALANCE_03_TF.csv
