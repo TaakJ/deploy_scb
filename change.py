@@ -70,9 +70,8 @@ class check_files_for_deploy:
                         glines = safe_read_lines(os.path.join(actual_file, filename))
                         d = difflib.Differ()
                         diffs = [x for x in d.compare(glines, flines) if x[0] in ('+', '-')]
-                        
+                        shema_views = Path(actual_file).stem
                         if diffs:
-                            shema_views = Path(actual_file).stem
                             print(f'{i}. {os.path.join(shema_views, filename)} => Changes')
                         else:
                             print(f'{i}. {os.path.join(shema_views, filename)} => No Changes')
