@@ -314,7 +314,7 @@ class run_process_merge():
             
         if check:
             check_files_for_deploy(self.date, ddl_path=ddl_path)._compare_directories
-            # self.write_from_ddl(dict_df=dict_df)
+            self.write_from_ddl(dict_df=dict_df)
             
         print("=========================================")
         

@@ -3,6 +3,8 @@ import datetime
 import openpyxl
 import glob
 import pandas
+import time
+from pathlib import Path
 
 class run_process_genfile():
     
@@ -68,60 +70,61 @@ class run_process_genfile():
                 os.makedirs(self.mvp1_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
-                    deploy_list = os.path.join(self.mvp1_path, f'00_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')       
-                    df_sheet[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp1_path, f'00_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')       
+                    df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    deploy_list = os.path.join(self.mvp1_path, f'01_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')
-                    df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp1_path, f'01_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')
+                    df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP2':
                 os.makedirs(self.mvp2_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
-                    deploy_list = os.path.join(self.mvp2_path, f'00_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
-                    df_sheet[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp2_path, f'00_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
+                    df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    deploy_list = os.path.join(self.mvp2_path, f'01_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
-                    df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp2_path, f'01_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
+                    df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP3':
                 os.makedirs(self.mvp3_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
-                    deploy_list = os.path.join(self.mvp3_path, f'00_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
-                    df_sheet[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp3_path, f'00_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
+                    df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    deploy_list = os.path.join(self.mvp3_path, f'01_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
-                    df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp3_path, f'01_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
+                    df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP4':
                 os.makedirs(self.mvp4_path, exist_ok=True)
                 # sheet  
                 if mvp in df_sheet.keys():
-                    deploy_list = os.path.join(self.mvp4_path, f'00_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
-                    df_sheet[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp4_path, f'00_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
+                    df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    deploy_list = os.path.join(self.mvp4_path, f'01_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
-                    df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp4_path, f'01_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
+                    df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 
             elif mvp == 'MVP6':
                 os.makedirs(self.mvp6_path, exist_ok=True)
                 # sheet
                 if mvp in df_sheet.keys():
-                    deploy_list = os.path.join(self.mvp6_path, f'00_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
-                    df_sheet[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp6_path, f'00_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
+                    df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    deploy_list = os.path.join(self.mvp6_path, f'01_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
-                    df_ddl[mvp]["Deploy"].to_csv(deploy_list, header=None, index=None, sep='\t')
+                    textfiles = os.path.join(self.mvp6_path, f'01_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
+                    df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                     
     def create_for_adb(self, df_sheet, df_ddl):
         
         self.path_define = './adb'
+        sub_path='ADB_01'
         
         def condition(x):
             #############################################################################
@@ -147,55 +150,103 @@ class run_process_genfile():
                 return state
         
         for mvp in self.str_mvp:
+            
             df_sheet[mvp]['Sub_Git_Path'] = df_sheet[mvp]['Git_Path'].str[26:29]
             df_sheet[mvp]['name_file'] = df_sheet[mvp]['Sub_Git_Path'].apply(condition)
+            
             for state in df_sheet[mvp]['name_file'].unique():
                 if state == 1:
                     content = "ADB_01/Utilities/{mvp}/U24_Import_Interface_Mapping_Config_Deploy.json"
                     if mvp == "MVP1" and df_sheet.keys():
-                        files_name = f'03_deployList_SI-523_SR-10142_SR-10143_{mvp}_ImportConfig_UAT.txt'
-                        detail = content.format(mvp=mvp)
+                        textfiles = Path(os.path.join(self.mvp1_path, sub_path, f'03_deployList_SI-523_SR-10142_SR-10143_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
                     if mvp == "MVP2" and df_sheet.keys():
-                        files_name = f'03_deployList_SI-523_SR-5512_SR-5622_{mvp}_ImportConfig_UAT.txt'
-                        detail = content.format(mvp=mvp)
+                        textfiles = Path(os.path.join(self.mvp2_path, sub_path, f'03_deployList_SI-523_SR-5512_SR-5622_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
                     if mvp == "MVP3" and df_sheet.keys():
-                        files_name = f'03_deployList_SI-523_SR-5513_SR-5956_{mvp}_ImportConfig_UAT.txt'
-                        detail = content.format(mvp=mvp)
+                        textfiles = Path(os.path.join(self.mvp3_path, sub_path, f'03_deployList_SI-523_SR-5513_SR-5956_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                    
                     if mvp == "MVP4" and df_sheet.keys():
-                        files_name = f'03_deployList_SI-523_SR-5515_SR-12745_{mvp}_ImportConfig_UAT.txt'
-                        detail = content.format(mvp=mvp)
+                        textfiles = Path(os.path.join(self.mvp4_path, sub_path, f'03_deployList_SI-523_SR-5515_SR-12745_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                    
                     if mvp == "MVP6" and df_sheet.keys():
-                        files_name = f'03_deployList_SI-523_SR-16276_SR-16280_{mvp}_ImportConfig_UAT.txt'
-                        detail = content.format(mvp=mvp)
+                        textfiles = Path(os.path.join(self.mvp6_path, sub_path, f'03_deployList_SI-523_SR-16276_SR-16280_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
+                elif state == 2:
+                    content = "ADB_01/Utilities/{mvp}/U22_Import_File_Config_02.json"
+                    if mvp == "MVP1" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp1_path, sub_path, f'02_deployList_SI-523_SR-10142_SR-10143_{mvp}_RegisterConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
+                    if mvp == "MVP2" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp2_path, sub_path, f'02_deployList_SI-523_SR-5512_SR-5622_{mvp}_RegisterConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
+                    if mvp == "MVP3" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp3_path, sub_path, f'02_deployList_SI-523_SR-5513_SR-5956_{mvp}_RegisterConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
                     
-                    self.write_to_text(files_name, detail)
-    
-    def write_to_text(self, files_name, detail):
-        print(files_name)
-        print(detail)
+                    if mvp == "MVP4" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp4_path, sub_path, f'02_deployList_SI-523_SR-5515_SR-12745_{mvp}_RegisterConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
                     
-        # for content in df['name_file'].unique():
-        #     # sheet
-        #     if content == f'ADB_01/Utilities/{mvp}/U24_Import_Interface_Mapping_Config_Deploy.json':
-        #         if mvp == "MVP1":
-        #             deploy_list = os.path.join(self.mvp1_path, f'03_deployList_SI-523_SR-10142_SR-10143_{mvp}_ImportConfig_UAT.txt')
-        #         elif mvp == "MVP2":
-        #             deploy_list = os.path.join(self.mvp2_path, f'03_deployList_SI-523_SR-5512_SR-5622_{mvp}_ImportConfig_UAT.txt')
-        #         elif mvp == "MVP3":
-        #             deploy_list = os.path.join(self.mvp3_path, f'03_deployList_SI-523_SR-5513_SR-5956_{mvp}_ImportConfig_UAT.txt')
-        #         elif mvp == "MVP4":
-        #             deploy_list = os.path.join(self.mvp4_path, f'03_deployList_SI-523_SR-5515_SR-12745_{mvp}_ImportConfig_UAT.txt')
-        #     else:
-        #         if mvp == "MVP1":
-        #             deploy_list = os.path.join(self.mvp1_path, f'02_deployList_SI-523_SR-10142_SR-10143_{mvp}_RegisterConfig_UAT.txt')
-        #         elif mvp == "MVP2":
-        #             deploy_list = os.path.join(self.mvp2_path, f'02_deployList_SI-523_SR-5512_SR-5622_{mvp}_RegisterConfig_UAT.txt')
-        #         elif mvp == "MVP3":
-        #             deploy_list = os.path.join(self.mvp3_path, f'02_deployList_SI-523_SR-5513_SR-5956_{mvp}_RegisterConfig_UAT.txt')
-        #         elif mvp == "MVP4":
-        #             deploy_list = os.path.join(self.mvp4_path, f'02_deployList_SI-523_SR-5515_SR-12745_{mvp}_RegisterConfig_UAT.txt')
+                    if mvp == "MVP6" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp6_path, sub_path, f'02_deployList_SI-523_SR-16276_SR-16280_{mvp}_RegisterConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        textfiles.write_text(content.format(mvp=mvp))
+                        
+                elif state == 3:
+                    append = 'y'
+                    content = "ADB_01/Utilities/{mvp}/U23_Import_Table_Definition_Deploy.json"
+                    if mvp == "MVP1" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp1_path, sub_path, f'03_deployList_SI-523_SR-10142_SR-10143_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        self.write_to_text(textfiles, append, content.format(mvp=mvp))
+                        
+                    if mvp == "MVP2" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp2_path, sub_path, f'03_deployList_SI-523_SR-5512_SR-5622_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        self.write_to_text(textfiles, append, content.format(mvp=mvp))
+                        
+                    if mvp == "MVP3" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp3_path, sub_path, f'03_deployList_SI-523_SR-5513_SR-5956_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        self.write_to_text(textfiles, append, content.format(mvp=mvp))
+                        
+                    if mvp == "MVP4" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp4_path, sub_path, f'03_deployList_SI-523_SR-5515_SR-12745_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        self.write_to_text(textfiles, append, content.format(mvp=mvp))
+                    
+                    if mvp == "MVP6" and df_sheet.keys():
+                        textfiles = Path(os.path.join(self.mvp6_path, sub_path, f'03_deployList_SI-523_SR-16276_SR-16280_{mvp}_ImportConfig_UAT.txt'))
+                        textfiles.parent.mkdir(exist_ok=True, parents=True)
+                        self.write_to_text(textfiles, append, content.format(mvp=mvp))
+                    
+                
+    def write_to_text(self, textfiles, append, content):
+        if append == 'y':
+            with open(textfiles, "a+") as writer:
+                writer.seek(0)
+                data = writer.read(100)
+                if len(data) > 0 :
+                    writer.write("\n")
+                # Append text at the end of file
+                writer.write(content)
+                writer.close()
             
-        #     files = open(deploy_list,"w+")
-        #     files.write(f"{content} ")
-        #     files.close()
-        
+
