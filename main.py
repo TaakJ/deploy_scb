@@ -7,7 +7,7 @@ from merge import run_process_merge
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-13"
+    date = "2023-03-17"
     re_deploy = "2023-03-10"
     # Can specify storage 
     storage = "scbedwseasta001adlsuat"
