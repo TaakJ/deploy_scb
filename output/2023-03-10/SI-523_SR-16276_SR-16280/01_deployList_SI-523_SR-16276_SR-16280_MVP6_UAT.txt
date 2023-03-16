@@ -1,4 +1,0 @@
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VUL_CCACSEQ_01.sql,ddl_script_replace/process_migration/VTXEDW/VUL_CCACSEQ_01.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTXEDW/VUL_CCENSEQ_01.sql,ddl_script_replace/process_migration/VTXEDW/VUL_CCENSEQ_01.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUODS/VODS_CBS_LAST_TRANS_DT.sql,ddl_script_replace/process_migration/VEUODS/VODS_CBS_LAST_TRANS_DT.sql
-scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUODS/VODS_CC_LAST_TRANS_DT.sql,ddl_script_replace/process_migration/VEUODS/VODS_CC_LAST_TRANS_DT.sql

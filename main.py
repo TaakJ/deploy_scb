@@ -14,8 +14,8 @@ class run_main:
     # Can specify container 
     container = "edw-ctn-landing"
     
-    t1 = time.time() 
-    ## start split parameter 2
+    t1 = time.time()
+    ## start split parameter
     run_process_split(date=date, re_deploy=re_deploy).run()
     
     ## start merge 

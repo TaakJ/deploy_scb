@@ -271,9 +271,8 @@ class run_process_merge():
         
         print("================= ddl ===================")
         
-        # elf.date = self.re_deploy
+        # self.date = self.re_deploy
         ddl_path = os.getcwd() + f'/filename/DDL/{self.date}'
-        
         df = dataframe.loc[~dataframe.duplicated(subset=['VIEW_TABLE','GROUP_JOB_NAME', 'MVP']), :]
         if df.empty is False:
             new_df = df.copy()
