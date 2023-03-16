@@ -201,11 +201,13 @@ class run_process_merge():
         
         print("============== int_mapping ==============")
         df = dataframe.loc[dataframe['COL_NM'] == 'INTERFACE_NAME']
+        print(f"count file int_mapping: {len(df)} files")
         
         current_path = os.getcwd() + r'/filename/U03_INT_MAPPING' 
         list_of_files = glob.glob(f'{current_path}/{self.date}/*')
         files_name = [Path(files).name for files in list_of_files]
         
+        dict_df = {}
         if files_name != []:
             mvp1, mvp2, mvp3, mvp4, mvp6 = self.crate_folder_mvp(files_name, df, path='U03_INT_MAPPING')
             list_df = [mvp1, mvp2, mvp3, mvp4, mvp6]

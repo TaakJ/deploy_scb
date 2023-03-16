@@ -1,0 +1,2 @@
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VEUIPS/VIPS_CUSTOC.sql,ddl_script_replace/process_migration/VEUIPS/VIPS_CUSTOC.sql
+scbedwseasta001adlsuat,edw-ctn-landing,VIEWS/VTPBCM/TVBCM_PAYROLL_PA_ATS_CN.sql,ddl_script_replace/process_migration/VTPBCM/TVBCM_PAYROLL_PA_ATS_CN.sql
