@@ -128,7 +128,9 @@ class run_process_merge():
         files_deploy = glob.glob(f'{current_path}/{self.re_deploy}/*')
         if files_deploy != []:
             df_old = pandas.read_excel(''.join(files_deploy), sheet_name=sheet)
-            
+        else:
+            df_old = pandas.DataFrame()
+        
         return df_old
     
     def check_file_in_folder(self, list_df, path):
@@ -139,7 +141,6 @@ class run_process_merge():
             if df_old.empty is False:
                 mvp = pandas.merge(mvp, df_old, how='left', on=['LIST', 'MVP'], indicator=True)
                 mvp = mvp[mvp['_merge'] == 'left_only'].drop('_merge',axis=1)
-            
             # path stored
             current_path = os.getcwd() + f'/filename/{path}/{self.date}'
             

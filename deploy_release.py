@@ -16,8 +16,9 @@ class run_process_genfile():
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         
         current_path = os.getcwd() + f'/output/{self.date}'
-        filename = max(glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'), key=os.path.getmtime)
-        if filename != "":
+        filename = glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx')
+        # filename = max(glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'), key=os.path.getmtime)
+        if filename:
             df_sheet, df_ddl = self.separate_sheet(filename)
             self.create_for_adls(df_sheet, df_ddl)
             self.create_for_adb(df_sheet, df_ddl)
