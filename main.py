@@ -38,10 +38,10 @@ class run_main:
     print("start function merge file ..")
     run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
 
-    ## start genfile
-    # if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
-    #     print("start function gen file ..")
-    #     run_process_genfile(date=date)
+    # start genfile
+    if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
+        print("start function gen file ..")
+        run_process_genfile(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
