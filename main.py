@@ -9,7 +9,7 @@ from merge import run_process_merge
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-17"
+    date = "2023-03-18"
     re_deploy = ""
     date_fmt = datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%Y%m%d')
     # Can specify storage 
@@ -35,14 +35,13 @@ class run_main:
     run_process_split(date=date, re_deploy=re_deploy).run()
     
     ## start merge 
-    if any(os.scandir(path_table_def)) and any(os.scandir(path_int_mapp)) and any(os.scandir(path_pl_register)) and any(os.scandir(path_pl_ddl)):
-        print("start function merge file ..")
-        run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
+    print("start function merge file ..")
+    run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
 
     ## start genfile
-    if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
-        print("start function gen file ..")
-        run_process_genfile(date=date)
+    # if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
+    #     print("start function gen file ..")
+    #     run_process_genfile(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')

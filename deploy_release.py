@@ -19,7 +19,6 @@ class run_process_genfile:
         
         filename = f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'
         df_sheet, df_ddl = self.separate_sheet(filename)
-        print(df_sheet)
         self.create_for_adls(df_sheet, df_ddl)
         self.create_for_adb(df_sheet, df_ddl)
         
@@ -69,10 +68,13 @@ class run_process_genfile:
                 # ddl 
                 sheet_name = f'Checklist_DDL_{mvp}'
                 ddl = pandas.read_excel(filename, sheet_name=sheet_name)
+                
                 ddl["Deploy"] = ddl[["Storage", "Container", "Git_Path", "Checklist"]].apply(lambda x: ",".join(x), axis =1)
                 df_ddl.update({mvp: ddl})
             except:
                 pass
+            
+            print(ddl)
             
         return df_sheet, df_ddl
     

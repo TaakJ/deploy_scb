@@ -31,38 +31,82 @@ class run_process_merge():
         
         current_path = os.getcwd() + f'/output/{self.date}'
         filename = max(glob.glob(f'{current_path}/template_{self.date_fmt}.xlsx'), key=os.path.getmtime)
-        
         sheet1 = pandas.read_excel(filename, sheet_name='all')
         sheet2 = pandas.read_excel(filename, sheet_name='ddl')
         
-        df_int_mapp = self.source_int_mapp(sheet1) 
-        df_sys_name = self.source_pl_config(sheet1)
-        df_table_def = self.source_table_def(sheet1)
         
-        if bool(df_int_mapp) is True and bool(df_sys_name) is True and bool(df_table_def):
-            self.auto_gen_file(df_int_mapp, df_sys_name, df_table_def)
+        # path
+        path_main  = os.getcwd()
+        path_output = path_main + f'/output/{self.date}'
+        path_table_def = path_main + f'/filename/U02_TABLE_DEFINITION/{self.date}'
+        os.makedirs(path_table_def,exist_ok=True)
+        path_int_mapp = path_main + f'/filename/U03_INT_MAPPING/{self.date}'
+        os.makedirs(path_int_mapp,exist_ok=True)
+        path_pl_register = path_main + f'/filename/U99_PL_REGISTER_CONFIG/{self.date}'
+        os.makedirs(path_pl_register,exist_ok=True)
+        path_pl_ddl = path_main + f'/filename/DDL/{self.date}'
+        os.makedirs(path_pl_ddl,exist_ok=True)
+        
+        # if any(os.scandir(path_table_def)) and any(os.scandir(path_int_mapp)) and any(os.scandir(path_pl_register)) and any(os.scandir(path_pl_ddl)):
+        df_int_mapp = {} 
+        if any(os.scandir(path_int_mapp)):
+            df_int_mapp = self.source_int_mapp(sheet1)
+        else:
+            [df_int_mapp.update({mvp: pandas.DataFrame()}) for mvp in self.str_mvp]
             
-        df_ddl = self.source_ddl(sheet2)
+        df_sys_name = {}
+        if any(os.scandir(path_pl_register)):
+            df_sys_name = self.source_pl_config(sheet1)
+        else:
+            [df_sys_name.update({mvp: pandas.DataFrame()}) for mvp in self.str_mvp]
             
-    def auto_gen_file(self, df_int_mapp, df_sys_name, df_table_def):
+        df_table_def = {}
+        if any(os.scandir(path_table_def)):
+            df_table_def = self.source_table_def(sheet1)
+        else:
+            [df_table_def.update({mvp: pandas.DataFrame()}) for mvp in self.str_mvp]
+        
+        df_ddl = {} 
+        if any(os.scandir(path_pl_ddl)):
+            df_ddl = self.source_ddl(sheet2)
+        else:
+            [df_ddl.update({mvp: pandas.DataFrame()}) for mvp in self.str_mvp]
+        
+        self.auto_gen_file(df_int_mapp, df_sys_name, df_table_def, df_ddl)
+            
+    def auto_gen_file(self, df_int_mapp, df_sys_name, df_table_def, df_ddl):
         for mvp in self.str_mvp:
+            # adls
             sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)
-            sum_df['Note UAT Deploy Date'] = self.date
-            sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
-            sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
-            sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
-            sum_df["Obsolete"] = ""
-            sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
-            
-            df_new = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
-            if df_new.empty is False:
-                self.write_from_source(df_new, mvp)
-                print(f"{mvp} files count: {len(df_new)} rows and write to excel completed.")
+            if sum_df.empty is False:
+                sum_df['Note UAT Deploy Date'] = self.date
+                sum_df['Git_Path'] = sum_df['Storage_Path'].apply(lambda x: "{}/{}/{}/".format(self.date_fmt, x, mvp))
+                sum_df["Path"] = sum_df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
+                sum_df["Full_Path"] = sum_df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
+                sum_df["Obsolete"] = ""
+                sum_df["Checklist"] = sum_df[["Storage", "Container", "Full_Path","Path"]].apply(lambda x: ",".join(x), axis =1)  
+                
+                df_sum = sum_df.loc[:, ['Storage', 'Container', 'Git_Path', 'Storage_Path','File_Name', 'Note UAT Deploy Date', 'Obsolete', 'Checklist']]
+                
+                sheet_name = f'Checklist_ADLS_{mvp}'
+                self.write_from_source(df_sum, mvp, sheet_name)
+                print(f"{mvp} adls files count: {len(df_sum)} rows and write to excel completed.")
             else:
-                raise Exception("Dataframe is empty !!")
+                ("ADLS folder empty")
+                
+            # ddl
+            if mvp in df_ddl.keys():
+                sum_ddl = pandas.DataFrame(df_ddl[mvp])
+                sheet_name = f'Checklist_DDL_{mvp}'
+                if sum_ddl.empty is False:
+                    df_new = sum_ddl.loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
+                    self.write_from_source(df_new, mvp, sheet_name)
+                    print(f"{mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
+                else:
+                    ("DDL folder empty")
         
-    def write_from_source(self, df, mvp):
-        sheet_name = f'Checklist_ADLS_{mvp}'
+    def write_from_source(self, df, mvp, sheet):
+        sheet_name = sheet
         self.sheet = self.wb.create_sheet(sheet_name)
         self.sheet.title = sheet_name
         rows = dataframe_to_rows(df, header=True, index=False)
@@ -284,7 +328,6 @@ class run_process_merge():
             df_mvp = dict(tuple(new_df.groupby('MVP')))
             dict_df = {}
             for mvp in self.str_mvp:
-                
                 if mvp in df_mvp.keys():
                     destination  = os.path.join(ddl_path, mvp)
                     
@@ -316,30 +359,30 @@ class run_process_merge():
             
         if check:
             check_files_for_deploy(self.date, ddl_path=ddl_path)._compare_directories
-            self.write_from_ddl(dict_df=dict_df)
             
         print("=========================================")
         
-    def write_from_ddl(self, dict_df):
+        return dict_df
         
-        # write to sheet
-        for mvp in self.str_mvp:
-            if mvp in dict_df.keys():
-                df_new = dict_df[mvp].loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
-                print(f"{mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
+    # def write_from_ddl(self, dict_df):
+    #     # write to sheet
+    #     for mvp in self.str_mvp:
+    #         if mvp in dict_df.keys():
+    #             df_new = dict_df[mvp].loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
+    #             print(f"{mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
                 
-                sheet_name = f'Checklist_DDL_{mvp}'
-                self.sheet = self.wb.create_sheet(sheet_name)
-                self.sheet.title = sheet_name
-                rows = dataframe_to_rows(df_new, header=True, index=False)
-                for r_idx, row in enumerate(rows, 1):
-                    for c_idx, val in enumerate(row, 1):
-                        value = self.sheet.cell(row=r_idx, column=c_idx)
-                        value.value = val
+    #             sheet_name = f'Checklist_DDL_{mvp}'
+    #             self.sheet = self.wb.create_sheet(sheet_name)
+    #             self.sheet.title = sheet_name
+    #             rows = dataframe_to_rows(df_new, header=True, index=False)
+    #             for r_idx, row in enumerate(rows, 1):
+    #                 for c_idx, val in enumerate(row, 1):
+    #                     value = self.sheet.cell(row=r_idx, column=c_idx)
+    #                     value.value = val
                 
-                self.file_name =  f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
-                self.wb.save(self.file_name)
+    #             self.file_name =  f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
+    #             self.wb.save(self.file_name)
                 
-            else:
-                print(f"{mvp} ddl files is empty")
+    #         else:
+    #             print(f"{mvp} ddl files is empty")
                 
