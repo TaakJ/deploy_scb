@@ -7,7 +7,7 @@ import time
 import shutil
 from pathlib import Path, PurePath
 
-class run_process_genfile():
+class run_process_genfile:
     
     def __init__(self, date):
         self.date = date
@@ -15,15 +15,13 @@ class run_process_genfile():
         self._path = None
         self.str_mvp = ['MVP1','MVP2','MVP3','MVP4','MVP6']
         
-        current_path = os.getcwd() + f'/output/{self.date}'
-        filename = glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx')
-        # filename = max(glob.glob(f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'), key=os.path.getmtime)
-        if filename:
-            df_sheet, df_ddl = self.separate_sheet(filename)
-            self.create_for_adls(df_sheet, df_ddl)
-            self.create_for_adb(df_sheet, df_ddl)
-        else:
-            raise ValueError("File not found !!")
+        current_path = os.getcwd() + f'/output/{date}'
+        
+        filename = f'{current_path}/deployment_checklist_{self.date_fmt}.xlsx'
+        df_sheet, df_ddl = self.separate_sheet(filename)
+        print(df_sheet)
+        self.create_for_adls(df_sheet, df_ddl)
+        self.create_for_adb(df_sheet, df_ddl)
         
     @property
     def path_define(self):

@@ -7,6 +7,7 @@ import datetime
 import shutil
 from openpyxl.utils.dataframe import dataframe_to_rows
 from change import check_files_for_deploy
+from deploy_release import run_process_genfile
 
 class run_process_merge():
     
@@ -30,11 +31,11 @@ class run_process_merge():
         
         current_path = os.getcwd() + f'/output/{self.date}'
         filename = max(glob.glob(f'{current_path}/template_{self.date_fmt}.xlsx'), key=os.path.getmtime)
-        if filename != "":
-            sheet1 = pandas.read_excel(filename, sheet_name='all')
-            sheet2 = pandas.read_excel(filename, sheet_name='ddl')
-        else:
-            raise ValueError("File not found !!")
+        # if filename != "":
+        sheet1 = pandas.read_excel(filename, sheet_name='all')
+        sheet2 = pandas.read_excel(filename, sheet_name='ddl')
+        # else:
+        #     raise ValueError("File not found !!")
         
         df_int_mapp = self.source_int_mapp(sheet1) 
         df_sys_name = self.source_pl_config(sheet1)
@@ -43,8 +44,8 @@ class run_process_merge():
         if bool(df_int_mapp) is True and bool(df_sys_name) is True and bool(df_table_def):
             self.auto_gen_file(df_int_mapp, df_sys_name, df_table_def)
             
-        df_ddl = self.source_ddl(sheet2)
-        
+        # df_ddl = self.source_ddl(sheet2)
+            
     def auto_gen_file(self, df_int_mapp, df_sys_name, df_table_def):
         for mvp in self.str_mvp:
             sum_df = pandas.concat([df_table_def[mvp], df_int_mapp[mvp], df_sys_name[mvp]], axis=0, ignore_index=True)

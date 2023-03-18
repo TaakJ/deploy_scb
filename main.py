@@ -30,8 +30,8 @@ class run_main:
     os.makedirs(path_pl_ddl,exist_ok=True)
     
     t1 = time.time()
-    ## start split parameter
-    print("start function split file to parameter ..")
+    ## start split 
+    print("start function split file ..")
     run_process_split(date=date, re_deploy=re_deploy).run()
     
     ## start merge 
@@ -40,9 +40,9 @@ class run_main:
         run_process_merge(date=date, storage=storage, container=container, re_deploy=re_deploy)
 
     ## start genfile
-    # if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
-    #     print("start gen file ..")
-    #     run_process_genfile(date=date)
+    if glob.glob(f'{path_output}/deployment_checklist_{date_fmt}.xlsx'):
+        print("start function gen file ..")
+        run_process_genfile(date=date)
     
     t2 = time.time() - t1
     print(f'Executed in {t2:0.2f} seconds.')
