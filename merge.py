@@ -34,7 +34,6 @@ class run_process_merge():
         sheet1 = pandas.read_excel(filename, sheet_name='all')
         sheet2 = pandas.read_excel(filename, sheet_name='ddl')
         
-        
         # path
         path_main  = os.getcwd()
         path_output = path_main + f'/output/{self.date}'
@@ -47,7 +46,6 @@ class run_process_merge():
         path_pl_ddl = path_main + f'/filename/DDL/{self.date}'
         os.makedirs(path_pl_ddl,exist_ok=True)
         
-        # if any(os.scandir(path_table_def)) and any(os.scandir(path_int_mapp)) and any(os.scandir(path_pl_register)) and any(os.scandir(path_pl_ddl)):
         df_int_mapp = {} 
         if any(os.scandir(path_int_mapp)):
             df_int_mapp = self.source_int_mapp(sheet1)
@@ -90,9 +88,9 @@ class run_process_merge():
                 
                 sheet_name = f'Checklist_ADLS_{mvp}'
                 self.write_from_source(df_sum, mvp, sheet_name)
-                print(f"{mvp} adls files count: {len(df_sum)} rows and write to excel completed.")
+                print(f"{mvp} config all files count: {len(df_sum)} rows and write to excel completed.")
             else:
-                ("ADLS folder empty")
+                ("Config folder empty")
                 
             # ddl
             if mvp in df_ddl.keys():
@@ -356,7 +354,7 @@ class run_process_merge():
                     sum_df["Checklist"] =  sum_df['Storage_Path'].apply(lambda x: "ddl_script_replace/process_migration/{}".format(x)) 
                     sum_df['MVP'] = mvp
                     dict_df.update({mvp: sum_df})
-            
+                    
         if check:
             check_files_for_deploy(self.date, ddl_path=ddl_path)._compare_directories
             
@@ -364,25 +362,3 @@ class run_process_merge():
         
         return dict_df
         
-    # def write_from_ddl(self, dict_df):
-    #     # write to sheet
-    #     for mvp in self.str_mvp:
-    #         if mvp in dict_df.keys():
-    #             df_new = dict_df[mvp].loc[:, ['Storage', 'Container', 'Git_Path', 'Note UAT Deploy Date', 'Checklist']]
-    #             print(f"{mvp} ddl files count: {len(df_new)} rows and write to excel completed.")
-                
-    #             sheet_name = f'Checklist_DDL_{mvp}'
-    #             self.sheet = self.wb.create_sheet(sheet_name)
-    #             self.sheet.title = sheet_name
-    #             rows = dataframe_to_rows(df_new, header=True, index=False)
-    #             for r_idx, row in enumerate(rows, 1):
-    #                 for c_idx, val in enumerate(row, 1):
-    #                     value = self.sheet.cell(row=r_idx, column=c_idx)
-    #                     value.value = val
-                
-    #             self.file_name =  f'{self.path}/deployment_checklist_{self.date_fmt}.xlsx'
-    #             self.wb.save(self.file_name)
-                
-    #         else:
-    #             print(f"{mvp} ddl files is empty")
-                

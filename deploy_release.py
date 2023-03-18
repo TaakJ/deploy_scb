@@ -52,29 +52,25 @@ class run_process_genfile:
         df_sheet = {}
         df_ddl = {}
         for mvp in self.str_mvp:
+            # sheet
             try:
-                # sheet
                 sheet_name = f'Checklist_ADLS_{mvp}'
                 df = pandas.read_excel(filename, sheet_name=sheet_name)
                 df["Path"] = df[["Storage_Path", "File_Name"]].apply(lambda x: "/".join(x), axis =1)
                 df["Full_Path"] = df[["Git_Path", "File_Name"]].apply(lambda x: "".join(x), axis =1)
                 df["Deploy"] = df[["Storage", "Container", "Full_Path", "Path"]].apply(lambda x: ",".join(x), axis =1)
                 df_sheet.update({mvp: df})
-                
             except:
                 pass
-            
+
+            # ddl 
             try:
-                # ddl 
                 sheet_name = f'Checklist_DDL_{mvp}'
                 ddl = pandas.read_excel(filename, sheet_name=sheet_name)
-                
                 ddl["Deploy"] = ddl[["Storage", "Container", "Git_Path", "Checklist"]].apply(lambda x: ",".join(x), axis =1)
                 df_ddl.update({mvp: ddl})
             except:
                 pass
-            
-            print(ddl)
             
         return df_sheet, df_ddl
     
