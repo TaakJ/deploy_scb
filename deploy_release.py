@@ -86,7 +86,7 @@ class run_process_genfile:
                     df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    textfiles = os.path.join(self.mvp1_path, f'01_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')
+                    textfiles = os.path.join(self.mvp1_path, f'02_deployList_SI-523_SR-10142_SR-10143_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP2':
@@ -97,7 +97,7 @@ class run_process_genfile:
                     df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    textfiles = os.path.join(self.mvp2_path, f'01_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
+                    textfiles = os.path.join(self.mvp2_path, f'02_deployList_SI-523_SR-5512_SR-5622_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP3':
@@ -108,7 +108,7 @@ class run_process_genfile:
                     df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    textfiles = os.path.join(self.mvp3_path, f'01_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
+                    textfiles = os.path.join(self.mvp3_path, f'02_deployList_SI-523_SR-5513_SR-5956_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
             
             elif mvp == 'MVP4':
@@ -119,7 +119,7 @@ class run_process_genfile:
                     df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    textfiles = os.path.join(self.mvp4_path, f'01_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
+                    textfiles = os.path.join(self.mvp4_path, f'02_deployList_SI-523_SR-5515_SR-12745_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 
             elif mvp == 'MVP6':
@@ -130,7 +130,7 @@ class run_process_genfile:
                     df_sheet[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                 # ddl
                 if mvp in df_ddl.keys():
-                    textfiles = os.path.join(self.mvp6_path, f'01_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
+                    textfiles = os.path.join(self.mvp6_path, f'02_deployList_SI-523_SR-16276_SR-16280_{mvp}_UAT.txt')
                     df_ddl[mvp]["Deploy"].to_csv(textfiles, header=None, index=None, sep='\t')
                     
     def create_for_adb(self, df_sheet, df_ddl):
