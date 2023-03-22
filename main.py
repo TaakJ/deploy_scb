@@ -9,7 +9,7 @@ from merge import run_process_merge
 class run_main:
     
     # Can specify deploy date
-    date = "2023-03-18"
+    date = "2023-03-21"
     re_deploy = ""
     date_fmt = datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%Y%m%d')
     # Can specify storage 
