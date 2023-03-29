@@ -204,15 +204,15 @@ class run_process_merge():
         
         print("============== table_def ================")
         df = dataframe.loc[dataframe['COL_NM'] == 'TABLE']
-        new_df = df.loc[~df.duplicated(subset=['LIST','MVP']), :] 
-        new_df[['schema', 'table']] = new_df['LIST'].str.split(',', expand=True)
-        new_df['LIST'] = new_df['schema'].map(str) + '_' + new_df['table'].map(str)
-        print(f"count row table_def: {len(new_df)} rows")
+        print(f"count row table_def: {len(df)} rows")
+        # new_df = df.loc[~df.duplicated(subset=['LIST','MVP']), :] 
         
         dict_df = {}
         list_df = []
-        if new_df.empty is False:
-            df_mvp = dict(tuple(new_df.groupby('MVP')))
+        if df.empty is False:
+            df[['schema', 'table']] = df['LIST'].str.split(',', expand=True)
+            df['LIST'] = df['schema'].map(str) + '_' + df['table'].map(str)
+            df_mvp = dict(tuple(df.groupby('MVP')))
             
             for mvp in self.str_mvp and df_mvp.keys():
                 _df = self.crate_folder_mvp_and_check_file(df_mvp, mvp, path='U02_TABLE_DEFINITION')
