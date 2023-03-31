@@ -1,0 +1,37 @@
+diff --git main.py main.py
+index 661b5e4..2b304ad 100644
+--- main.py
++++ main.py
+@@ -9,7 +9,7 @@ from merge import run_process_merge
+ class run_main:
+     
+     # Can specify deploy date
+-    date = "2023-03-28"
++    date = "2023-03-29"
+     re_deploy = ""
+     date_fmt = datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%Y%m%d')
+     # Can specify storage 
+diff --git merge.py merge.py
+index 2d9f5d2..a42d828 100644
+--- merge.py
++++ merge.py
+@@ -212,6 +212,7 @@ class run_process_merge():
+         if df.empty is False:
+             df[['schema', 'table']] = df['LIST'].str.split(',', expand=True)
+             df['LIST'] = df['schema'].map(str) + '_' + df['table'].map(str)
++            
+             df_mvp = dict(tuple(df.groupby('MVP')))
+             
+             for mvp in self.str_mvp and df_mvp.keys():
+diff --git output/2023-03-28/deployment_checklist_20230328.xlsx output/2023-03-28/deployment_checklist_20230328.xlsx
+index a4121d4..d7d4fb6 100644
+Binary files output/2023-03-28/deployment_checklist_20230328.xlsx and output/2023-03-28/deployment_checklist_20230328.xlsx differ
+diff --git output/2023-03-28/gen_parameter_20230328.xlsx output/2023-03-28/gen_parameter_20230328.xlsx
+index 85f66b3..9493e4c 100644
+Binary files output/2023-03-28/gen_parameter_20230328.xlsx and output/2023-03-28/gen_parameter_20230328.xlsx differ
+diff --git output/2023-03-28/template_20230328.xlsx output/2023-03-28/template_20230328.xlsx
+index ccfee9b..3226aab 100644
+Binary files output/2023-03-28/template_20230328.xlsx and output/2023-03-28/template_20230328.xlsx differ
+diff --git parameter/template.xlsx parameter/template.xlsx
+index 35549d2..f9dd1e2 100644
+Binary files parameter/template.xlsx and parameter/template.xlsx differ

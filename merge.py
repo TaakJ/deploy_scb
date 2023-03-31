@@ -212,6 +212,7 @@ class run_process_merge():
         if df.empty is False:
             df[['schema', 'table']] = df['LIST'].str.split(',', expand=True)
             df['LIST'] = df['schema'].map(str) + '_' + df['table'].map(str)
+            
             df_mvp = dict(tuple(df.groupby('MVP')))
             
             for mvp in self.str_mvp and df_mvp.keys():
